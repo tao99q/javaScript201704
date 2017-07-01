@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box1{
+            width: 100px;
+            height: 100px;
+            background-color: yellowgreen;
+            position: relative;
+            left: 0;
+            top:20px;
+            font-size: 30px;
+            text-align: center;
+            line-height: 100px;
+            color: #ff6700;
+
+        }
+        .box1.box2{
+            border-radius: 50%;
+            transform: rotate(360deg) scale(1.2);
+            -webkit-transform: rotate(360deg) scale(1.2);
+            background: radial-gradient(red,yellow,blue,green,deepskyblue,plum,purple);
+            background: -webkit-radial-gradient(red,yellow,blue,green,deepskyblue,plum,purple);
+            transition: all 1s 1s ;
+            -webkit-transition: all 1s 1s ;
+        }
+    </style>
+</head>
+<body>
+<div class="box1">溜达~</div>
+</body>
+</html>
+<script src="js/public.js"></script>
+<script src="js/animation升级版1.js"></script>
+<!--<script src="js/animation.js"></script>-->
+
+<script>
+    var box1=document.getElementsByClassName("box1")[0];
+//    animation(box1,{left:400,top:200},2000,0,function(){
+//        this.innerHTML="转转";
+//        public.addClass(this,"box2");
+//    });
+
+   // animation(box1,{left:400,top:300});
+   // animation(box1,{left:400,top:300},3000,function(){});
+//    animation(box1,{left:400,top:300},3000,function(){},0);
+    animation(box1,{left:400,top:300},2000,function(){console.log(1)},function(){console.log(2)});
+//    animation(box1,{left:400,top:300},function(){});
+    //animation 中一共有五个参数,前两个必须固定:ele,target,后三个是可选的,所以不要求顺序,也不要求个数,把后面三参数获取出来,函数当做callback,第一个数字是duration,第二数字是运动曲线
+</script>

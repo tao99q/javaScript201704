@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app" style="font-size: 50px">
+{{new Date | filterDate}}
+{{Date.now()|filterDate}}
+</div>
+<script src="js/vue2.0.js"></script>
+<script>
+    //给Vue上加自定义过滤器
+    Vue.filter("filterDate",function (value) {
+        //value 就是要过滤的内容
+        //根据穿件来的参数变成真实的时间
+        var time=new Date(value);
+        //console.log(time);
+        //return "2017-6-29 12:42:00"
+        return `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
+    });
+    var vm=new Vue({
+        a:"a",
+        b:"b",
+        el:'#app',
+        data:{},
+    });
+    //自定义属性通过$options来获取
+    console.log(vm.$options);
+</script>
+</body>
+</html>

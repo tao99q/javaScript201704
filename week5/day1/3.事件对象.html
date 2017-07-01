@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+</head>
+<body>
+<!--
+事件对象:
+当我们出发这个事件行为的时候,后面给他绑定的这个函数就会执行,一旦执行浏览器就会给他传一个参数,这个参数就是我们说的事件对象,
+一般都使用形参e来接收事件对象
+
+注意:多个元素的同一个事件行为同时触发,事件对象是一样的就是同一个事件对象
+因为我们的鼠标就一个,你触发一次就记录一次信息
+
+MouseEvent 事件对象:记录当时触发这个事件那一瞬间的鼠标信息
+e.clientX: 点击的那一下,鼠标距离浏览器左边的距离
+e.clientY: 点击的那一下,鼠标距离浏览器上边的距离
+e.pageX:  点击的那一下,鼠标距离整个网页左边的距离
+e.pageY:  点击的那一下,鼠标距离整个网页上边的距离
+e.target: 事件源 谁执行的那个事件,事件源就是谁
+
+但是在IE下浏览器不会默认给绑定的方法传参数,
+1.他的事件对象放在 window.event
+2.事件源:在IE678中是 srcElement
+3.在低版本IE中没有pageX和pageY
+
+
+键盘事件对象
+
+KeyboardEvent
+keyCode:当前按下那个键的键值
+空格:32
+左:37,上:38,右:39,下:40
+return/enter:13
+shift:16
+alt:18
+control(ctrl):17
+delete(mac)/Backspace:8
+Del:46
+-->
+<div id="box">
+    111111
+<p>pppppppp</p>
+</div>
+<input  id="input1" type="text"/>
+</body>
+</html>
+<script>
+    var box=document.getElementById("box");
+    var input=document.getElementById("input1");
+    var p=box.getElementsByTagName("p")[0];
+    document.body.onclick=function(e){
+        e=e||window.event;
+        var target= e.target|| e.srcElement;
+        console.log("body的事件源:",e.target);
+    };
+    box.onclick=function(e){
+        //console.log(arguments[0]);
+        //MouseEvent===e
+        //e.clientX
+        //e.clientY
+        console.log(e.target);
+    };
+    p.onclick=function(e){
+        console.log(e.target);
+    };
+
+    input.onkeydown=function(e){
+        console.log( e.keyCode);
+        //KeyboardEvent
+
+    }
+</script>

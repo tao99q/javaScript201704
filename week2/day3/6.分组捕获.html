@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分组捕获</title>
+</head>
+<body>
+<script type="text/javascript">
+   //分组捕获
+    //exec返回值是个数组
+    //1.第一项：大正则捕获的内容
+    //2.第二项：第一个分组捕获的内容
+    //3.第三项：第二个分组捕获的内容
+    //。。。。。
+    //index:第一项中大正则捕获内容首字符的索引
+    //input:元字符串
+    var str="html5css3es6";
+    var reg=/([a-z]+)(\d)/g;
+//   console.log(reg.exec(str));
+//   console.log(reg.exec(str));
+//   console.log(reg.exec(str));
+//   console.log(reg.exec(str));
+   var s="";
+   //obj={html:5,css:3,es:6}
+   var obj={};
+   var re=reg.exec(str);
+   while (re){
+       obj[re[1]]=re[2];
+       s+=re[1]+"版本是"+re[2]+" ";
+       re=reg.exec(str)
+   }
+   console.log(s);
+   console.log(obj);
+
+
+   //match,
+   // 1有分组的时候正则加上修饰符g 捕获不到分组的内容,
+   //2.不加修饰符g，跟exec结果一样，只能捕获一次
+
+    //总结一句：如果有分组，想要获取分组的内容只能用exec了
+</script>
+</body>
+</html>

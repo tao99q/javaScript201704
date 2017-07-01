@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{msg}}
+</div>
+<script src="js/vue1.0.js"></script>
+<script>
+    //生命周期: 钩子函数
+    //vm.$mount();手动挂载
+    var vm=new Vue({
+        data:{
+            msg:"哈哈"
+        },
+        created:function () {
+            //实例化,只要创建一个vue的实例就会触发这个函数执行
+            alert("实例创建成功!");
+            console.log(this);
+            //this当前实例
+        },
+        beforeCompile:function () {
+            //开始编译前
+            alert("开始编译前");
+        },
+        compiled:function () {
+            //编译完成
+            alert("编译完成");
+        },
+        ready:function () {
+            //插入文档后
+            alert("准备好了");
+        },
+        beforeDestroy:function () {
+            //销毁前
+            alert("准备销毁")
+        },
+        destroyed:function () {
+            //销毁后
+            alert("销毁")
+        }
+    });
+    vm.$mount("#app");
+
+    vm.$destroy();//销毁需要手动销毁
+    console.log(vm);
+
+</script>
+</body>
+</html>

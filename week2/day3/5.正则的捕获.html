@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    //exec捕获，两个阶段
+    //匹配，判断字符串是否匹配正则，不匹配返回null
+    //捕获，把匹配的字符串中的内容捕获出来，返回一个数组
+    //[第一项：捕获出来的内容，index：捕获的内容首字符在原字符串中的索引，input：原字符串]
+
+    var str="abcdefg";
+    var reg=/\d/;
+    console.log(reg.exec(str));//null
+    var str="2017nian5yue4hao";
+//    console.dir(reg);
+//    console.log(reg.exec(str));
+    //1.正则的懒惰性。捕获的时候只捕获第一次匹配的内容,正则中有个属性叫lastIndex表示开始查找的索引
+//    console.dir(reg);
+//    console.log(reg.exec(str));
+//    console.dir(reg);
+//    console.log(reg.exec(str));
+
+    //解决懒惰性，加上修饰符g
+    var reg=/\d/g;
+    var str="2017nian5yue4hao";
+//    console.log(reg.exec(str));
+//    console.log(reg.exec(str));
+//    console.log(reg.exec(str));
+//    console.log(reg.exec(str));
+//    console.log(reg.exec(str));
+//    console.log(reg.exec(str));
+//    console.log(reg.exec(str));
+    var ary=[];
+    var re=reg.exec(str);//
+    while (re){
+       ary.push(re[0]);
+       re=reg.exec(str)
+    }
+    console.log(ary);
+
+    //match 他是字符串的方法   str.match(正则表达式)
+    //注意：用match的时候 正则表达式必须加上修饰符g，否则就跟exec的结果一样了
+    //match 返回是一个数组，但是没有index 和input 这俩属性
+    var str="es6css3h5";
+    var reg=/\d/;
+    console.log(reg.exec(str));
+    console.log(str.match(reg));
+    var reg=/\d/g;
+    console.log(reg.exec(str));
+    console.log(str.match(reg));
+</script>
+</body>
+</html>

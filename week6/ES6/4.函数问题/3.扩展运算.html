@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<script>
+    "use strict";
+    //扩展运算符可以在传参数的时候使用，可以在任何位置使用，因为他是把数组直接转为非数组
+    //...[]
+    console.log(1,2,3,...[4,5],6);//
+    var num=[1,2,3,4,5];
+    function fn1(x,y) {
+        let sum=x+y;
+        console.log(sum);
+    }
+    //fn1(num)
+    fn1(...num);
+    //fn1(1,2,3,4,5)
+
+    //可以代替apply使用
+    let ary=[1,2,3,4];
+    Math.max(1,2,3,4);
+   // Math.max.apply(null,ary);
+    let max=Math.max(...[1,2,3,4]);
+    console.log(max);
+
+    //
+    let ary1=[1,2];
+    let ary2=[3,4];
+    let ary3=[];
+    ary3.concat(ary1,ary2);
+    let ary4=[...ary1,...ary2];
+
+    //将非数组转为数组
+    // 字符串转为数组 [...str]
+    let str="哈哈123";
+    //console.log(str.split(""));
+    //str=str.split("").reverse().join("");
+    //console.log(str);
+
+    console.log([...str].reverse().join(""));
+
+    //将类数组转为数组（arguments,nodeList）
+    function to() {
+        return [...arguments];
+    }
+    console.log(to(1, 2, 3, 4, 5));
+    let ps=document.getElementsByTagName("p");
+    function toArray(likeArray) {
+        return [...likeArray]
+    }
+    var pps=toArray(ps);
+    pps.forEach(function (item,index) {
+        item.innerHTML++;
+    })
+</script>
+</body>
+</html>

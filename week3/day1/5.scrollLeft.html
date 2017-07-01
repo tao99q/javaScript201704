@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: deepskyblue;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    哈哈哈哈哈哈哈哈啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊哈啊啊啊啊啊啊啊啊啊啊啊哈哈哈哈哈哈哈哈啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊哈啊啊啊啊啊啊啊啊啊啊啊哈哈哈哈哈哈哈哈啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊哈啊啊啊啊啊啊啊啊啊啊啊
+</div>
+<script src="js/public.js"></script>
+<script>
+    //onscroll事件:只要滚动条发生改变就会触发这个事件
+     var box=document.getElementById("box");
+     console.log(box.scrollTop);
+
+    box.onscroll=function(){
+        console.log(box.scrollTop);
+    }
+</script>
+</body>
+</html>

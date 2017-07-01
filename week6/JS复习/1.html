@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script>
+
+    var a=[1,0,2,1,0,2,0,1];
+    //var a=[0,2,1,0,1];
+    console.log($.unique(a));
+    var str="1";
+    str++;
+    console.log(str);
+    //括号表达式
+    //1.改变计算优先级
+    //2.保证浏览器语法规范
+    //3.(x,y,z)选取的最后一个的值
+    console.log((1, 2, 3));
+    (function () {
+       console.log(1)
+    },function () {
+        console.log(2)
+    })();
+    
+    //
+    String.prototype.getParam=function (key) {
+        var  str=this.split("?")[1];
+        str=str.replace(/&/g,"',");
+        str=str.replace(/=/g,":'");
+        var obj=eval("({" + str + "'})");
+        for(var x in obj){
+            if(key==x){
+                return obj[key];
+            }
+        }
+    };
+    var url="locallhost?key1=val1&key2=val2&key3=val3";
+    console.log(url.getParam("key3"));
+
+
+    String.prototype.getParam=function (key) {
+        var reg=new  RegExp(key+"=(\\w+)");
+        return reg.exec(this)[1];
+    };
+    url.getParam("key3");
+    String.prototype.getParam=function (key) {
+        var val=null;
+        this.replace(/(\w+)=(\w+)/g,function () {
+            if(arguments[1]==key)
+                val=arguments[2];
+        });
+       return val;
+    };
+    console.log(url.getParam("key3"));//val3
+
+
+
+</script>
+</body>
+</html>

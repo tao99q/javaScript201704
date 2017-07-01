@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+1.用面向对象的思想扩展方法==》基于内置类的原型扩展方法
+2.链式写法实现的原理  return this
+3.谈谈你对原型的理解
+
+
+
+原型的链：
+实例.属性名，遇到属性名先看是不是自己的私有属性，如果是的话就用私有的，不是的话，通过实例的__proto__找到所属类的原型（prototype），还没有的话，通过所属类的prototype的__proto__继续找，一直找到基类（根本）Object的prototype
+-->
+</body>
+</html>
+<script type="text/javascript">
+    Object.prototype.x = 10;
+    Object.prototype.y = 20;
+    Object.prototype.sum = function() {
+        console.log(this.x + this.y)
+    };
+    function Fn() {
+        this.x = 100;
+        this.y = 200;
+        this.sum = function() {
+            console.log(this.x + this.y)
+        }
+    };
+    Fn.prototype.sum = function() {
+        console.log(this.x + this.y);
+    };
+    Fn.prototype.x = 1;
+    Fn.prototype.y = 2;
+    var f1 = new Fn;
+    var f2 = new Fn;
+
+    Fn.prototype.sum();
+    //this.x + this.y
+    //Fn.prototype.x+Fn.prototype.y=1+2=3
+
+    f1.__proto__.__proto__.sum();
+    //Fn.prototype.__proto__.sum();
+    //Object.prototype.sum();
+    //this.x + this.y
+    //Object.prototype.x+Object.prototype.y=30
+
+    Fn.prototype.__proto__.sum();
+    //Object.prototype.sum();
+    //this.x + this.y
+    //Object.prototype.x+Object.prototype.y=30
+
+
+    console.log(f1.__proto__.sum === f2.__proto__.sum === Fn.prototype.sum);//true
+    //Fn.prototype.sum
+
+
+    f1.__proto__.sum==f2.__proto__.__proto__.sum
+    //Fn.prototype.sum==Fn.prototype.__proto__.sum
+    //Fn.prototype.sum==Object.prototype.sum
+
+    f1.__proto__.sum==Fn.prototype.sum;//true
+    //Fn.prototype.sum==Fn.prototype.sum
+
+    f1.__proto__.sum==Fn.prototype.__proto__.sum;
+    //Fn.prototype.sum==Object.prototype.sum
+
+    f1.__proto__.__proto__.sum==Fn.prototype.__proto__.sum
+    //Object.prototype.sum===Object.prototype.sum
+    Object.prototype.sum==Fn.prototype.sum
+
+</script>

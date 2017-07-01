@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    var n=1;
+    var m=new Number(1);
+    console.dir(n);
+    console.dir(m);
+    var  reg=/\d/;//字面量创建方式
+    var reg1=new RegExp("\\d");//
+    //1 用构造函数方式创建的时候遇到|变成\\
+    //2 构造函数方式创建可以实现变量拼接
+
+    var  num=2017;
+    var  str="zhufeng*2017*peixun";
+    var reg=/^[a-z]+\*\d{4}\*[a-z]+$/;
+    var reg= new  RegExp("^[a-z]+\\*"+num+"\\*[a-z]+$");
+    console.log(reg.test(str));
+    var reg=/^1\\d$/;//"1\\d"
+    console.log(reg.test("1\\d"));
+    //1.匹配小数
+    //0.1,1.10,0.0
+    var reg=/^(\d|[1-9]\d+)\.\d+$/;
+    //2.匹配有效数字
+    //负数 -出现0次或1次
+    //.现0次或1次 只要出现了后面必须有数字
+    var reg=/^-?(\d|[1-9]\d+)(\.\d+)?$/;
+
+
+</script>
+</body>
+</html>

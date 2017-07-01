@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app" style="font-size: 50px">
+    首字母变成大写:{{wd|capitalize}} <br>
+    全部转换成大写:{{wd|uppercase}}      <br>
+    全部转换成小写:{{'WORD'|lowercase}}      <br>
+    货币过滤器:{{price|currency "£" 2}}     <br>
+    延迟事件执行的时间
+    <input type="text" @keyup="up|debounce 2000"> <br>
+    limitBy 循环数组的时候显示几条数据,从那条(索引)开始显示
+    <input type="button" @click="count+=2" value="下一页">
+    <p v-for="item in list|limitBy 2 count">{{item}}</p>
+    filterBy在所有的数据中过滤
+    <input type="text" v-model="name">
+    <p v-for="item in items | filterBy name">
+        {{item}}
+    </p>
+    orderBy >=0从小到大  <0 从大到小
+    <button @click="order*=-1">排序</button>
+    <div v-for="item in arr | orderBy 'a' order">{{item.a}},{{item.b}}</div>
+
+</div>
+<script src="js/vue1.0.js"></script>
+<script>
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            order:1,
+            name:"zy",
+            wd:"hello",
+            count:0,
+            price:19999.1234,
+            list:["1","2","3","4","5","6","7","8"],
+            items:["Tom","Jack","jzx","pzx","yl","zmh","tc","csl","zy","ym","zw","zsy","lx"],
+            arr:[{a:1,b:"a"},{a:10,b:"b"},{a:3,b:"c"}]
+        },
+        methods:{
+            up(){
+                console.log(1)
+            }
+        }
+    })
+</script>
+</body>
+</html>

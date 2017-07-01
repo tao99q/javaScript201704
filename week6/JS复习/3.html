@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script>
+    jQuery.fn.extend({
+        f:function () {
+            return this
+        }
+    });
+    $("body").f().height(1000).css({background:"red"});
+    function fn(n,m) {
+       console.log(this)
+    }
+    var obj={};
+    //fn.call(window,1);//call方法中this==fn
+    fn.call.call(fn,1);//fn.call(1)
+    fn.call.call(fn,window,1);//fn.call(window,1)
+    fn.call.call(fn,window,1,2);//fn.call(window,1,2)
+    var ary=[1,2,3,4,5,6];
+    //Math.max(1,2,3,4,5,6)
+    console.log(eval("Math.max(" + ary + ")"));
+    console.log(Math.max.apply(null, ary));
+    console.log(typeof Array);
+    console.log(typeof Math);
+
+    fn.bind(ary)();
+    $.proxy(fn,ary)();
+
+
+
+</script>
+</body>
+</html>

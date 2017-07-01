@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    var ary=[2,4,6,18,9,34,10];
+    //1.排序
+    function MAX1(ary) {
+        return ary.sort(function (a,b) {
+            return b-a
+        })[0]
+    }
+    console.log(MAX1(ary));
+    //2.eval
+    function MAX2(ary) {
+        //return eval("Math.max("+ary.join()+")")
+        return eval("Math.max("+ary+")");
+    }
+    console.log(MAX2(ary));
+    //3.apply
+    function MAX3(ary) {
+       return Math.max.apply(null,ary)
+    }
+    console.log(MAX3(ary));
+    //4.假设法
+    function MAX4(ary) {
+        var max=ary[0];
+        ary.forEach(function (item,index) {
+            max=item>max?item:max;
+        });
+        return max
+    }
+    console.log(MAX4(ary));
+
+</script>
+</body>
+</html>

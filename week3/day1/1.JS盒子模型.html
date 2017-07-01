@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            border :20px solid green;
+            padding: 30px;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+</div>
+<!--
+height:加入给元素设置了height,不管内容多少,你获取出来的都是设置的高度;如果没有设置高度,获取出来的height就是真实内容的高度
+1.client系列:
+clientWidth:内容宽+左右padding
+clientHeight:内容高+上下padding
+clientLeft:左边框的宽度
+clientTop:上边框的宽度
+
+2.offset系列
+offsetWidth:clientWidth+左右border
+offsetHeight:clientHeight+上下border
+offsetParent:父级参照物:
+offsetLeft:左偏移量:当前元素外边框距离父级参照物(offsetParent)的内边框的水平距离
+offsetTop:上偏移量当前元素外边框距离父级参照物(offsetParent)的内边框的垂直距离
+
+3.scroll系列
+scrollWidth:没有溢出的情况下内容的宽+左padding(有溢出的情况跟clientWidth一样)
+scrollHeight:没有溢出的情况下内容的高+上padding(有溢出的情况跟clientHeight一样)
+scrollLeft:内容区域滚出去的宽度
+scrollTop:内容区域滚出去的高度
+
+ps1.这十三个盒子模型属性中只有scrollLeft和scrollTop是可以修改值得,其他的只能读取不能赋值,给他们赋值也不起作用
+2.这十三个盒子模型属性获取的值都是整数,是浏览器默认四舍五入了
+-->
+<script type="text/javascript">
+    //css盒子模型:margin,border,padding,height/width
+    //JS盒子模型:JS提供一系列的方法来获取CSS盒子模型中的相关属性的
+    var box=document.getElementById("box");
+    console.log(window.getComputedStyle(box).height);
+    //JS盒子模型一共13个
+
+    console.log(box.clientHeight);
+    console.log(box.clientWidth);
+    console.log(box.clientLeft);
+
+    console.log(box.offsetWidth);
+</script>
+</body>
+</html>

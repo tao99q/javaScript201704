@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="####" id="form">
+    <label for="name">name:</label>
+    <input id="name" name="name" type="text">
+    <br>
+    <label for="">passWord：</label>
+    <input name="pw" type="password">
+    <br>
+    <label for="">Email：</label>
+    <input name="email" type="email">
+    <br>
+    <label for="">Date：</label>
+    <input name="date" type="date">
+    <br>
+    <label for="">num：</label>
+    <input name="num" type="number">
+    <br>
+    <label for="">checkBox：</label>
+    <input name="cBox" type="checkbox" checked=>
+    <br>
+    <label for="">selected：</label>
+    <select name="sel" id="">
+        <option value="0">苹果</option>
+        <option value="1">香蕉</option>
+        <option value="2">菠萝</option>
+    </select>
+
+
+</form>
+<button id="btn">提交</button>
+<script>
+var form=document.getElementById("form");
+var btn=document.getElementById("btn");
+function getForm(form) {
+    var inputs=form.getElementsByTagName("input");
+    var selects=form.getElementsByTagName("select");
+    var obj={};
+    var ary=[].concat.apply([],inputs);
+    ary=ary.concat.apply(ary,selects);
+    ary.forEach(function (item) {
+        //this==window;
+        obj[item.name]=item.value;
+    });
+    return obj;
+}
+console.log(btn);
+btn.onclick=function () {
+    console.log(getForm(form));
+}
+</script>
+</body>
+</html>

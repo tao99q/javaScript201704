@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body,div,img{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 300px;
+            height: 200px;
+            margin: 1200px auto;
+            border: 10px solid #666;
+            background: url("img/load.jpg") no-repeat center #ccc;
+        }
+        #box img{
+            width: 100%;
+            height: 100%;
+            border: none;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+    </style>
+</head>
+<!--
+图片延迟加载的思路:
+为了保证网页的加载速度,我们一般先把第一屏的内容(img图片)加载,其他的等图片完全展示出来之后再加载
+1.img标签的src属性就是用来加载图片资源的,对于不在第一屏幕的图片img,不需要加载,那么他的src属性值就先不用写上图片的地址
+2.我们给图片加一个自定义属性,将图片的地址放进去保存起来
+3.当滚动条滚动时,判断图片如果完全展示出来,我们再去加载这个图片,(换句话说把存在自定义属性上的图片的真实地址还给src属性)
+4.在还给src之前我们还要检验一下,这个真实的地址能否加载出来
+
+-->
+<body>
+<div id="box">
+    <img src="" photo="img/19.jpg" alt=""/>
+</div>
+</body>
+</html>
+<script src="js/public.js"></script>
+<script type="text/javascript">
+    var box=document.getElementById("box");
+    var oImg=box.getElementsByTagName("img")[0];
+//    window.onscroll=function(){
+//        //一旦触发滚动事件就开始判断box是否完全露出来
+//        //求出浏览器的高度和滚上去的距离
+//        var _H=public.win("clientHeight")+public.win("scrollTop");
+//        //求出box距离body的上偏移量和box的高(包括边框)
+//        var _h=public.offset(box).top+box.offsetHeight;
+//        if(_H>=_h){
+//            //说明box完全露出来了
+//            oImg.src=oImg.getAttribute("photo");
+//        }
+//    }
+
+    window.onscroll=function(){
+
+        if(oImg.isLoad){
+            return;
+        }
+        var H=public.win("clientHeight")+public.win("scrollTop");
+        var h=box.offsetHeight+public.offset(box).top;
+        if(H>=h){
+
+            //oImg.src=oImg.getAttribute("photo");
+            //把图片地址还给src之前,要把这个地址做一下校验
+            //创建一个替身img标签,只是在ＪＳ代码中用一下，不会添加到页面上，不会对页面样式结构造成影响，我们把这个地址放在创建的这个ｉｍｇ的ｓｒｃ实验一下，如果能加载成功再把给oImg
+            //图片加载成功会触发他的onload事件(话句话说只要是他的onload事件触发了说明加载成功了)
+            var curImg=document.createElement("img");
+            curImg.src=oImg.getAttribute("photo");
+            curImg.onload=function(){
+                //说明真实地址是可以加载出来的
+                oImg.src=this.src;//this -->curImg
+            };
+            oImg.isLoad=true;
+            window.clearInterval(oImg.timer);
+            fadeIn(oImg);
+        }
+    };
+
+    function fadeIn(ele){
+        //设置一个定时器,获取他的透明度的值,让其增加,再讲增加后的值赋给当前元素,如果透明度增加到1后,将定时器清掉
+        ele.timer=window.setInterval(function(){
+            var opacityVal=public.getCss(ele,"opacity");
+            if(opacityVal>=1){
+                window.clearInterval(ele.timer);
+                return;
+            }
+            opacityVal+=0.01;
+            public.setCss(ele,"opacity",opacityVal);
+        },30)
+    }
+
+</script>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html, body, a {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 500%;
+            background: linear-gradient(top, red, orange, yellow, green, cyan, blue, purple);
+            background: -webkit-linear-gradient(top, red, orange, yellow, green, cyan, blue, purple);
+            background: -ms-linear-gradient(top, red, orange, yellow, green, cyan, blue, purple);
+        }
+
+        a {
+            display: none;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            background-color: #fff;
+            color: #333;
+            font-size: 30px;
+            text-decoration: none;
+            position: fixed;
+            right: 50px;
+            bottom: 50px;
+            border-radius: 50%;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 2px 2px 3px black;
+        }
+
+        a.go {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<a id="go" href="javascript:;">go</a>
+<!--
+scrollTop最小值是0,就算你给他设置一个负数值,默认还是0
+-->
+<script src="js/public.js"></script>
+<script type="text/javascript">
+    var go = document.getElementById("go"), timer = null;
+    //给按钮绑定点击事件,让当前body的scrollTop值一直在减小,减到0就停下来
+    //用定时器实现一直减小,到了0就让定时器清除掉
+//    go.onclick = function () {
+//        //每一次点击先把上一次的定时器清掉
+//        window.clearInterval(timer);
+//        console.log(timer);
+//        timer = window.setInterval(function () {
+//            //获取当前scrollTop值
+//            var sT = public.win("scrollTop");
+//            //做临界值判断,当scrollTop值<=0,让定时器停掉
+//            if (sT <= 0) {
+//                window.clearInterval(timer);
+//                go.className = "";
+//                //到头了再把onscroll事件还给人家
+//                window.onscroll =fn;
+//                return;
+//            }
+//            //让当前的scrollTop-10
+//            sT -= 50;
+//            //再把新的scrollTop值赋值给body
+//            public.win("scrollTop", sT);
+//        }, 10);
+//        //在回到顶部的过程中不需要触发onscroll事件,所以我们把onscroll事件制空
+//        window.onscroll = null;
+//    };
+//    //需求当滚上去的距离大于800(scrollTop>800)了让标签显示
+//    window.onscroll = fn;
+//    function fn() {
+//        var sT = public.win("scrollTop");
+//        if (sT > 1500) {
+//            go.className = "go";
+//        }
+//    }
+
+
+
+    go.onclick=function(){
+        window.clearInterval(timer);
+        timer=window.setInterval(function(){
+            var sT=public.win("scrollTop");
+            if(sT<=0){
+                window.clearInterval(timer);
+                go.className="";
+                window.onscroll=fn;
+                return;
+            }
+            public.win("scrollTop",sT-=50)
+        },10);
+        window.onscroll=null;
+    };
+    window.onscroll=fn;
+    function fn(){
+        var cH=public.win("clientHeight");
+        var sT=public.win("scrollTop");
+        if(sT>=cH){
+            go.className="go";
+        }
+    }
+</script>
+</body>
+</html>

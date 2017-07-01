@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <div :style="{color:'blue',fontSize:'30px'}">div1</div>
+    <div :style="style1">style1</div>
+    <div :style="[style1,style2]">[style1,style2]</div>
+</div>
+</body>
+</html>
+<script src="js/vue2.0.min.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            style1:{color:"red"},
+            style2:{background:"yellow"}
+        }
+    })
+</script>

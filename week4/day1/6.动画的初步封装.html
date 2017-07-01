@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body,div{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            position: relative;
+            left: 0px;
+            top: 0;
+            background-color: red;
+            opacity: 0.1;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 50px;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script src="js/public.js"></script>
+<script>
+    var box=document.getElementById("box");
+    function animation(ele,target,duration,sport,callBack){
+        //ele:执行动画的元素 必填
+        //target:目标值 是个对象 必填
+        //duration :总时间 选填(没有传默认是1000毫秒)
+        //sport:运动曲线 选填(没有传默认是0 匀速直线运动)
+        //callBack:回调函数 选填的,传了就必须是个函数,动画完成后执行的操作
+        target=target||[];
+        duration=duration||1000;
+        sport=sport||0;
+        if(typeof callBack!=="function"){
+            callBack=function(){console.log("没有回调函数")};
+        }
+        var begin={}, time= 0,sportEffect=[];
+        //根据传进来的target给起始位置begin赋值
+        if(target.toString()=="[object Object]"){
+            //判断target是个对象了才去遍历他
+            for(var key in target){
+                //值把target的私有属性传给begin
+                if(target.hasOwnProperty(key)){
+                    begin[key]=public.css(ele,key);
+                }
+            }
+        }
+        //定义运动曲线 linear
+        function linear(b,t,d,s){
+            return b+ (t-b)/d *s;
+        }
+        //将linear放到sportEffect数组中
+        sportEffect.push(linear);
+        //每一次执行定时器的时候先把上一个定时器清掉
+        window.clearInterval(ele.timer);
+        ele.timer=window.setInterval(function(){
+            if(time+10>=duration){
+                window.clearInterval(ele.timer);
+                for(var key in target){
+                    public.css(ele,key,target[key]);
+                }
+                //我们把这个回调函数里面的this变成执行动画的这个元素
+                callBack.call(ele);
+                return;
+            }
+            time+=10;
+            for(var key in target){
+                public.css(ele,key,sportEffect[sport](begin[key],target[key],duration,time))
+            }
+        },17)
+    }
+
+
+    var l=public.win("clientWidth")-box.offsetWidth;
+    box.flag=true;
+    box.onclick=function(){
+        if(this.flag){
+            animation(box,{left:l,opacity:1},2000,0,function(){this.innerHTML="哈哈哈"});
+            this.flag=false;
+        }else{
+            window.clearInterval(this.timer);
+            this.flag=true;
+        }
+
+    };
+    //0匀速直线运动
+</script>
+</body>
+</html>

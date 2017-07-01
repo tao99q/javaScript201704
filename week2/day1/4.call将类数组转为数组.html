@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    try {
+        console.log(a);
+        a = 1;
+        //先执行try里面的代码，如果报错了就执行catch里面的代码
+    } catch (e) {
+        //e是一个对象，里面存着错误信息，存在e.message,这里面存着try里面的错误信息
+        console.log(e.message);
+        //throw  new  Error("老板傻呀");
+    }
+
+
+    function toArray(likeArray) {
+        //call在低版本IE下不支持
+        var ary = [];
+        try {
+            //return Array.prototype.slice.call(likeArray, 0);
+            //return ary.__proto__.slice.call(likeArray);
+            return ary.slice.call(likeArray);
+        }
+        catch (e) {
+            console.log(e.message);
+            for (var i = 0; i < likeArray.length; i++) {
+                ary.push(likeArray[i])
+            }
+            return ary
+        }
+    }
+    function fn() {
+        return toArray(arguments)
+    }
+
+    console.log(fn(1, 2, 3, 5, 6, 7, 10));
+
+    console.dir(Array.prototype);
+
+</script>
+</body>
+</html>

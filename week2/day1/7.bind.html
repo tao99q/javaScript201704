@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bind</title>
+</head>
+<body>
+<script type="text/javascript">
+    //bind 在IE低版本不兼容，只改变函数this返回一个新的函数，原来的函数不变，不会让函数执行,  bind 以后在事件中常用，我们自己会写一个兼容任何浏览器的方法
+    var a=2;
+    function fn() {
+        console.log(this.a);
+    }
+    var obj={a:1};
+    fn();
+    var fn1=fn.bind(obj);//fn1是跟fn 长的一样，只是this是obj，fn是不变的
+    fn1()
+</script>
+</body>
+</html>

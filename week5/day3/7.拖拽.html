@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 100px;
+            top: 50px;
+            background-color: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+</html>
+<script src="js/public.js"></script>
+<script src="js/events.js"></script>
+<script>
+    /*
+    //拖拽分为三个阶段
+    //1.鼠标按下抓住盒子 box.onmousedown
+    //2.按着鼠标拖着盒子走,这个过程是鼠标一直按着,也就是一直在onmousedown事件中,但是走是在正个页面中走的,所以说onmousemove是个整个文档document绑定的
+    //3.鼠标松开,放开盒子 onmouseup也是给document绑定的
+
+    var box=document.getElementById("box");
+    box.onmousedown=function(e){
+        //按下的时候记录鼠标到box的距离 存到自定义属性上
+        this.l= e.clientX-this.offsetLeft;
+        this.t= e.clientY-this.offsetTop;
+
+        //拖着盒子在整个document中移动
+        document.onmousemove=function(e){
+            //this==document
+            box.style.left= e.clientX-box.l+"px";
+            box.style.top= e.clientY-box.t+"px";
+            e.preventDefault();
+        };
+        document.onmouseup=function(e){
+            //鼠标松开之后将move和up绑定的方法移除
+            document.onmousemove=null;
+            document.onmouseup=null;
+        }
+    }
+    */
+</script>
+<script>
+    var box=document.getElementById("box");
+
+    on(box,"mousedown",function(e){
+        this.strL= e.pageX-public.offset(this).left;
+        this.strT= e.pageY-public.offset(this).top;
+        var _this=this;
+        this._move=function(e){
+            move.call(_this,e);
+        };
+        this._up=function(e){
+            up.call(_this,e);
+        };
+        on(document,"mousemove",this._move);
+        on(document,"mouseup",this._up)
+    });
+    function move(e){
+        //this==box
+        var l= e.pageX-this.strL;
+        var t= e.pageY-this.strT;
+        //临界值
+        var maxL=public.win("clientWidth")-this.offsetWidth;
+        var maxT=public.win("clientHeight")-this.offsetHeight;
+        l=l<0?0:(l>maxL?maxL:l);
+        t=t<0?0:(t>maxT?maxT:t);
+        public.css(this,{left:l,top:t});
+        e.preventDefault();
+    }
+    function up(e){
+        //移除掉move事件和up事件
+        off(document,"mousemove",this._move);
+        off(document,"mouseup",this._up)
+    }
+</script>

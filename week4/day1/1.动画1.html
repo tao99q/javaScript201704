@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            background-image: radial-gradient(#fff 15% ,transparent 16%), radial-gradient(#ccc 15% ,transparent 16%);
+            background-image: -webkit-radial-gradient(#fff 15% ,transparent 16%), -webkit-radial-gradient(#ccc 15% ,transparent 16%);
+            background-size: 16px 16px;
+            background-position: 0px 0px ,8px 8px;
+            font-size: 100px;
+            color: blue;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        /*#box{*/
+            /*width: 100px;*/
+            /*height: 100px;*/
+            /*background: radial-gradient(#ff6700,#ddd,yellow,green,blue,paleturquoise,palevioletred);*/
+            /*background: -webkit-radial-gradient(#ff6700,#ddd,yellow,green,blue,paleturquoise,palevioletred);*/
+        /*}*/
+        /*#box{*/
+            /*background-color: black;*/
+            /*width: 100px;*/
+            /*height: 100px;*/
+            /*background-image: radial-gradient(#ff6700 20%,transparent 20%),radial-gradient(green 20%,transparent 20%);*/
+            /*background-size: 20px 20px;*/
+            /*background-position:0px 0px,50px 50px;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div id="box"> </div>
+<!--今天是星期二,班长居然迟到了,你,们说怎么罚她~-->
+<script>
+    var htmlStr="今天是星期二,班长居然迟到了,你,们说怎么罚她~";
+    var timer=null;
+    var n=0;
+    timer=window.setInterval(function(){
+        document.body.innerHTML+=htmlStr.charAt(n++);
+        if(n>=htmlStr.length){
+            window.clearInterval(timer);
+        }
+    },500)
+</script>
+</body>
+</html>

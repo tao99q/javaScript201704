@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    "use strict";
+    let fun=(a)=>{
+        return(b)=>{
+            return(c)=>{
+                return a+b+c
+            }
+        }
+    };
+    console.log(fun(10)(20)(30));
+
+    let fun1=function (a) {
+        return function (b) {
+            return function (c) {
+                return a+b+c
+            }
+        }
+    };
+    console.log(fun1(1)(2)(3));
+
+    let fn=a=>b=>c=>a+b+c;
+    console.log(fn("1")("2")("3"));
+</script>
+</body>
+</html>

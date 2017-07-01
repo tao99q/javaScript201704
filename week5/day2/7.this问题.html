@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box {
+            width: 100px;
+            height: 30px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+    //绑定on
+    function on(ele,type,callback){
+        //ele,绑定事件的元素,type:事件类型,callback:绑定的函数
+        //先判断的当前浏览器中有没有addEventListener
+        if(ele.addEventListener){
+            ele.addEventListener(type,callback,false);
+        }else{
+            //没有就用attachEvent,注意第一个参数事件类型中前面拼接一个"on"
+            //因为callback函数执行的时候我们要把他里面的this变成ele,所有我们把callBack函数用另一个函数run包起来,在这个run函数中通过call()让callBack的this变成ele,让callback执行
+            function run(){
+                callback.call(ele);
+            }
+            ele.attachEvent("on"+type,run);
+            //ele.attachEvent("on"+type,function(){callback.call(ele)})
+        }
+    }
+
+    //移除off
+    function off(ele,type,callback){
+        if(ele.removeEventListener){
+            ele.removeEventListener(type,callback);
+        }else{
+            ele.detachEvent("on"+type,callback);
+        }
+    }
+
+    var box=document.getElementById("box");
+    on(box,"click",function(){
+        console.log(this==box);
+    })
+</script>
+</body>
+</html>

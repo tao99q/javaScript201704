@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: yellowgreen;
+            cursor: move;
+            position: absolute;
+        }
+
+        #box img {
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <img src="3.jpg" alt="">
+</div>
+<script src="js/event.js"></script>
+<script src="js/public.js"></script>
+<script>
+    var box = document.getElementById("box");
+    on(box, "mousedown", down, false);
+    function down(e) {
+        //this box
+        this.L = e.pageX - public.offset(this).left;
+        this.T = e.pageY - public.offset(this).top;
+        if (this.setCapture) {
+            this.setCapture();
+            on(this, "mousemove", move);
+            on(this, "mouseup", up);
+        } else {
+            var _this=this;//_this==box
+            //用自定义属性吧_move存起来
+            this._move = function (e) {
+                move.call(_this, e);
+            };
+            this._up=function () {
+                up.call(_this,e)
+            };
+            on(document, "mousemove", this._move);
+            on(document, "mouseup", this._up);
+        }
+    }
+    function move(e) {
+        //this box
+        var l = e.pageX - this.L;
+        var t = e.pageY - this.T;
+        public.css(this, {left: l, top: t});
+        e.preventDefault();
+    }
+    function up(e) {
+        //this box
+        if (this.releaseCapture) {
+            this.releaseCapture();
+            off(this, "mousemove", move);
+            off(this, "mouseup", up)
+        }else {
+            //是要给document解绑的
+            off(document, "mousemove", this._move);
+            off(document, "mouseup", this._up);
+        }
+    }
+</script>
+</body>
+</html>

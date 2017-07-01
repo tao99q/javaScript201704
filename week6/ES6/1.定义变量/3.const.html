@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    "use strict";
+    let a=0;
+    a=8;
+    //const定义静态变量，不能修改值，必须要赋值
+    const g=10;
+    //g=20;不能修改值，
+    //const g=20;在同一级作用域中不能重复定义
+    if(g){
+        const  g=20;
+        console.log(g);
+    }
+</script>
+</body>
+</html>

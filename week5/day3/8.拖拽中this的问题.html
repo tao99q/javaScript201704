@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 100px;
+            top: 50px;
+            background-color: yellowgreen;
+        }
+        #box img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <img src="img/1.jpg" alt=""/>
+</div>
+<script src="js/public.js"></script>
+<script src="js/events.js"></script>
+<script>
+    var box=document.getElementById("box");
+    on(box,"mousedown",function(e){
+        this.strL= e.pageX-public.offset(this).left;
+        this.strT= e.pageY-public.offset(this).top;
+//        function _move(e){
+//            move.call(box,e)
+//        }
+        var _this=this;//_this=box
+        this._move=function(e){
+            //this==document
+            //_this==box
+            move.call(_this,e);
+        };
+        this._up=function(e){
+            up.call(_this,e)
+        };
+        on(document,"mousemove",this._move);
+        //move中的this是document,用call将里面的this变成box,call会让当前函数执行,所以说要用一个函数_move包起来,但是写在这里面的_move是私有属性,off移除的时候外面获取不到,所以把_move加在自定义属性上
+        on(document,"mouseup",this._up);
+        //跟move一样也是把up用一个函数_up包起来,改变this,将_up加在box的自定义属性上
+    });
+    function move(e){
+        //this==box
+        var l= e.pageX-this.strL;
+        var t= e.pageY-this.strT;
+        var maxL=public.win("clientWidth")-this.offsetWidth;
+        var maxT=public.win('clientHeight')-this.offsetHeight;
+        l=l<0?0:(l>maxL?maxL:l);
+        t=t<0?0:(t>maxT?maxT:t);
+        public.css(this,{left:l,top:t});
+        e.preventDefault();
+    }
+    function up(e){
+        //this==box
+        off(document,"mousemove",this._move);
+        off(document,"mouseup",this._up);
+    }
+
+</script>
+</body>
+</html>

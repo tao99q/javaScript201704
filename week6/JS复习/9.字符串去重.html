@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var str='111117770000';
+    console.log(str.charAt(0));
+    console.log(str[0]);
+
+    String.prototype.unique=function () {
+        var _this=this;
+        for(var i=0;i<_this.length;i++){
+            if(_this.indexOf(_this[i])!==_this.lastIndexOf(_this[i])){
+                _this =_this.replace(_this[i]," ");
+            }
+        }
+        _this=_this.replace(/ /g,'');
+        return _this;
+    };
+
+    console.log(str.unique());
+
+    var s="123";
+
+</script>
+</body>
+</html>

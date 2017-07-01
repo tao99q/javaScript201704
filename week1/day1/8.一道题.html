@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    f=function () {
+        return true
+    };
+    g=function () {
+        return false
+    }
+//    (function () {
+//        if(g()&&[]==![]){
+//            f=function f() {
+//                return false
+//            };
+//            function g() {
+//                return true
+//            }
+//        }
+//    })();
+    //alert(f());
+    //alert(g());
+    //全局变量：f，g
+    //私有：预解释：function g=undefined（函数条件里面只声明不定义的）
+    //g()-->undefined(),不是一个函数，所以报错了
+    var i=1;
+    console.log(ss);
+    if (i){
+        console.log(ss);
+        function ss() {}
+    }
+    //预解释的时候不管条件是否成立，都进行预解释，但是函数只声明不定义，
+    //代码执行的时候，条件成立的话，先给函数定义
+</script>
+</body>
+</html>

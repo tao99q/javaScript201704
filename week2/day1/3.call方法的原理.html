@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    function fn() {
+        console.log(this);
+    }
+    var obj={1:1}
+    Function.prototype.call=function (obj,n,m) {
+        this//谁去执行call方法this就是谁就是，call点前面的函数
+       // obj是改变this的this
+        //假如说fn.call,这里面的this就是fn
+        //就把fn中的this变成那个obj
+        this(n,m);
+    };
+    fn.call(obj);
+   // fn.call(0).call(1)(obj);
+    //call(1)前面的函数是fn.call（0）,将他里面的this变成obj
+    //call（0）这个方法this是fn。将他变成obj，call作用就是this()->obj(),obj不是一个函数所以就报错了
+
+
+</script>
+</body>
+</html>

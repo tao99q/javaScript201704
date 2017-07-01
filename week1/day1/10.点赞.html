@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点赞</title>
+    <style>
+        html,body,div,h2,span{
+            margin: 0;
+            padding: 0;
+            -webkit-user-select: none;
+            font-family: "微软雅黑";
+        }
+        #box{
+            margin: 50px auto;
+            width: 400px;
+            padding: 20px;
+            border: 1px solid peru;
+            border-radius: 6px;
+            background-color: palegoldenrod;
+        }
+        #box h2{
+            height: 50px;
+            line-height: 50px;
+            border: 1px dashed salmon;
+            text-align: center;
+        }
+        #box1{
+            margin-top: 20px;
+            line-height: 35px;
+            text-align: center;
+            border: 1px solid darkgrey;
+            background-color: deepskyblue;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 1px 3px 4px 1px;
+        }
+        #box1 span{
+            font-size: 25px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <h2>四班李凯最聪明，认同的狂点赞~</h2>
+    <div id="box1">
+        我非常同意【
+        <span>100</span>
+        】
+    </div>
+</div>
+<script type="text/javascript">
+    var box=document.getElementById("box1");
+    var oSpan=box.getElementsByTagName("span")[0];
+    //1全局变量
+    var n=100;
+    box.onclick=function () {
+        n++;
+        oSpan.innerHTML=n;
+    };
+    //2
+    box.onclick=function () {
+        var n=oSpan.innerHTML;
+        n++;
+        oSpan.innerHTML=n;
+    }
+    //3
+    box.onclick=function () {
+        oSpan.innerHTML++
+    }
+    //4.自定义属性的方式
+    box.index=100;
+    box.onclick=function () {
+        oSpan.innerHTML=++this.index
+    }
+    //5.创建一个不销毁作用域
+    box.onclick=(function () {
+        var n=100;
+        return function () {
+            oSpan.innerHTML=++n
+        }
+    })()
+    //6
+    box.onclick=(function (n) {
+        return function () {
+            oSpan.innerHTML=++n
+        }
+    })(100)
+    //7
+    ;(function () {
+        var n=100;
+        box.onclick=function () {
+            n++;
+            oSpan.innerHTML=n;
+        }
+    })()
+</script>
+</body>
+</html>

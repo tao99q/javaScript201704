@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+<script type="text/javascript">
+    Object.prototype.d=3;
+    Object.a="1";
+    Object.prototype.c=5;
+    function FF() {
+        this.a=1; this.b=2;
+    }
+    FF.prototype.c=6; FF.prototype.a=4;
+    FF.a=12;
+    var f1=new FF();var f2=new FF();
+    console.log(f1.a);//1
+    console.log(f1.b);//2
+    console.log(f1.c);//6
+    console.log(f1.d);//3
+    console.log(f1.s);//undefined
+</script>
+</body>
+
+</html>

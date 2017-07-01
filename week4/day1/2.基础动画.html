@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body,div{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            position: relative;
+            left: 0;
+            top: 0;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/javascript" src="js/public.js" charset="utf-8"></script>
+<script type="text/javascript">
+    var box=document.getElementById("box");
+    //固定步长的动画
+    var timer=null;
+    //left最大值:整屏幕的宽度-box的宽
+    var maxL=public.win("clientWidth")-box.offsetWidth;
+    //获取出来开始位置的left
+    var curL=public.css(box,"left");
+    timer=window.setInterval(function(){
+        if(curL+5>=maxL){
+            //假如最后一步不够5了,我们不能直接判断,应该让他加一步跟最最大值比较,剩下的哪一步我们帮他走完,然后return;
+            window.clearInterval(timer);
+            public.css(box,"left",maxL);
+            return;
+        }
+        curL+=5;
+        public.css(box,"left",curL);
+    },17);
+
+</script>
+<!--
+假如说我想让top,width,height,opacity也同步变化,那我们就得一个一个的把步长计算出来,这样岂不是很麻烦,我们想找到他们共同之处?
+哦!总时间是相同的
+我们换个思路来看
+-->
+</body>
+</html>

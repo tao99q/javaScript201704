@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+查找上一级作用域：看当前这个函数对应的堆内存在哪个作用域下定义的，那么他的上一级就是这个作用域，跟在哪里执行没关系
+-->
+<script type="text/javascript">
+    var num=1;
+    function fn() {
+        var num=10;
+        function ff() {
+           console.log(num) ;
+        }
+        return ff
+    }
+    var ff=fn();
+    console.log(ff());
+    //全局：num，ff，function fn=xxxfff000
+    //num=1,ff=xxxfff111
+    //私有变量：num，ff（函数）=xxxfff111
+
+</script>
+</body>
+</html>
+<!--
+1.全局预解释：var num,ff,function fn=xxxfff000
+2.全局执行：num=1,ff=fn()形成私有作用域
+3.参数没有
+4.私有预解释：var num，function ff=xxxfff111
+5.私有代码执行：num=10，return xxxfff111
+6.全局 ：ff=xxxfff111，ff()num=10,ff()执行结果是undefined
+
+-->

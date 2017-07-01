@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{list1}},{{list2}}
+    <p>只出现最后一个:{{list1,list2}}</p>
+    <p>支持运算:{{list1*list2}}</p>
+    <p>支持三元运算符:{{list0?list1:list2}}</p>
+    <p>不可以写if(){}</p>
+</div>
+<script src="js/vue1.0.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            list0:'',
+            list1:"1",
+            list2:"2"
+        }
+    })
+</script>
+</body>
+</html>

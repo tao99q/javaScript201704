@@ -1,0 +1,8 @@
+安装vue
+1)通过bower
+安装bower :npm install bower -g
+mac:sudo npm install bower -g
+查看VUE版本 :bower info vue
+安装vue:bower install vue@1.0.28
+2)通过npm
+npm install vue@1.0.28

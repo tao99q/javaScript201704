@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+|和[]的问题
+</body>
+<script type="text/javascript">
+    //x|y  x或y中的一个
+    var reg=/^(0|1)$/;//只匹配 “1” “0”
+    console.log(reg.test("00"));//false
+    console.log(reg.test("11"));//false
+    console.log(reg.test("01"));//false
+    console.log(reg.test("0"));//true
+
+    //[xy] x,y中选一个，[xyzmn],xyzmn五个中选一个
+    //[^xy],只要不是x,y就可以
+    //[a-z] 表示a-z中的一个
+    //表示a-z加上A-Z中的一个  [a-zA-Z]
+    //[]中除了咱们说的有特殊意义的字符（^ - \）其他在[]里面都是普通元字符的意义。例如[.]就表示点
+    console.log(/^[2*]/.test("2"));//true
+
+    //| 如果没有小括号的情况下，最后看|
+    var reg=/^(1\d|5)$/;//从1+数字或者是5中选一个，作为开头和结尾
+    console.log(reg.test("11"));
+    console.log(reg.test("5"));
+    console.log(reg.test("15"));
+    console.log(reg.test("55"));
+    var reg=/^1\d|5$/;//以1+数字开头，或者是以5结尾
+    console.log(reg.test("11"));//true
+    console.log(reg.test("55"));//true
+    console.log(reg.test("1515"));//true
+    console.log(reg.test("15551"));//true
+
+    //比较 x|y和[xy]的区别
+    var reg=/^10|89$/;//以10开头或者以89结尾
+    console.log(reg.test("898989"));
+    var reg=/^[1089]$/;
+    var reg=/^[10|89]$/;//1,0,|,8,9中的一个
+    var reg=/^[10-89]$/;//1,0-8,9中的一个
+    var reg=/^[15-79]$/;//1,5-7,9中的一个
+    //var reg=/^[17-59]$/;//
+
+    //21-26
+    var reg=/^2[1-6]$/;
+    //16-65
+    //16-19,20-59,60-65
+    var reg=/^(1[6-9]|[2-5][0-9]|6[0-5])$/;
+    //()分组，把大正则分成几个小正则
+    //作用：改变默认优先级先运算括号里面的，\1代表的是第一个分组匹配的内容
+    var reg=/^\w(\w)\1\w$/;
+    console.log(reg.test("good"));//week,cool,boot,foot,food,feel,book,zoom,look,deep,keep,bool,wood
+    var reg=/^\w(\w)\1\w$/;
+    console.log(reg.test("111"));
+
+
+
+</script>
+</html>

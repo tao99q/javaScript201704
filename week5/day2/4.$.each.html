@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+</body>
+</html>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script>
+    var ary=[1,2,3,4];
+    var obj={name:"aa",age:2};
+    $.each(ary,function(index,item){
+        console.log(item == this);
+    });
+    $.each(obj,function(index,item){
+        console.log(index,item);
+    });
+
+    function each(obj,callback){
+        //判断obj有length但是不是函数
+        if(obj.length&&typeof obj!=="function"){
+            for(var key in obj){
+                //如果是数组的话key 就是索引
+                callback.call(obj[key],key,obj[key])
+            }
+        }
+    }
+    //往JQ本身扩展
+    jQuery.extend({
+        each:each
+    });
+    //$.
+
+    //$("ul li")[1]-->原生的
+    //$("ul li").eq(1)-->JQ对象的
+
+//    $("ul li").each(function(index,item){
+//        console.log(this,item);
+//    });
+    //向原型上扩展
+    jQuery.fn.extend({
+        myEach:function(callback){
+            //this JQ 的实例
+            if(this.length){
+               for(var i=0;i<this.length;i++){
+                   //callback执行的时候里面的this是当前那一项item,也是个原生对象,这里面的this是JQ实例我们可以通过索引获取出来ed是个原生对象(或者通过get(i)获取也是原生的对象)
+                   callback.call(this[i],i,this[i]);
+                   //this==item
+               }
+            }
+        }
+    });
+    $("ul li").myEach(function(index,item){
+        console.log(this,item);
+    });
+</script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //1
+    ![]==false;
+    []==false;
+
+    //2
+    var a=[];
+    if(!a){
+        a.push(1);
+    }
+    a.push(2);
+    console.log(a);
+
+    //3
+    var b="";
+    if(""||[]){
+        b=[];
+    }
+    console.log(b);//[]
+
+    //
+    if(""==[]){
+        console.log("oK")
+    }
+
+    //
+    b=[];
+    if(!b||"0"){
+        console.log(b);//[]
+    }
+</script>
+</body>
+</html>

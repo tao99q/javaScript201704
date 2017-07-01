@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>正则练习题</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+		    //1
+			var url = "www.mq1117.cn? course1 = js &course2=css&course3=jQ";
+			//obj={course1:"js",course2:"css",course3:"jQ"}
+			//     course1 = js &course2=css&course3=jQ
+			//第一种方法
+			function parse1(url){
+				var s=url.split("?")[1].split("&");
+				var obj={};
+				for(var i=0;i<s.length;i++){
+					var s1=s[i].split("=");
+					obj[s1[0]]=s1[1];
+				}
+				return obj;
+			}
+			console.log(parse1(url))
+			//第二种
+			function parse2(url){
+				var reg=/(?:\?|&)\s*(\w+)\s*=\s*(\w+)\s*/g;
+				var obj={};
+				var r=reg.exec(url);
+				while(r){
+					obj[r[1]]=r[2];
+					r=reg.exec(url);
+				}
+				return obj;
+			}
+			console.log(parse2(url));
+			//第三中方法
+			function parse3(url){
+				var s=url.split("?")[1].match(/\w+/g);
+				var obj={};
+				//s=["course1", "js", "course2", "css", "course3", "jQ"]
+				for(var i=0;i<s.length;i++){
+					obj[s[i]]=s[++i];
+				}
+				return obj;
+			}
+			console.log(parse3(url));
+			//第四种方法
+			function parse4(url){
+				return eval("({"+url.split("?")[1].replace(/\s*&\s*/g,"',").replace(/\s*=\s*/g,":'")+"'})")
+			}
+			console.log(parse4(url));
+			
+			
+			//2  给数字加上千分符
+			var str="3978192736278";
+			//"3,978,192,736,278";
+			var a=str.split("");
+			//["3","9","7","8","1","9","2","7","3","6","2","7","8"]
+			console.log(a);
+			var n=a.length%3;
+			if(n===0){
+				for(var i=2;i<a.length;i+=3){
+					a[i]=a[i].replace(a[i],a[i]+",")
+				}
+			}else{
+				a[n]=a[n].replace(a[n],","+a[n]);
+				for(var i=n+3;i<a.length;i+=3){
+					a[i]=a[i].replace(a[i],","+a[i]);				
+				}
+			}
+			console.log(a.join(""));
+					
+			var str="3978192736278";
+			//"3,978,192,736,278";
+			var a=str.split("");
+			var n = a.length % 3;
+			if(n === 0) {
+				for(var i = (a.length / 3)-1; i >0; i--) {
+					a[3*i]=a[3*i].replace(a[3*i],","+a[3*i])
+				}
+			} else {		
+				for(var i =((a.length - n) / 3)-1; i >0 ; i--) {
+					a[(3 * i) + n]=a[(3 * i) + n].replace(a[(3 * i) + n],","+a[(3 * i) + n])
+				}
+				a[n]=a[n].replace(a[n],","+a[n])
+			}
+			console.log(a.join(""));
+			//3.找出连续出现的数字 替换成他们的和
+			var num="45mdar567temp7";
+			var reg=/\d{2,}/g;
+			var s=num.replace(reg,function(){
+				//"45"  ["4","5"]
+				var a=arguments[0].split("");
+				var n=0;
+				for(var i=0;i<a.length;i++){
+					n+=parseFloat(a[i]);
+				}
+				return n;
+			})
+			console.log(s);
+			
+		</script>
+	</body>
+</html>

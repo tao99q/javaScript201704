@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="msg">
+    {{msg}}
+</div>
+<script src="js/vue2.0.js"></script>
+<script>
+    //生命周期: 钩子函数
+    //vm.$mount();手动挂载
+    var vm=new Vue({
+        data:{
+            msg:"哈哈"
+        },
+        beforeCreate:function () {
+            //el,data还没有初始化
+            console.log(this._data);
+            console.log(this.$el);
+            //alert("实例创建之前!");
+        },
+        created:function () {
+            //data已经初始化,但是el还没有
+            console.log(this._data);
+            console.log(this.$el);
+            //alert("实例创建成功!");
+        },
+        beforeMount:function () {
+            //挂载之前,这时候就已经data跟el初始化了
+            console.log(this._data);
+            console.log(this.$el);
+        },
+        mounted:function () {
+            //挂载完成
+        },
+        beforeUpdate:function () {
+            //修改前
+            alert("修改前")
+        },
+        updated:function () {
+            //修改后
+            alert("修改后")
+        },
+        beforeDestroy:function () {
+            //销毁前
+            //alert("准备销毁")
+        },
+        destroyed:function () {
+            //销毁后
+            //alert("销毁")
+        }
+    });
+    //vm.$mount("#app");
+
+    //vm.$destroy();//销毁需要手动销毁
+    console.log(vm);//销毁的时候只是销毁的跟Vue的关系,里面的内容不会销毁
+    //vm.msg=1;
+
+
+</script>
+</body>
+</html>

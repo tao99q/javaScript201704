@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #app{
+            width: 750px;
+            height: 140px;
+            border: 2px dashed fuchsia;
+        }
+        #app div{
+            display: inline-block;
+            width: 200px;
+            height: 100px;
+            margin: 20px;
+            background: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+<!--
+绑定事件 v-on: 简写成 @
+v-on:click   @click
+@click="parent($event)" $event:事件对象
+好比:html标签上事件onclick="fn(event)"
+
+@click.prevent:阻止事件的默认行为
+ -->
+<div id="app" @click="parent($event)">
+    <div @click.stop="fn1">1</div>
+    <div @click="fn2">2</div>
+    <div @click="fn3">3</div>
+    <a href="https://www.baidu.com/" @click.prevent="aa">baidu</a>
+</div>
+</body>
+<script src="js/vue2.0.min.js"></script>
+<script>
+    var v1=new Vue({
+        el:"#app",
+        data:{
+//            fn1:function () {
+//                console.log("div1");
+//            },
+//            fn2:function () {
+//                console.log("div2");
+//            },
+//            fn3:function () {
+//                console.log("div3");
+//            },
+//            parent:function () {
+//                console.log("parent");
+//            }
+        },
+        methods:{
+            fn1(){
+                console.log("div1");
+            },
+            fn2(){
+                console.log("div2");
+            },
+            fn3(){
+                console.log("div3");
+            },
+            parent(e){
+                //console.log(e);
+                console.log("parent");
+            },
+            aa(){
+                alert(1)
+            }
+        }
+    });
+    //这里也是会触发事件冒泡的
+    //如何阻止事件冒泡
+    //1.给上一级的 事件加一个修饰符 self @click.self 只有点自己的时候才会触发绑定的函数
+    //2.给当前元素的事件加一个修饰符 stop @click.stop
+</script>
+</html>

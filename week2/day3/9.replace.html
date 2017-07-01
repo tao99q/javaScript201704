@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+replace中的第二个参数可以传一个函数，替换一次执行一次，每一次执行都会默认给他传参数
+第一个参数arguments[0]：大正则匹配的内容
+第二个参数arguments[1]：第一个分组匹配的内容
+第三个参数arguments[2]：第二个分组匹配的内容
+。。。。。
+倒数第二个参数：就相当于exec返回值中的那个index，就是大正则匹配的内容首字符出现的索引
+最后一个参数：就相当于exec返回值中的那个input，原字符串
+
+return什么就替换成什么
+
+<script type="text/javascript">
+    var str="html2000js14000node6000" ;
+    var reg=/([a-z]+)(\d+)/g;
+    str=str.replace(reg,function () {
+        //console.log(arguments);
+        //html2000->html学费是:2000;
+        return arguments[1]+"学费是:"+arguments[2]+";"
+    });
+    console.log(str);
+
+    var s="https://www.baidu.com/s?ie=utf-8&f=3&rsv_bp=0&rsv_idx=1&tn=baidu&wd=s";
+    s=s.split("?")[1];
+    console.log(s);
+    //ie=utf-8&f=3&rsv_bp=0&rsv_idx=1&tn=baidu&wd=s
+    //ie=utf-8&->ie:'utf-8',
+    var reg=/(\w+)=(\w+-*\w*)&?/g;//我要匹配类似'ie=utf-8&'字符串
+    //把ie=utf-8&替换成ie:'utf-8'
+    s=s.replace(reg,function () {
+        //return什么就替换成什么样
+        //正好是第一个分组内容+“：”+第二个分组的内容+“',”;
+        //第一个分组内容:arguments[1]
+        //第二个分组内容:arguments[2]
+
+        return arguments[1]+":'"+arguments[2]+"',";
+    });
+    //最后得到的结果是后面多个逗号，我们想把它去掉，有很多方式，自己想想，比如substr(0,s.length-1)
+
+    s=s.substr(0,s.length-1);
+    //要用eval变成对象之前先加上大括号，不要忘了再加上小括号包起来，以免出错
+    obj=eval("({"+s+"})");
+    console.log(obj);
+</script>
+</body>
+</html>

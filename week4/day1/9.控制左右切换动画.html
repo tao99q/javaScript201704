@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            position: relative;
+            left: 0;
+            top:20px;
+            background-color: purple;
+            opacity: 0.1;
+        }
+        button{
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+            margin-top: 50px;
+            font-size: 20px;
+            color: #999;
+            border-radius: 3px;
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<button id="go">go</button>
+<button id="back">back</button>
+<script src="js/public.js"></script>
+<script src="js/animation升级版1.js"></script>
+<script type="text/javascript">
+    var box=document.getElementById("box");
+    var bL=public.css(box,"left");
+
+
+    /*
+    function go(){
+        var t=public.win("clientWidth")-box.offsetWidth;
+        var begin=bL;
+        var duration=2000;
+        var left=public.css(box,"left");
+
+        animation(box,{left:public.win("clientWidth")-box.offsetWidth,opacity:1},getT(t,begin,duration,left),back)
+    };
+    function back(){
+        var t=10;
+        var begin=public.win("clientWidth")-box.offsetWidth;;
+        var duration=2000;
+        var left=public.css(box,"left");
+        animation(box,{left:10,opacity:0.1},getT(t,begin,duration,left),go)
+    };
+    go.call(box);
+
+
+    var goBtn=document.getElementById("go");
+    var backBtn=document.getElementById("back");
+    goBtn.onclick=go;
+    backBtn.onclick=back;
+
+    //(target-begin)/duration==(target-left)/time
+
+    function getT(target,begin,duration,left){
+        return (target-left)*2000/(target-begin)
+    }
+    */
+</script>
+<script>
+    function go(){
+        animation(box,{left:public.win("clientWidth")-box.offsetWidth,opacity:1},2000,back)
+    };
+    function back(){
+        animation(box,{left:10,opacity:0.1},2000,go)
+    };
+    go.call(box);
+
+
+    var goBtn=document.getElementById("go");
+    var backBtn=document.getElementById("back");
+    goBtn.onclick=go;
+    backBtn.onclick=back;
+
+    //(target-begin)/duration==(target-left)/time
+
+    function getT(target,begin,duration,left){
+        return (target-left)*2000/(target-begin)
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 100%;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    {{msg}}
+    <input type="text" v-model="msg">
+</div>
+</body>
+</html>
+<!--<script src="js/vue1.0.js"></script>-->
+<script src="js/vue2.0.js"></script>
+<script>
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            msg:"AA"
+        }
+    });
+    //console.log(vm.$el);
+    //vm.$el获取当前绑定的元素
+    vm.$el.style.backgroundColor="yellow";
+    //在vue1.0中vm.$data 获取当前绑定的数据 来刷新视图,还可以手动修改数据,$data,_data这两种方式都可以获取数据
+//    vm.$data={msg:"aa"};
+//    console.log(vm.$data);
+//    console.log(vm._data);
+
+
+    //在vue2.0 中获取的话:$data,_data这两种方式都可以获取数据
+    //不可以修改data
+    //console.log(vm.$data);
+    //console.log(vm._data);
+    //vm.$data={msg:"aa"};
+    //vm._data={msg:"aa"};
+
+    //$watch  监控数据模型变化
+    vm.$watch("msg",function (newVal,oldVal) {
+        //只要数据msg发生改变了就会出触发这个函数,默认传2个参数
+        //newVal:修改后的,oldVal:原来的
+        console.log(newVal,oldVal);
+    })
+</script>

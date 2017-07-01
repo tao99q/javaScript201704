@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+闭包：是一种机制,函数执行的时候会形成一个私有作用域，来保护里面的私有变量不受外界的干扰，我们把这种机制叫做闭包
+私有变量：两种：1参数，2在私有作用域下预解释的变量
+
+
+函数执行的步骤：
+1.形成私有作用域
+2.给形参赋值
+3.预解释
+4.函数体执行
+
+
+在私有作用域下遇到变量先看是不是自己的私有变量（两种），是的话就是私有的，不是的话就往上一级找，如果还没有继续找，直到找到全局下为止，还没找到就报错了，这种查找机制叫做作用域链，私有作用域下的私有变量外界访问不到，但是可以获取外界的变量
+-->
+<script type="text/javascript">
+    function fn() {
+        var f=0;
+        f++;
+        console.log(f)
+    }
+    //console.log(f);
+    //全局：预解释：function fn=xxxfff000；代码执行：f没有报错了
+
+    fn();
+    //私有作用域
+    //私有预解释：var f
+    //代码执行：f=0,f++->f=1,
+    var a=1;
+    var b=2;
+    function sum(a) {
+      var b=10;
+      a++;
+      b++;
+      console.log(a,b)
+    }
+    sum(a);
+    console.log(a,b)
+    //全局预解释：var a，b,function sum=xxxfff000
+    //全局执行：a=1,b=2 ,sum(1)形成一个私有作用域
+    //1.给参数赋值，a=1
+    //2.私有作用域预解释：var b
+    //3.b=10,a=2,b=11
+    //全局中 console.log(a,b);1,2
+</script>
+</body>
+</html>

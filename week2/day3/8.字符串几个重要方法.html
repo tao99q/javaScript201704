@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    //1.search()返回值是首字符的索引，没有返回-1
+    var reg = /\*\d+/g;
+    var str = "zhufeng*2017*peixunhtml5";
+    console.log(str.search(reg));
+    //2.split(正则) 按照正则匹配的字符进行拆分为数组
+    var s = "https://www.baidu.com/s?ie=utf-8&f=3&rsv_bp=0&rsv_idx=1&tn=baidu&wd=s";
+    var reg = /\?|&/g;
+    var ary = s.split(reg), obj = {};
+    ary.shift();
+    console.log(ary);
+    for (var i = 0; i < ary.length; i++) {
+        var a = ary[i].split(/=/);
+        obj[a[0]] = a[1];
+    }
+    console.log(obj);
+
+    //replace(),使用正则加上修饰符g，就可以全部替换完
+    var s=" s1    s2  a1  v1 ";
+    var reg=/\s+/g;
+    s=s.replace(reg," ");
+    console.log(s);
+    var reg=/^\s+|\s+$/g;//首尾有空格
+    s=s.replace(reg,"");
+
+
+    //replace(正则，function(){})
+
+
+
+</script>
+</body>
+</html>

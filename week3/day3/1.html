@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="parent" class="div1 div11 div22">
+    <div></div>
+    <div></div>
+    <div></div>
+    <p></p>
+    <p></p>
+    <p></p>
+    <span></span>
+</div>
+</body>
+</html>
+<script src="js/public.js"></script>
+<script>
+    var parent=document.getElementById("parent");
+
+    var p=public.children(parent, "p");
+    console.log(p[1],p[0]);
+    console.log(public.children(parent, "div"));
+    console.log(public.children(parent));
+
+    //判断当前元素有没有某个/某些class名
+    console.log(parent.className);//"div1 div2"
+
+    function hasClass(curEle,classStr){
+        //"div1 div2 div11 div22"
+        var reg=new RegExp("(^| +)"+classStr+"( +|$)");
+        /*var reg=new RegExp("\\b"+classStr+"\\b");
+        /(^| +)div1( +|$)/g
+        /\bdiv1\b/g*/
+        return reg.test(curEle.className);
+    }
+
+    console.log(hasClass(parent, "div1"));
+    console.log(hasClass(parent, "div2"));
+    console.log(hasClass(parent, "div11"));
+    console.log(hasClass(parent, "div"));
+
+
+    function addClass(curEle,classStr){
+        //1.处理参数2 classStr 将其首位空格去掉
+        classStr=classStr.replace(/^ +| +$/g,'');
+        //2.将中间出现的多个空格都变成一个空格
+        classStr=classStr.replace(/ +/g,' ');
+        //3.判断curEle之前有没有className
+        if(curEle.className.length>0){
+            //有的话,先加一个空格在拼接上classStr
+            curEle.className+=" "+classStr;
+        }else{
+            //没有的话直接赋值
+            curEle.className=classStr;
+        }
+    }
+
+    function addClass(curEle,classStr){
+        //1.处理参数2 classStr 将其首位空格去掉
+        classStr=classStr.replace(/^ +| +$/g,"");
+        //2.按照一到多个空格将classStr拆分成数组
+        var classAry=classStr.split(/ +/g);
+        //3.循环数组,判断curEle之前的className中有没有那个类名,没有的话给他加上
+        for(var i=0;i<classAry.length;i++){
+            if(!hasClass(curEle,classAry[i])){
+                curEle.className+=(" "+classAry[i]);
+            }
+        }
+        //4,为了保证第一个前面没有空格在做一次首尾空格去掉
+        curEle.className=curEle.className.replace(/^ +| +$/g,"");
+    }
+    addClass(parent,"box1");
+    addClass(parent,"box1  box2");
+    addClass(parent,"box1   box3  box4")
+
+
+
+    //删除class名
+    function removeClass(curEle,classStr){
+        ////1.处理参数2 classStr 将其首位空格去掉,然后按照一到多个空格拆分为数组
+        classStr=classStr.replace(/^ +| +$/g,"").split(/ +/g);
+        //2 循环判断之前的class中有没有,有的话替换成空字符串
+        for(var i=0;i<classStr.length;i++){
+            var reg=new  RegExp("(^| +)"+classStr[i]+"( +|$)");
+            curEle.className=curEle.className.replace(reg," ");
+        }
+        //最后再把首尾空格去掉
+        curEle.className=curEle.className.replace(/^ +| +$/g,'')
+    }
+    removeClass(parent, " div1  box2     box3  div22 ");
+
+
+</script>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    //1.自定义属性，一般需要存储一个值，不想让他人改变，那么就存在元素的自定义属性里面
+    //注意：只要是引用数据类型都可以增加自定义属性，强调一线函数
+    function sum() {
+        console.log(3);
+    }
+    sum.aa="aa";
+    console.log(sum.aa);
+    //
+    var timer1=window.setTimeout(function () {
+        console.log("1");
+    },1000)
+    //timer1=1 timer1就是一个变量里面存了一个值1
+    window.clearTimeout(1)//清除定时器不是把定时器破坏了，而是把里面的方法阻止了
+    timer1=null;
+
+    //引用数据类型的赋值
+    var obj={aa:"aa"};
+    //1.浏览器先要判断一下赋值是什么数据类型
+    //2.引用数据类型的话，浏览器先要开辟一个堆内存，将里面的值存起来
+    //3.将地址赋值给变量名
+    console.log(obj1);
+    var obj1={name:"111"};
+    console.log(fn);
+    function fn() {
+
+    }
+</script>
+</body>
+</html>

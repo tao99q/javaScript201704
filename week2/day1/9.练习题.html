@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    function fn1(n) {
+        console.log(this);
+        console.log(n++,n);
+    }
+    function fn2(n) {
+        console.log(this);
+        console.log(n--,n);
+    }
+    fn1();//this-window,n++=NaN, n=NaN
+    fn1.call(null,12);//this-window 12,13
+    fn1.call.call(fn2);//fn2()this-window,n++=NaN, n=NaN
+    fn1.call.call.call(fn2,10);//fn2()
+    [].push.call.call(fn1,4);//fn1()
+    Array.call.call(fn2,6);//fn2()
+    [].constructor.call.call.call(fn1,8);//fn1()
+
+
+    Function.prototype.call=function () {
+        this()
+    };
+
+</script>
+</body>
+</html>

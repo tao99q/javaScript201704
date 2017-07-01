@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鼠标跟随</title>
+		<style type="text/css">
+			html,
+			body,
+			div {
+				margin: 0;
+				padding: 0;
+				-webkit-user-select: none;
+			}
+			
+			#box {
+				position: relative;
+				width: 200px;
+				height: 200px;
+				background-color: yellowgreen;
+				margin: 50px auto;
+			}
+			
+			#mark {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 50px;
+				height: 50px;
+				background-color: #ADD8E6;
+				opacity: 0.6;
+				filter: alpha(opacity=60);
+				cursor: move;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="box"></div>
+	</body>
+	<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+
+		var box=document.getElementById("box");
+		var offset=public.offset(box);
+		function moveMark(mark,e){
+			var l= e.clientX-offset.left-mark.offsetWidth/2;
+			var t= e.clientY-offset.top-mark.offsetHeight/2;
+			var minL= 0,minT=0;
+			var maxL=box.offsetWidth-mark.offsetWidth;
+			var maxT=box.offsetHeight-mark.offsetHeight;
+			l=l<minL?0:(l>maxL?maxL:l);
+			t=t<minT?0:(t>maxT?maxT:t);
+			public.css(mark,{left:l,top:t});
+		}
+		box.onmouseenter=function(e){
+			e=e||window.event;
+			var mark=document.createElement("div");
+			mark.id="mark";
+			this.appendChild(mark);
+			moveMark(mark,e)
+		};
+		box.onmousemove=function(e){
+			e=e||window.event;
+			var mark=document.getElementById("mark");
+			if(mark){
+				moveMark(mark,e);
+			}
+		};
+		box.onmouseleave=function(e){
+			var mark=document.getElementById("mark");
+			if(mark){
+				this.removeChild(mark)
+			}
+		}
+	</script>
+
+</html>

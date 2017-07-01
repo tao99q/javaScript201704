@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var url=window.location.href;
+    url=window.decodeURI(url);
+//    url="http://localhost:63342/第五周/第三天/1.html?user=啊啊啊&passWord=11&box=on&sel=2"
+    var s1=url.split("?")[1].replace(/=/g,":'");
+    s1=s1.replace(/&/g,"',");
+    var obj=eval("({" + s1 + "'})");
+    var str2="";
+    for(var key in obj){
+        str2+="<span>"+key+"</span> <span>"+obj[key]+"</span><br>"
+    }
+    document.body.innerHTML+=str2;
+</script>

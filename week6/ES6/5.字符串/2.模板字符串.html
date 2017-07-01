@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    "use strict";
+    //1.有特殊意义的 \` $ {
+    //123`${123}\
+    let str=`123\`\$\{123\}\\`;
+    console.log(str);//123`${123}\
+
+    //2.插入变量
+    let a="123";
+    let str0=`123${a}`;
+    console.log(str0);
+
+    //3.换行
+    let str1=`<div>\
+          <span>span1</span>\
+          <span>span2</span>\
+     </div>\
+     `;
+    document.body.innerHTML+=str1;
+
+    //4.插入表达式
+    function fn(x,y) {
+        return x+y
+    };
+    let str2=`1+2=${fn(1,2)}`;
+    //let str2=`liKai is a ${true?"boy":"girl"}`;
+
+    //自动类型转换
+    //let str3=`${[1,2]}`;
+    let str3=`${{A:"A"}}`;
+    console.log(str3);
+
+
+    ///
+    let x="x";
+    let y="y";
+    //let s=temp`0${x}1${y}2`;
+    //["0","1","2"]
+    //let s=temp`${x}1${y}`;
+    //["","1",""]
+
+    let s=temp`${x}${y}`;
+    //["","",""]
+    function temp(a,...b) {
+        console.log(a);
+        console.log(b);
+    }
+
+</script>
+</body>
+</html>

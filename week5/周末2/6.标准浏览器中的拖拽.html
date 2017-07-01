@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: yellowgreen;
+            cursor: move;
+            position: absolute;
+        }
+        #box img{
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <img src="3.jpg" alt="">
+</div>
+</body>
+</html>
+<script>
+    var box=document.getElementById("box");
+    box.onmousedown=function (e) {
+        //按下去的一瞬间记录鼠标距离盒子的距离，通过自定义属性存起来
+        this.L=e.clientX-this.offsetLeft;
+        this.T=e.clientY-this.offsetTop;
+        document.onmousemove=function (e) {
+            var l=e.clientX-box.L;
+            var t=e.clientY-box.T;
+            box.style.left=l+"px";
+            box.style.top=t+"px";
+            //如果当前盒子中有其他元素，必须要组织一下默认行为，因为元素默认是不可以乱拖拽的
+            e.preventDefault();
+        };
+        document.onmouseup=function (e) {
+            this.onmousemove=null;
+            this.onmouseup=null;
+        }
+    }
+</script>

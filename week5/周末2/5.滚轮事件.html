@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        #box{
+            width: 300px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body id="body">
+<div id="box"></div>
+<script>
+    var body = document.getElementById("body");
+    var box = document.getElementById("box");
+//    body.onmousewheel=function (e) {
+//        //e.wheelDelta:120/180/150/300 上  -120/-180/-150/300下
+//        console.log(e.wheelDelta);
+//        //大于0是上，小于0是下
+//    }
+    //在火狐中没有onmousewheel这个事件行为
+    //DOMMouseScroll只针对火狐  必须用DOM二级事件绑定
+    //e.detail -3上  3下
+    //小于0是上，大于0是下
+
+    function addWheel(ele,fn) {
+        //鼠标放在ele上，干什么事（fn）
+        function wheel(e) {
+            e=e||window.event;
+            var bOk=false;
+            if(e.wheelDelta){
+                bOk=e.wheelDelta<0?false:true;
+            }else {
+                //e.detail
+                bOk=e.detail>0?false:true;
+            }
+            //bOk=true上，false下
+            fn&&fn.call(ele,bOk);
+            e.preventDefault?e.preventDefault():e.returnValue=false;
+        }
+        if(window.navigator.userAgent.toLowerCase().indexOf("firefox")>=0){
+            //火狐浏览器
+            ele.addEventListener("DOMMouseScroll",wheel)
+        }else {
+            ele.onmousewheel=wheel;
+        }
+    }
+    addWheel(box,function (bOk) {
+        //bOK:true 上滚   ，false下滚
+        //var bc=parseFloat(window.getComputedStyle(box).height);
+        //rgba(0, 0, 0, 0.1)
+        //bc=/^rgba\(0, 0, 0, (0?(?:.\d+)?)\)$/g.exec(bc)[1];
+        //console.log(bc);
+        if(bOk){
+            this.style.height=box.offsetHeight+10+"px";
+        }else {
+            this.style.height=box.offsetHeight-10+"px";
+        }
+
+
+    })
+</script>
+</body>
+</html>

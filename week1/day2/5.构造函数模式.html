@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构造函数</title>
+</head>
+<body>
+<!--
+函数三重身份：
+     1.普通的的函数，就代表一个方法
+     2.类 自定义类
+     3.他是Function类的一个实例
+     var obj1=new Fn();
+     new：就是构造函数创建方式，Fn函数就是一个类，obj1就是Fn类的一个实例
+
+     Fn()创建过程：
+     1.形成一个私有作用域
+     2.预解释
+     3.自动创建一个实例，this
+     4.代码执行的时候，通过this给实例增加私有属性并赋值
+     5.会默认返回当前的这个实例this
+
+    注意：1.通过this给实例增加的是私有属性，每个实例之间的私有属性是私有的不一样，
+     2.不用写return直接返回this，如果你写了，写的是基本数据类型的没有影响，如果你写的是引用数据类型的就会把this修改了，你写的啥就返回啥
+
+     3.var obj=new Fn() 跟 var obj=new Fn 一样，没有区别
+-->
+<script type="text/javascript">
+    function fn() {
+       var obj={};
+       obj.name="aa";
+       obj.age=12;
+       return obj
+    }
+    var obj=fn();
+    function Fn() {
+        //this->obj
+        this.name="aa";
+        this.age=12;
+        this.f=function () {
+            console.log("11")
+        }
+
+    }
+
+    var obj1=new Fn();
+    //obj1是Fn这个类的一个具体的实例
+    var obj2=new Fn();
+    //obj2是Fn这个类的一个具体的实例
+    console.log(obj1.f===obj2.f);
+
+    console.log(obj1);
+
+    function FF() {
+        //this->obj
+        this.name="aa";
+        this.age=12;
+        this.f=function () {
+            console.log("11")
+        }
+        return this
+    }
+    var obj0=new  FF();
+    console.log(obj0);
+
+    var num=1;
+    function XX() {
+        var num=12;
+        this.num=10;
+        this.x=100;
+        this.y=function () {
+            console.log(this.x+num)
+        }
+    }
+    var x1=new XX();
+    console.log(x1.x,x1.num);
+    //x1.x=100,x1.num=10
+    x1.y();
+    var x2=new XX();
+    //x2={num:10,x:100,y:function(){}}
+    console.log(x1.x===x2.x);
+    console.log(x1.y===x2.y);//false
+
+
+    var a={a:1,b:2};//a=xxxfff000
+    var b={a:1,b:2};//b=xxxfff111
+</script>
+<!--
+var x1=new XX();
+创建了XX类的一个实例x1,
+先让XX执行，形成一个私有作用域，预解释：var 私有变量num
+私有作用域中代码执行：num=12；
+通过this给实例增加了三个私有属性，并且赋值，然后将创建的好的this实例返回出来给了x1,现在x1={num:10,x:100,y:function(){}}
+x1.y()->function () {
+console.log(this.x+num)}
+这里面的this值得是x1,x1.x+12=112
+-->
+</body>
+</html>

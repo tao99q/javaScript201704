@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    //正则就是用来处理复杂字符串
+    //1.匹配字符串中的格式是否正确-->正则匹配 test（true、false）
+    //2.把匹配的内容找出来-->正则的捕获exec(返回值是个数组)
+
+    var reg=/mengqian/g;
+    //两部分组成
+    //1.写在//中间的部分都是元字符  必须要有
+    //2.写在//后面的，叫修饰符（可以没有），只有三种：g(全局匹配)，i(忽略大小写)，m(换行匹配)
+
+    //具有特殊意义的元字符
+    //|   转义符  把具有特殊意义的字符转为本来的意思
+    var s='I\'m a person';
+    var s1="\\d";
+    var reg=/\\d/;
+    var reg1=/\./;
+    var s2="......11";
+    console.log(reg.test(s1));
+    console.log(reg1.test(s1));
+    console.log(reg1.test(s2));
+
+    //^ 以什么什么开头
+    var reg=/^1/;//匹配以1开头的字符串
+    console.log(reg.test("12abc"));//true
+    console.log(reg.test("a121"));//false
+
+    //$ 以什么什么结尾
+    var reg=/78$/;//匹配以78结尾的字符串
+    console.log(reg.test("787878"));//true
+    //如果是规定了开头和结尾，中间内容就定死了
+    var reg=/^6abc7$/;//
+    console.log(reg.test("6abc7"));
+    var reg=/^\d$/;
+    console.log(reg.test("2"));//true
+    console.log(reg.test("11"));//false
+
+    // \d 0-9中的任意一个
+    // \D 除了\d以外的任意一个
+    // \w 0-9,a-z,A-z,_一共63个。这63个中的任意一个
+    // \W 除了\w 以外的任意一个
+    // \n 匹配一个换行符
+    console.log("1\n2");//字符串中\n就是换行
+    // \s 空白符 （常用他来表示空格）
+    // \S 匹配一个非空白符
+    // \b 匹配一个边界 ,\b不能出现在两个字符中间
+    console.log(/\ba/.test("baab a"));//true
+    console.log(/\ba/.test("bbba"));//false
+    console.log(/\ba/.test("bbb a"));//true
+    console.log(/\ba\b/.test("a bbb a"));//true
+    console.log(/a\b/.test("abbba"));//true
+    // \B 匹配一个非边界
+    console.log(/\Bb/.test("aabbaaabbbbbb"));//true
+    console.log(/\Bbb/.test("bbbbb"));//true
+    console.log(/\Bb/.test("abb"));//true
+    console.log(/\d/.test("zhufeng2017"));
+    console.log(/s\Ba\B/.test('saa'));
+</script>
+</body>
+</html>

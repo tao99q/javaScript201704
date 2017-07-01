@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        img{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+    <link rel="stylesheet" href="css/menu.css"/>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script>
+        //DOM0级事件  window.onload=function(){} 只能写一次
+        //DOM2级事件 实现多次绑定 window.addEventListener("load",function)
+//        window.addEventListener("load",function(){
+//            console.log("页面加载完成1")
+//        });
+//        window.addEventListener("load",function(){
+//            console.log("页面加载完成2")
+//        });
+        window.onload=function(){
+            //页面上所有的东西都加载完成(DOM,音频,视频,CSS,外部引入的文件,图片...)才开始执行里面的代码
+            alert("JS");
+        };
+        //$(document).ready 实现多次
+        //下面三种是一样的
+        /*
+        $(document).ready(function(){
+            //只要页面上所有的DOM结构(图片)加载完成后才开始执行
+            alert("JQ");
+        });
+        jQuery(function($){
+            alert("jQ");
+        });
+        $(function(){
+            alert("jQ");
+        });
+        */
+
+
+        //在window也有一个方法是让DOM结构加载完成就执行
+        document.addEventListener("DOMContentLoaded",function(){
+            alert("DOMContentLoaded");
+        },false);
+        //addEventListener,DOMContentLoaded,有兼容性
+        function DOMLoad(fn){
+            if(document.addEventListener){
+                document.addEventListener("DOMContentLoaded",fn,false);
+            }else{
+                //onreadystatechange:当页面的状态发生改变的时候,通过document.readyState来监听页面的变化
+                /*
+                * 0-uninitialized XML对象被产生,但是没有任何文件被加载
+                * 1-loading 加载程序进行中,但是文件尚未开始解析
+                * 2-loaded 部分文件被加载解析,但是对象模型尚未建成
+                * 3-interactive: 仅仅对部分已经加载的文件有效,但是文档模型建成了,只能是只读的
+                * 4-completed  文件加载完成,加载成功
+                *
+                * */
+                document.onreadystatechange=function(){
+                    if(document.readyState=="completed"){
+                        //文件加载成功
+                        fn()
+                    }
+                }
+            }
+        }
+        function fn(){
+            console.log("哈哈")
+        }
+        DOMLoad(fn);
+    </script>
+</head>
+<body>
+<img src="img/1.jpg" alt=""/>
+<audio src=""></audio>
+</body>
+
+</html>
+

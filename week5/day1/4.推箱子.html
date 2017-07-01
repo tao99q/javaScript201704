@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>推箱子</title>
+		<style type="text/css">
+			html,body,div{
+				margin: 0;
+				padding: 0;
+			}
+			#box{
+				position: absolute;
+				top:30px;
+				left: 30px;
+				width: 150px;
+				height: 150px;
+				border: 1px dashed gold;
+				background-color: lightcyan;
+				font-size: 20px;
+				color: blueviolet;
+				text-align: center;
+				line-height: 150px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			推推
+		</div>
+		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+
+			var box=document.getElementById("box");
+			window.onkeydown=function(e){
+				e=e||window.event;
+				if(e.keyCode===37){
+					public.css(box,{left:public.css(box,"left")-10});
+				}else if(e.keyCode===38){
+					public.css(box,{top:public.css(box,"top")-10});
+				}else if(e.keyCode===39){
+					public.css(box,{left:public.css(box,"left")+10});
+				}else if(e.keyCode===40){
+					public.css(box,{top:public.css(box,"top")+10});
+				}else if(e.keyCode===32){
+					public.css(box,{background:"red"});
+					box.innerHTML="恭喜!"
+				}
+			}
+
+		</script>
+	</body>
+</html>

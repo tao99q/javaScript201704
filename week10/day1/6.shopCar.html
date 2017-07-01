@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+<div id="list" class="container">
+    <table class="table table-bordered table-hover table-striped">
+        <caption class="text-danger" style="font-size: 20px">购物车</caption>
+        <thead>
+        <tr>
+            <th class="text-center">商品名称</th>
+            <th class="text-center">商品价格</th>
+            <th class="text-center">操作</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        <tr v-for="item in shopList">
+            <td>{{item.name}}</td>
+            <td>${{item.price}}
+            <td>
+                <button class="btn bg-danger btn-sm" @click="remove(item)">删除</button>
+            <!--remove(item)删除数据中当前这一项-->
+            </td>
+        </tr>
+        <tr>
+            <!-- colspan ="3" 合并单元格-->
+            <td colspan="3" v-show="shopList.length">
+                <button class="btn bg-danger" @click="removeAll">删除全部</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="name">商品名称</label>
+            <div class="col-sm-4">
+                <input class="form-control" id="name" type="text" placeholder="商品名称" v-model="name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="price">商品价格</label>
+            <div class="col-sm-4">
+                <input class="form-control" id="price" type="text" placeholder="商品价格" v-model="price">
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" @click="add" >添加</button>
+        <button type="reset" class="btn btn-warning">重置</button>
+    </form>
+</div>
+</body>
+</html>
+<script src="js/vue2.0.min.js"></script>
+<script>
+    new Vue({
+        el:"#list",
+        data:{
+            name:'',
+            price:"",
+            shopList:[{name:"衬衣",price:"299"},{name:"连衣裙",price:"499"},{name:"短裤",price:"199"},{name:"袜子",price:"9"},{name:"玩具",price:"99"}]
+        },
+        methods:{
+            remove(val){
+                //this==当前实例
+                //filter 遍历数组,参数是个函数,几项数组有这个函数就执行几次,每一次执行都会默认传三个参数(item,index,input),每一次函数如果返回true保留当前项,如果返回false就就删除当前项
+                //filter不会改变原数组
+                this.shopList=this.shopList.filter(item=>item!=val);
+            },
+            removeAll(){
+                this.shopList=[];
+            },
+            add(){
+                //console.log(this.name,this.price);
+                if(this.price&&this.name){
+                    this.shopList.push({name:this.name,price:this.price});
+                }else {
+                    alert("不能为空");
+                }
+                this.name=this.price="";
+            }
+        }
+    })
+</script>

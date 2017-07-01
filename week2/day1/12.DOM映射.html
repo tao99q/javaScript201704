@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body,ul,li{
+            margin: 0;
+            padding: 0;
+            -webkit-user-select: none;
+            font-family: "微软雅黑";
+            font-size: 16px;
+        }
+        ul,li{
+            list-style: none;
+        }
+        #news{
+            width: 300px;
+            margin: 20px auto;
+            box-shadow: 1px 2px 2px;
+            border: 2px dashed darkgrey;
+            background-color: azure;
+            padding: 10px;
+        }
+        #news li{
+            line-height: 40px;
+            color: blue;
+            padding-left: 10px;
+        }
+        li.li0{
+            background-color: bisque;
+        }
+        li.li1{
+            background-color: navajowhite;
+        }
+        li.li2{
+            background-color: silver;
+        }
+        li.li3{
+            background-color: gainsboro;
+        }
+        li.li4{
+            background-color: peachpuff;
+        }
+        li.li5{
+            background-color: seashell;
+        }
+    </style>
+</head>
+<body>
+<ul id="news">
+<li class="li0">珠峰开课了~</li>
+</ul>
+</body>
+<script TYPE="text/javascript">
+    var jsonData=[{
+        "content":"赵四出轨~",
+        "class":"li1"
+    },{
+        "content":"白百何离婚了~",
+        "class":"li2"
+    },{
+        "content":"郭富城结婚了~",
+        "class":"li3"
+    },{
+        "content":"五一假期过完了~",
+        "class":"li4"
+    },{
+        "content":"端午节不放假啊~",
+        "class":"li5"
+    }];
+
+    var news=document.getElementById("news");
+    var oLis=news.getElementsByTagName("li");
+    console.log(oLis);
+    oLis[0].onmouseover=function () {
+        this.style.backgroundColor="plum";
+    };
+    oLis[0].onmouseout=function () {
+        this.style.backgroundColor="bisque";
+    };
+//    for (var i=0;i<jsonData.length;i++){
+//        var oLi=document.createElement("li");
+//        oLi.innerHTML=jsonData[i]["content"];
+//        oLi.className=jsonData[i]["class"];
+//        news.appendChild(oLi);
+//    }
+//    console.log(oLis);
+//    var aryLis=[];
+//    for (var i=0;i< oLis.length;i++){
+//       aryLis.push(oLis[i])
+//    }
+//    console.log(aryLis);
+//    aryLis[3].id="li3";
+</script>
+<!--
+DOM映射：
+通过DOM方法获取的一个元素集合（类数组），这个集合仍然和页面的元素保持着联系，并且这个元素集合会随着页面元素的增加而增加，减少而减少，即使把这个类数组转为一个数组，每个元素仍然和页面有联系，这就叫做DOM映射
+-->
+</html>
+<!--
+回流：
+元素的位置发生改变（增加元素，删除元素，移动）引起回流，让整个页面重新渲染一遍，从而造成的性能的浪费
+重绘：元素的样式发生改变，就会把当前的这个元素重新渲染一遍
+所以在以后项目中，能用重绘代替的就不用回流，能用一次回流就不要使用多次
+
+
+向页面增加元素的方式
+1.动态创建的方式document.createElement，然后一个一个appendChild，会造成多次回流，这样不好，但是他有个好处是不会改变原来的元素（比如不会影响他之前绑定的事件）
+2.通过拼接字符串，最后在一次性通过innerHTML ,这样只会引起一次回流，比较好，但是，他会改变原来的元素（比如会影响他之前绑定的事件）
+3.文档碎片，他就是一个容器专门来盛放DOM元素的
+
+-->
+<script type="text/javascript">
+
+    var flg=document.createDocumentFragment();
+    for (var i=0;i<jsonData.length;i++){
+        var oli=document.createElement("li");
+        oli.innerHTML=jsonData[i].content;
+        oli.className=jsonData[i].class;
+        flg.appendChild(oli);
+    }
+    news.appendChild(flg);
+    flg=null;//用完了 没有用了，就清空
+</script>
+<!--
+步骤：
+1.先创建元素,var oli=document.createElement("li")
+2.按需求给元素增加一些需要的属性
+3.暂时存放在flg(DOM碎片)中,也是flg.appendChild(oli)进去的
+4.循环完之后，把整个flg放到ul中，news.appendChild(flg)
+这样只会引起回流一次
+-->

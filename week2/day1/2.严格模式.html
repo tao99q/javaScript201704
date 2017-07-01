@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script TYPE="text/javascript">
+    "use strict"//严格模式
+    //1.函数执行的时候，前面没有点，this->undefined
+    function fn(n,m) {
+        console.log(this);
+    }
+    fn();
+    window.fn();
+    //2.call()不传参数->undefined，传了个null->this=null，undefined->this=undefined
+    fn.call();//undefined
+    fn.call(null);//null
+    fn.call(undefined);//undefined
+
+    obj={f:function () {}}
+    obj.f
+</script>
+</body>
+</html>

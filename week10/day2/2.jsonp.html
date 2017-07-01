@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="jsonp请求" @click="jsonpData">
+</div>
+</body>
+</html>
+<script src="js/vue2.0.min.js"></script>
+<script src="js/vue-resource.js"></script>
+<script>
+    var v1=new Vue({
+        el:"#app",
+        data:{},
+        methods:{
+            jsonpData(){
+                this.$http.jsonp("https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su",{
+                    jsonp:"cb",
+                    params:{
+                        wd:"WW"
+                    }
+                }).then(function (res) {
+                    console.log(res.body);
+                })
+            }
+        }
+    })
+</script>
+<!--
+$http.jsonp("Url 路径",{
+    jsonp:"cb",
+    params:{
+        wd:"a"
+    }
+ })
+-->

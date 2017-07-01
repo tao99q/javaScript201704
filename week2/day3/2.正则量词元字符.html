@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    var reg=/\d/;
+    //* 表示前面的元字符出现0到多次
+    var reg=/\d\.*/;
+    console.log(reg.test("12"));//true
+    console.log(reg.test("12.1"));//true
+    console.log(reg.test("12..."));//true
+    console.log(reg.test("12.1.1.1"));//true
+    console.log(/^\d\.*/.test("12"));//true
+    console.log(/^\d\.*/.test("12.1"));//true
+    console.log(/^\d\.*$/.test("12..."));//false
+    console.log(/^\.\d*$/.test("12.1.1.1"));//false
+    // + 前面的元字符出现1到多次
+    var reg=/^.+\d/;
+    console.log(reg.test("12"));//true
+    console.log(reg.test(".1+2"));//true
+    console.log(reg.test("++"));//false
+    console.log(reg.test("2"));//false
+    console.log(reg.test("pp1"));//true
+    console.log(reg.test("p\n1"));//false
+
+    // ? 前面的元字符出现0或1次
+    var reg=/^\d+\.?/;
+    console.log(reg.test(".2"));//false
+    console.log(reg.test("12.2"));//true
+    console.log(reg.test("0.2a"));//true
+    console.log(reg.test("12a"));//true
+    console.log(reg.test("a1.2"));//false
+    console.log(reg.test("1........"));//
+    var reg=/^\d?\.\d?$/;
+    console.log(reg.test("11.11"));//false
+    console.log(reg.test("1.1"));//true
+    console.log(reg.test(".11"));//false
+    console.log(reg.test("11"));//false
+    console.log(reg.test("."));//true
+    console.log(reg.test(".a"));//false
+    var reg=/^\*+\+?$/;
+    console.log(reg.test("***+"));
+    console.log(reg.test("***"));
+    var reg=/^\*\d+\+?\d*$/;
+    console.log(reg.test("***12+*"));//false
+    console.log(reg.test("***12"));//false
+    console.log(reg.test("*12+12"));//true
+    console.log(reg.test("1212"));//false
+    console.log(reg.test("*1"));//true
+
+
+    // {n}前面的元字符就出现n次
+    var reg=/^\d{3}$/;//只有三个数字
+    // {n,}前面的元字符就出现n到多次
+    // {n,m}前面的元字符就出现n到m次
+</script>
+</body>
+</html>

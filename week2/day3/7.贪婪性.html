@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+正则的贪婪性
+<script type="text/javascript">
+    //贪婪性，虽然只捕获一次，但是把这次的满足条件的全都捕获出来了
+    var reg=/\d+/;
+    var str="womenshi2017年第4qidoukao100fenyemeiyong";
+    console.log(reg.exec(str));
+    //如何解决贪婪性：  在量词元字符后面加上问号“？”
+    var reg=/\d+?/;
+    console.log(reg.exec(str));
+
+    //?:加在小括号里面前面表示只匹配不捕获
+    var str="js[2016]css[2016]html[2016]";
+    //var reg=/[a-z]+(?:\[\d{4}\])[a-z]+\1/g;
+    //因为？：表示不捕获，所以\1就没有代表的内容了
+    var reg=/[a-z]+(\[\d{4}\])[a-z]+\1[a-z]+\1/g;
+    //console.log(reg.exec(str));
+    var reg=/[a-z]+(?:\[\d{4}\])/g;
+    console.log(reg.exec(str));
+
+    //url解析
+    var s="https://www.baidu.com/s?ie=utf-8&f=3&rsv_bp=0&rsv_idx=1&tn=baidu&wd=s";
+    //var obj={ie:'utf-8',f:'3',rsv_bp:'0',rsv_idx:'1',tn:'baidu',wd:'s'}
+    //
+    var reg=/(?:\?|&)(\w+)=(\w+-*\w*)/g;
+    var obj={};
+    var re=reg.exec(s);
+    console.log(re);
+    while (re){
+        obj[re[1]]=re[2];
+        re=reg.exec(s);
+    }
+    console.log(obj);
+</script>
+</body>
+</html>

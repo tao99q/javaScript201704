@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body,div{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            position: relative;
+            left: 0px;
+            top: 0;
+            background-color: aqua;
+            opacity: 0;
+            border-radius: 0px;
+        }
+    </style>
+</head>
+<body>
+<!--
+left width height top opacity 都是一起变化的
+-->
+<div id="box"></div>
+<script src="js/public.js"></script>
+
+<script>
+    /*
+    var box=document.getElementById("box");
+    //起始位置
+    var begin={};//根据目标来确定需要哪些起始位置的值
+//    var beginLeft=public.css(box,"left");
+//    var beginTop=public.css(box,"top");
+//    var beginWidth=public.css(box,"width");
+//    var beginHeight=public.css(box,"height");
+//    var beginOpacity=public.css(box,"opacity");
+
+    //目标位置
+//    var targetLeft=public.win("clientWidth")-200;
+//    var targetTop=public.win("clientHeight")-300;
+//    var targetWidth=200;
+//    var targetHeight=300;
+//    var targetOpacity=1;
+    var target={
+        left:public.win("clientWidth")-300,
+        top:public.win("clientHeight")-300,
+        width:300,
+        height:300,
+        opacity:1
+    };
+    for(var key in target){
+        begin[key]=public.css(box,key)
+    }
+
+    var duration=2000;
+    var time=0;
+    var timer=null;
+    timer=window.setInterval(function(){
+        if(time+10>=duration){
+            window.clearInterval(timer);
+//            public.css(box,"left",targetLeft);
+//            public.css(box,"width",targetWidth);
+//            public.css(box,"top",targetTop);
+//            public.css(box,"height",targetHeight);
+//            public.css(box,"opacity",targetOpacity);
+            for(var key in target){
+                public.css(box,key,target[key])
+            }
+            return;
+        }
+        time+=10;
+//        var left=linear(beginLeft,targetLeft,duration,time);
+//        var top=linear(beginTop,targetTop,duration,time);
+//        var width=linear(beginWidth,targetWidth,duration,time);
+//        var height=linear(beginHeight,targetHeight,duration,time);
+//        var opacity=linear(beginOpacity,targetOpacity,duration,time);
+//        public.css(box,"left",left);
+//        public.css(box,"top",top);
+//        public.css(box,"width",width);
+//        public.css(box,"height",height);
+//        public.css(box,"opacity",opacity);
+        for(var key in target){
+            public.css(box,key,linear(begin[key],target[key],duration,time))
+        }
+    },17);
+
+
+
+    function linear(b,t,d,s){
+        //b:起始位置,t:目标位置,d:总时间,s:时间time
+        return b + (t-b)/d * s
+    }
+    */
+</script>
+
+<script>
+    var box=document.getElementById("box");
+    var begin={},timer=null,time= 0,duration=2000;
+    var target={
+        left:public.win("clientWidth")-300,
+        top:public.win("clientHeight")-300,
+        width:300,
+        height:300,
+        opacity:1
+    };
+    for(var key in target){
+        begin[key]=public.css(box,key);
+    }
+    timer=window.setInterval(function(){
+        if(time+10>=duration){
+            window.clearInterval(timer);
+            for(var key in target){
+                public.css(box,key,target[key])
+            }
+            return;
+        }
+        time+=10;
+        for(var key in target){
+            public.css(box,key,linear(begin[key],target[key],duration,time));
+        }
+    },17);
+
+    function linear(b,t,d,s){
+        return b + (t-b)/d * s;
+    }
+</script>
+
+</body>
+</html>

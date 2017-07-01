@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    //注意：全局作用域下的变量就是window的一个属性
+    //1.=右边函数不进行预解释（函数作为值的时候不进行预解释）
+    var ff=function () {
+        console.log(1);
+    }
+    //2.return 后面的代码不行行但是需要预解释，return出的内容执行但是不进行预解释
+    function fn() {
+        var a=0;
+        console.log(f);//function f(){}
+        return function () {
+            console.log(1);
+            return 1
+        };
+        function f() {}
+    }
+    var d=fn();
+    console.log(d())
+    fn()()
+    //3.不管条件是否成立都进行预解释
+    console.log(num);
+    if (0){
+        //虽然条件不成立 但是需要预解释
+        var num=0
+    }
+    ss=0;//->window.ss=0
+    console.log("ss" in window);
+
+    //练一练
+    console.log(aa);
+    if(!("aa" in window)){
+        var aa=1;
+    }
+    console.log(aa);
+
+    var ddd;
+    console.log("ddd" in window)
+    //4.自执行函数 不进行预解释
+    //console.log(sss)
+    ;(function  sss() {
+        console.log("a")
+    })()
+
+    //5.预解释的时候遇到已经声明过得变量不需要声明了，但是需要定义
+    var s1=1;
+    function s1() {//s1=xxxfff000
+      console.log("s1")
+    }
+    function s1() {//s1=xxxfff111
+       console.log("s11")
+    }
+    console.log(s1);
+    //1.全局作用域形成
+    //2.预解释：var s1 ,function s1=xxxfff000,s1=xxxfff111
+    //3.代码执行：s1=1
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    console.dir(JSON);
+    //1.JSON 是个对象，是window下的一个属性，也可理解为是个全局变量，在低版本的IE下没有
+    var obj={a:"a",1:1};
+    //jSON 对象跟普通对象的区别
+    //1.属性名用双引号包起来
+    //2.属性值是字符串的话也用双引号包起来
+    var jsonObj={"a":"a","1":1,"age":12,"ary":[1,2]};
+    //json字符串，一般从后台获取回来的数据都是json字符串
+    var jsonStr='{"a":"a","1":1,"age":12,"ary":[1,2]}';
+    //JSON.parse()将json格式的字符串转为json格式的对象
+    console.log(JSON.parse(jsonStr).ary);
+    //JSON.stringify()将json格式的对象转为json格式的字符串
+    console.log(JSON.stringify(jsonObj));
+    //在IE下没有JSON就用eval来实现
+
+
+    function jsonParse(jsonStr) {
+        try{
+            //如果浏览中有JSON就用它
+            return JSON.parse(jsonStr)
+        }catch (e){
+            //否则用eval
+            return eval("("+jsonStr+")")
+        }
+    }
+    function jsonParse(jsonStr) {
+        return "JSON" in window?JSON.parse(jsonStr):eval("("+jsonStr+")")
+    }
+</script>
+</body>
+</html>

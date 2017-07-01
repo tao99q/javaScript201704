@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body,div,img{
+            margin: 0;
+            padding: 0;
+            -webkit-user-select: none;
+        }
+        img{
+            border: none;
+        }
+        #box{
+            width: 1200px;
+            height: 200px;
+            margin: 50px auto;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            box-shadow: 1px 2px 3px #ccc;
+            font-size: 0;
+        }
+        .box2{
+            width: 4000px;
+        }
+        #box-begin,#box-end{
+            float: left;
+            width: 2000px;
+        }
+        #box img{
+            width: 200px;
+            height: 200px;
+        }
+        #box img:hover{
+            position: relative;
+            box-shadow: 1px 2px 2px #ccc;
+            top: -2px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div class="box2">
+        <div id="box-begin">
+        <img src="img/0.jpg" alt=""/>
+        <img src="img/1.jpg" alt=""/>
+        <img src="img/2.jpg" alt=""/>
+        <img src="img/3.jpg" alt=""/>
+        <img src="img/4.jpg" alt=""/>
+        <img src="img/5.jpg" alt=""/>
+        <img src="img/6.jpg" alt=""/>
+        <img src="img/7.jpg" alt=""/>
+        <img src="img/8.jpg" alt=""/>
+        <img src="img/9.jpg" alt=""/>
+    </div>
+        <div id="box-end">
+            <img src="img/0.jpg" alt=""/>
+            <img src="img/1.jpg" alt=""/>
+            <img src="img/2.jpg" alt=""/>
+            <img src="img/3.jpg" alt=""/>
+            <img src="img/4.jpg" alt=""/>
+            <img src="img/5.jpg" alt=""/>
+            <img src="img/6.jpg" alt=""/>
+            <img src="img/7.jpg" alt=""/>
+            <img src="img/8.jpg" alt=""/>
+            <img src="img/9.jpg" alt=""/>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<!--
+原理:1.保证页面上有两个一模一样的容器,为了防止第一个走出去后出现空白区域
+2.获取第一个盒子的宽度
+3.当scrollLeft值>=第一个盒子的宽度的时候让其scrollLeft变为0
+-->
+<script type="text/javascript">
+    var box=document.getElementById("box");
+    var box_begin=document.getElementById("box-begin");
+    var beginW=parseFloat(window.getComputedStyle(box_begin).width);
+    console.log(beginW);
+    var timer=null;
+    function fn(){
+        console.log(box.scrollLeft);
+        box.scrollLeft++;
+        var sL=box.scrollLeft;
+        if(sL>=beginW){
+            box.scrollLeft=0;
+        }
+    }
+    timer=window.setInterval(fn,1);
+    box.onmouseenter=function(){
+        window.clearInterval(timer);
+    };
+    box.onmouseleave=function(){
+        timer=window.setInterval(fn,1);
+    };
+</script>

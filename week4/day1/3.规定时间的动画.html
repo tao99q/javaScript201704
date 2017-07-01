@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body,div{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            position: relative;
+            left: 0px;
+            top: 0;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<!--
+起始位置 begin
+目标位置 target
+总时间 duration
+不断改变他的位置 就拿left先来看一下
+时时刻刻改变left值=起始位置+盒子走过的距离
+盒子走过的距离=速度*时间
+速度=总距离/总时间
+总距离=目标位置-起始位置
+
+left=begin+(target-begin)/duration *time
+唯一的变量就是时间time 你可以控制的 ()也就是说每隔多长时间来计算一次left值
+
+
+10,20,30,40,.......duration
+-->
+<script src="js/public.js"></script>
+<script>
+    var box=document.getElementById("box");
+    var begin=public.css(box,"left");
+    var target=public.win("clientWidth")-box.offsetWidth;
+    var duration=2000;
+    var time=0;
+    var timer=null;
+    timer=window.setInterval(function(){
+        if(time+10>=duration){
+            //当time加到大于等于总时间了,就清掉定时器,再把目标值赋给box,再return
+            window.clearInterval(timer);
+            public.css(box,"left",target);
+            return;
+        }
+        time+=10;
+        //left=begin+(target-begin)/duration *time
+        //通过上面的公式计算出来的left值
+        var left=begin+(target-begin)/duration *time;
+        public.css(box,"left",left);
+
+    },17);
+
+    //begin+(target-begin)/duration *time
+    function linear(b,t,d,s){
+        //b:起始位置,t:目标位置,d:总时间,s:时间time
+        return b + (t-b)/d * s
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+//获取当前浏览器一屏的宽高
+    document.documentElement.clientHeight||document.body.clientHeight;
+    document.documentElement.clientWidth||document.body.clientWidth;
+    //获取整个网页的宽高
+    document.documentElement.scrollHeight||document.body.scrollHeight;
+    document.documentElement.scrollWidth||document.body.scrollWidth;
+
+    function win(attr,value){
+        //如果直传一个参数说明是要获取浏览器的属性值
+        //如果穿俩个值是想设置属性的值:scrollTop/scrollLef这俩值才会用到value
+        if(typeof value=="undefined"){
+            return document.documentElement[attr]||document.body[attr]
+        }else{
+            document.documentElement[attr]=value;
+            document.body[attr]=value;
+        }
+    }
+console.log(win("scrollTop"));
+    win("clientWidth",1000);
+console.log(win("clientWidth"));
+
+</script>
+</body>
+</html>

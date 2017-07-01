@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鼠标跟随</title>
+		<style type="text/css">
+			html,
+			body,
+			div {
+				margin: 0;
+				padding: 0;
+				-webkit-user-select: none;
+			}
+			
+			#box {
+				position: relative;
+				width: 200px;
+				height: 200px;
+				background-color: yellowgreen;
+				margin: 50px auto;
+			}
+			
+			#mark {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 50px;
+				height: 50px;
+				background-color: #ADD8E6;
+				opacity: 0.6;
+				filter: alpha(opacity=60);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="box"></div>
+	</body>
+	<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+
+		var box=document.getElementById("box");
+		var offset=public.offset(box);
+		//写一个mark随着鼠标动的函数,就是给mark的left和top赋值的过程
+		function markMove(mark,e){
+			////获取计算mark的位置,left,top 为了不让mark跟鼠标紧紧挨着,给他个距离5
+			var l= e.clientX-offset.left+5;
+			var t= e.clientY-offset.top+5;
+			public.css(mark,{left:l,top:t})
+		}
+		box.onmouseover=function(e){
+			e=e||window.event;
+			//鼠标一进来立马创建一个盒子mark
+			var mark=document.createElement("div");
+			//给mark加一个id="mark"
+			mark.id="mark";
+			//将mark添加到box中
+			box.appendChild(mark);
+			//确定mark的位置
+			markMove(mark,e);
+			//mark一直一直创建:从左上角到右下角进去的时候,首先进入box中,创建了一个mark.再接着就进入了mark里面,就会触发mark的onmouseover事件,虽然mark的onmouseover事件行为没有绑定方法,但是会触发他的onmouseover事件行为,只是什么都没干,所以继续冒泡,传播到父级box中,然后又再一次触发了父级的onmouseover事件,就又执行了一次创建mark,依次类推就会不断创建,
+			//解决方法:阻止mark的冒泡
+			mark.onmouseover=function(e){
+				e=e||window.event;
+				e.stopPropagation? e.stopPropagation(): e.cancelBubble();
+			}
+		};
+
+		//鼠标在box中动起来
+		box.onmousemove=function(e){
+			e=e||window.event;
+			//获取mark
+			var mark=document.getElementById("mark");
+			if(mark){
+				//鼠标移动的时候不断地给mark确定位置
+				markMove(mark,e)
+			}
+		};
+		//从box中出来
+		//因为从mark中出来,再次进入box中就会触发box.onmouseover再执行一次,又创建一个mark
+		box.onmouseout=function(e){
+			e=e||window.event;
+			var mark=document.getElementById("mark");
+			if(mark){
+				//移除mark
+				this.removeChild(mark);
+			}
+		};
+
+
+		//onmouseenter和onmouseleave不会冒泡,就不用阻止冒泡了
+		//以后用到冒泡的时候就用onmouseover和onmouseout,不需要冒泡就用onmouseenter和onmouseleave
+	</script>
+
+</html>

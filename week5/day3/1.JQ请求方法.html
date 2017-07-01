@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="get">请求</button>
+<button id="get1">get请求</button>
+<div id="box"></div>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script>
+    //1.load("请求地址url",传给服务器的参数,回调函数)
+    //第一个参数必填,后俩可选
+    //传给服务器的参数,不传的话表示的是get请求,传了就表示post请求
+    //回调函数不管你请求成功没有都会执行
+    //回调函数默认给他传了三个参数:
+    // responseText:返回的数据
+    // textStatus:请求状态信息
+    // XHR:请求对象
+    $("#get").click(function(e){
+        $("#box").load("get/11.html",function(responseText,textStatus,XHR){
+            /*
+            console.log(responseText);
+            console.log(textStatus);
+            console.log(XHR);
+            */
+            console.log(textStatus);
+            var str=responseText.split("<ul>")[1].split("</ul>")[0];
+            $(this).html("<ul>"+str+"</ul>")
+        })
+    });
+
+    //$.get(url,传给后台的数据,回调函数)
+    //回调函数只有在请求成功之后才会执行
+    //function(data(返回的数据),status(状态信息))
+
+    $("#get1").click(function(e){
+        $.get("get/data.txt",{"name":"aa"},function(data,status){
+            data="JSON" in window?JSON.parse(data):eval("("+data+")");
+            //console.log(data);
+            $.each(data,function(index,item){
+
+            })
+        })
+    })
+
+
+    //$.post() 跟get方式一样用,只不过必须给后台传参数,
+
+
+    //将其请求回来的数据变为JSON对象
+    $.getJSON("get/data.txt",function(data){
+        console.log(data);
+    })
+</script>
+</body>
+</html>

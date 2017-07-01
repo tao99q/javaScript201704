@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单例模式</title>
+</head>
+<body>
+<ul id="oUl">
+    <li class="li1">1</li>
+    <li class="li2">4</li>
+    <li class="li3">3</li>
+    <li class="li4">2</li>
+</ul>
+
+<script type="text/javascript">
+    var obj1={
+        name:"王冬",
+        age:18,
+        say:function () {
+            console.log("JS");
+        }
+    };
+    var obj2={
+        name:"刘美亚",
+        age:19,
+        say:function () {
+            console.log("S");
+        }
+    };
+    //在之前obj1,obj2就是一个简单的对象名，在这里我们加一个高大上的名字，叫做命名空间
+    function fn() {
+        console.log("fn")
+    }
+    function fn() {
+       console.log("ffff")
+    }
+    var public={
+        f:function () {
+           console.log("公共的")
+        }
+    }
+    var mqObj={
+        fn:function () {
+            console.log("ffff")
+        },
+        s:function () {
+            console.log("s")
+        }
+    };
+    mqObj.fn();
+    var zzObj={
+        fn:function () {
+            console.log("aa")
+        },
+        s:function () {
+            console.log("aaa")
+        }
+    }
+    zzObj.fn();
+    //模块化开发：将一个完整的项目分模块，多个人共同开发，每个人分的模块写在一个对象里面，就是单例模式
+</script>
+<script type="text/javascript" src="js/public.js"></script>
+<script type="text/javascript">
+    //
+    var oUl=document.getElementById("oUl");
+    var oLis=oUl.getElementsByTagName("li");
+//    var ary=[];
+//    for (var i=0;i<oLis.length;i++){
+//        ary.push(oLis[i])
+//    }
+//    console.log(ary);
+    var ary=public.toArray(oLis);
+    ary.sort(function (a,b) {
+        return a.innerHTML-b.innerHTML
+    });
+    console.log(ary.join(""));
+    var s="";
+    for(var i=0;i<ary.length;i++){
+        s+="<li>"+ary[i].innerHTML+"</li>"
+    }
+    oUl.innerHTML=s;
+    //写一个函数把传进来的的数转为一个排好序的数组返回出来
+    function fn() {
+        return public.toArray(arguments).sort(function (a,b) {
+            return a-b
+        })
+    }
+    console.log(fn(1, 4, 2, 7, 3));
+</script>
+</body>
+</html>

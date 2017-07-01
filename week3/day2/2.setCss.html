@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box{
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+    var box=document.getElementById("box");
+    function setCss(curEle,attr,value){
+        //当attr是"opacity" 设置两次,要兼容IE6-8
+        if(attr=="opacity"){
+            curEle.style.opacity=value;
+            curEle.style.filter="alpha(opacity="+value*100+")";
+            return ;//后面就不需要执行了
+        }
+        //当浮动的时候我们需要特殊处理
+        if(attr=="float"){
+            curEle.style.cssFloat=value;//标准浏览器
+            curEle.style.styleFloat=value;//IE6-8
+            return;
+        }
+
+        //当attr是:width,height,left,top,right,bottom,margin(Top,Left,Right,Bottom),padding(Top,Left,Right,Bottom)这些情况的时候我们要给她加上单位"px",加之前我盟还要判断一下,value的值是不是个数,是个数才给他加上"px":isNaN来判断
+        //写个正则匹配这样的情况
+        var reg=/^(width|height|left|top|right|bottom|(margin|padding)(Top|Bottom|Left|Right)?)$/g;
+        if(reg.test(attr)){
+            if(!isNaN(value)){
+                value+="px";
+            }
+        }
+        curEle.style[attr]=value;
+    }
+    setCss(box,"width",100);
+
+    function setCss(ele,attr,val){
+        if(attr=="opacity"){
+            ele.style.opacity=val;
+            ele.style.filter="alpha(opacity="+val*100+")";
+            return ;
+        }
+        if(attr=="float"){
+            ele.style.cssFloat=val;
+            ele.style.styleFloat=val;
+        }
+        var reg=/^(width|height|top|bottom|right|left|(margin|padding)(Top|Bottom|Right|Left)?)$/;
+        if(reg.test(attr)&&!isNaN(val)){
+            val+="px";
+        }
+        ele.style[attr]=val;
+    }
+
+    //setGroupCss(box,{width:100,height:200,display:"inline-block",color:"#ddd"})
+
+
+    //批量设置
+    function setGroupCss(curEle,obj){
+        obj=obj||[];//保证toString方法不会报错
+        if(obj.toString()=="[object Object]"){
+            for(var key in obj){
+                //我们需要判断,只把obj的私有属性给curEle设置样式,过滤掉从Object.prototype上继承的公有属性
+                if(obj.hasOwnProperty(key)){
+                    setCss(curEle,key,obj[key]);
+                }
+            }
+        }
+    }
+
+    function setGroupCss(ele,obj){
+        //undefined没有toString方法就报错了
+        obj=obj||[];
+        //obj=obj||{};
+        //obj.toString()=="[object Object]"  true
+        if(obj.toString()=="[object Object]"){
+            for(var key in obj){
+                setCss(ele,key,obj[key])
+            }
+        }
+    }
+
+
+    setGroupCss(box,{width:100,height:200,display:"inline-block",color:"#ddd","border":"1px solid red"});
+//    setCss(box,"width",100);
+//    setCss(box,"height",200);
+//    setCss(box,"display","inline-block");
+//    setCss(box,"color","#ddd");
+
+</script>
+</body>
+</html>

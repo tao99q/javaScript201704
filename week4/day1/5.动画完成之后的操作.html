@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body,div{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            position: relative;
+            left: 0px;
+            top: 0;
+            background-color: aqua;
+            opacity: 0;
+            border-radius: 0px;
+            color: #fff;
+            font-size: 50px;
+            text-align: center;
+            line-height: 300px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="box"></div>
+<script src="js/public.js"></script>
+<!--
+动画完成之后的操作 是在到达目标位置的时候
+-->
+<script>
+    var box=document.getElementById("box");
+    var begin={},timer=null,time= 0,duration=2000;
+    var target={
+        left:public.win("clientWidth")-300,
+        top:public.win("clientHeight")-300,
+        width:300,
+        height:300,
+        opacity:1
+    };
+    for(var key in target){
+        begin[key]=public.css(box,key);
+    }
+    timer=window.setInterval(function(){
+        if(time+10>=duration){
+            window.clearInterval(timer);
+            for(var key in target){
+                public.css(box,key,target[key])
+            };
+            css(box,{backgroundColor:"red",borderRadius:"50%"});
+            box.innerHTML="到达终点";
+            return;
+        }
+        time+=10;
+        for(var key in target){
+            public.css(box,key,linear(begin[key],target[key],duration,time));
+        }
+    },17);
+    function linear(b,t,d,s){
+        return b + (t-b)/d * s;
+    }
+
+</script>
+
+</body>
+</html>

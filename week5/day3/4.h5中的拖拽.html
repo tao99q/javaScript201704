@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box1{
+            display: inline-block;
+            width: 400px;
+            height: 300px;
+            padding: 20px;
+            border: 3px dashed #ccc;
+            margin: 40px;
+        }
+        img{
+            border: none;
+            vertical-align: top;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div ondragover="put(event)" ondrop="drop(event)" id="box1"></div>
+<img id="img1" draggable="true" ondragstart="drag(event)" src="img/1.jpg" alt=""/>
+<!--
+1.设置元素的可拖放性 draggable="true"
+2.拖动谁,给谁绑定事件 ondragstart=function(){}
+3.放到哪里? ondragover这个事件规定了在何处放置被拖动的数据
+[注意:]默认无法将元素放到其他元素中的,那么如果需要放置就得阻止事件的默认行为 preventDefault
+4.进行放置 ondrop 当被放置的数据脱手的时候
+-->
+</body>
+</html>
+<script>
+    function drag(e){
+        //ondragstart
+        //设置被拖动元素的数据
+        //e事件对象
+        //e.DataTransfer 事件对象的可拖动数据
+        //e.DataTransfer.setData(参数1,参数2) 设置事件对象的可拖动数据
+        //参数1:设置被拖元素的数据类型 "Image"
+        //参数2:设置被拖元素的id
+        e.dataTransfer.setData("Image", e.target.id);
+    }
+    function put(e){
+
+        e.preventDefault();
+    }
+    function drop(e){
+        //注意一点,ondrop事件中浏览器默认是以打开连接的方式打开
+        //所以要阻止他的默认行为
+        e.preventDefault();
+
+        //获取放置进来的数据 获取出来的是他的ID
+        //记住:setData中设置的什么类型这里就怎么写
+        var id=e.dataTransfer.getData("Image");
+        var data=document.getElementById(id);
+        e.target.appendChild(data);
+    }
+</script>

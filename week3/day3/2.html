@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //    var reg=/^[.-x]$/g;
+    //    console.log(reg.test("z"));
+    //    console.log(reg.test("."));
+    //    console.log(reg.test("x"));
+    //    var reg=/[.-9]/;
+    //    console.log(reg.test("."));
+    //    console.log(reg.test("0"));
+    //    console.log(reg.test("6"));
+    /*    var a = b = 2;
+     var obj = {
+     a: 1,
+     b: "1"// 2
+     };
+     obj = (function (obj) {
+     this.a = obj.a;//window.a=1
+     this.b = obj.b++;//window.b=1
+     function ff() {
+     this.a++;//window.a=2; obj.a=2
+     this.b++;//window.b=2;obj.b=3
+     }
+
+     return {
+     a: obj.a,
+     b: obj.b,
+     ff: ff
+     }
+     })(obj);
+
+     //obj={a:1,b:2,ff:ff}
+     var ff = obj.ff;
+     ff();//
+     obj.ff();
+     console.log(a, b, obj.a, obj.b)//2 2 2 3
+     */
+
+    /*    var fun;
+     function fun(i) {
+     for (var a = 1; a < i; a++) {
+     if (this.m) {
+     this.n++;//n=13
+     } else {
+     this.n--;
+     }
+     }
+     }
+     var obj = {
+     n: 10,
+     m: isNaN(fun),//true
+     fun: fun
+     };
+     var n = m = 7;
+     fun(this.n);
+     console.log(n, m, obj);//13 7
+     */
+
+    /*
+     var a = 5;
+     function FF(a) {
+     this.a = a++;
+     this.b = a++;
+     }
+     FF.b = a;//5
+     FF.prototype.a = this.a;//5
+     FF.prototype.getA = function () {
+     console.log(this.a++);
+     };
+     FF.prototype.getB = function () {
+     console.log(this.b++);
+     };
+     var ff1 = new FF(this.a);//ff1{a:5,b:6}
+     ff1.getA();//ff1.a++ ->5,ff1{a:6,b:6}
+     ff1.getB();//ff1.b++ ->6,ff1{a:6,b:7}
+     FF.prototype.getB();
+     //FF.prototype.b= FF.prototype.b+1
+     console.log(FF.prototype);
+     console.log(FF.prototype.toString == FF.prototype.__proto__.toString);
+     console.log(Function.toString == FF.prototype.__proto__.toString);
+
+     var ary=[];
+     console.log(FF.prototype.__proto__.toString.call(ary));//"[object Array]"
+     */
+
+    var ary = [10, 2, 3];
+    var a = ary;//xxxfff000
+    ary.sort(function (a, b) {
+        console.log("hahh");
+        this.ary[2] = a[1] + a[2];//xxxfff000=[10,2,NaN]
+        this.ary = [1, 20, 3];//ary=xxxfff111
+        this.a[1] = 100;//xxxfff000=[10,100,NaN]
+    });
+    console.log(ary);
+    console.log(a);
+
+    var obj={1:2,a:2};
+    obj.fn=(function(){
+        arguments[0]++;//argument[0]=3
+        var a=obj[1];//a=2
+        obj=[1,2,3];//
+        this.obj[2]=obj[2];//[1,2,3]
+    })(obj.a);
+    console.log(obj);
+
+
+
+
+
+</script>
+</body>
+</html>

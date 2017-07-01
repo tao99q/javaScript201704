@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: yellowgreen;
+            cursor: move;
+            position: absolute;
+        }
+        #box img{
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <img src="3.jpg" alt="">
+</div>
+<script>
+    var box=document.getElementById("box");
+    box.onmousedown=function (e) {
+        e=e||window.event;
+        this.L=e.clientX-this.offsetLeft;
+        this.T=e.clientY-this.offsetTop;
+        //this.setCapture()在IE中相当于让鼠标和元素存在一个捆绑关系,
+        this.setCapture();
+        this.onmousemove=function (e) {
+            e=e||window.event;
+            var l=e.clientX-this.L;
+            var t=e.clientY-this.T;
+            this.style.left=l+"px";
+            this.style.top=t+"px";
+            e.preventDefault?e.preventDefault():e.returnValue=false;
+        };
+        this.onmouseup=function () {
+            this.releaseCapture();
+            this.onmousemove=null;
+            this.onmouseup=null;
+        }
+    }
+
+</script>
+</body>
+</html>

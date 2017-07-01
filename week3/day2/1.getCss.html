@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box{
+            width: 100px;
+            height: 200px;
+            margin: 20px;
+            opacity: 0.7;
+            filter: alpha(opacity=20.6);
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+</div>
+<script>
+    //window.getComputedStyle(ele,"before").width=200px
+    //IE
+    //ele.currentStyle.height=100px
+    //getCss(ele,attr)
+    // ele就是当前元素,求ele 的attr属性的值
+    // 单位是px,pt,deg,em,rem,pp  返回值变成数字
+
+
+    function getCSS(curEle,attr){
+        var val=null;
+        //val中存储的是我们将来返回的值
+        if("getComputedStyle" in window){
+            //在标准浏览器中,window下有"getComputedStyle"这个属性
+            val=window.getComputedStyle(curEle)[attr];
+        }else{
+            //在IE6-8
+            //注意透明度 filter:alpha(opacity=56)
+            //如果你传进来attr=="opacity",在IE6-8 他识别不到opacity只能识别filter,所以你要另做处理
+
+            if(attr=="opacity"){
+                val=curEle.currentStyle["filter"];
+                //写个正则匹配"alpha(opacity=56.5)",再把里面的数字获取出来(就是给他加上分组)
+                var reg=/^alpha\(opacity=(\d+(?:\.\d+)?)\)$/;
+                val=reg.test(val)?RegExp.$1/100:1;
+                //val=reg.test(val)?reg.exec(val)[1]/100:1;
+            }else{
+                val=curEle.currentStyle[attr]
+            }
+        }
+        //val里面就存着我们想要的属性值,但是还要做进一步处理,把单位是px,pt,deg,em,rem,pp  返回值变成数字
+        //"-12px" "35deg"  "1.45rem"
+        var re=/^-?\d+(\.\d+)?(?:px|pt|deg|em|rem|pp)?$/g;
+        if(re.test(val)){
+            val=parseFloat(val);
+        }
+        return val;
+    }
+
+
+
+    var box=document.getElementsByClassName("box")[0];
+    //var box=document.querySelector("div");
+    var box=document.getElementsByTagName("div")[0];
+    console.log(getCSS(box, "width"));
+    console.log(getCSS(box, "margin-left"));
+    console.log(getCSS(box, "opacity"));
+</script>
+</body>
+</html>
+<script>
+    function getCss(curEle,attr){
+        var val=null;
+        if("getComputedStyle" in window){
+            val=window.getComputedStyle(curEle)[attr];
+        }else{
+            if(attr=="opacity"){
+                //filter:alpha(opacity=35.7);
+                val=curEle.currentStyle["filter"];
+                var reg1=/^alpha\(opacity=(\d+(?:\.\d+)?)\)$/;
+                val=reg1.test(val)?RegExp.$1/100:1;
+            }else{
+                val=curEle.currentStyle[attr] ;
+            }
+        }
+        var reg2=/^-?\d+(?:\.\d+)?(?:px|pt|pp|rem|em|deg)?$/g;
+        if(reg2.test(val)){
+            val=parseFloat(val);
+        }
+        return val;
+    }
+</script>

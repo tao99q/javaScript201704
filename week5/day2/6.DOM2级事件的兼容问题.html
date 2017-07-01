@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box {
+            width: 100px;
+            height: 30px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+</html>
+<!--
+在标准浏览器中,用DOM2级事件绑定的时候,
+addEventListener/removeEventListener
+1.给同一个事件行为绑定多个函数,能够按顺序执行
+2.给同一个事件行为,同一个函数,同一个阶段,不能重复绑定,只会执行一个
+3.绑定的那个函数中的this仍然是被绑定的元素
+
+
+在IE6-8中的DOM2级
+attachEvent/detachEvent
+1.事件类型需要在前加上"on" :"onclick"
+2.不能设置发生的阶段,都是在冒泡阶段发生的
+3.同一个事件行为,同一个函数,能够多次绑定
+4.给同一个事件行为绑定多个函数,执行顺序混乱
+5.绑定的那个函数执行的时候里面的this是window
+-->
+<script>
+    var box = document.getElementById("box");
+    function f1(e) {
+        console.log(this);
+    }
+    //    box.addEventListener("click",f1,false);
+    //    box.addEventListener("click",f1,false);
+    //    box.addEventListener("click",f1,true);
+    function f2() {
+        console.log(1)
+    }
+    //    box.attachEvent("onclick",f2);
+    //    box.attachEvent("onclick",f2);
+    //    box.attachEvent("onclick",f2);
+//    box.attachEvent("onclick", function(){alert(1)});
+//    box.attachEvent("onclick", function(){alert(2)});
+    box.attachEvent("onclick", function(){
+        console.log(this==window)
+    });
+
+</script>

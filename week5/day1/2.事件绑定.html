@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+事件是异步执行的  (定时器,回调函数,绑定的事件,ajax)
+DOM0级事件绑定:给一个元素的同一个行为只能绑定一次,如果多次绑定后面就会前面的给覆盖了,原因就是给元素的属性赋了一个值(地址值)而已
+DOM0级事件不存在兼容性 任何浏览器都可以
+
+DOM2级事件
+addEventListener 是元素所属的EventTarget类原型上的公有属性
+box.addEventListener("事件的类型-事件行为属性不带on",function(){给事件行为帮绑定的方法},可选的参数false(默认冒泡阶段发生)/true(捕获阶段发生));
+
+绑定事件的时候为了移除的时候方便,第二个参数用函数名来写
+
+可以实现多次绑定 (执行的时候在IE不是按照顺序执行的)
+存在兼容性
+在IE下
+attachEvent("事件的类型",function(){})
+detachEvent
+
+
+//事件移除
+DOM0级 onclick=null;
+DOM2级 removeEventListener("事件类型",绑定的那个函数名,false/true)
+-->
+<div id="box">box</div>
+</body>
+</html>
+<script>
+    var box=document.getElementById("box");
+    console.dir(box);
+    box.onclick=function(){
+        this.style.color="red";
+    };
+    box.onclick=function(){
+        this.style.color="green";
+    };
+//    console.log("1");
+    function f1(){
+        this.innerHTML="boxbox";
+    };
+    function f2(){
+        this.style.backgroundColor="yellow";
+    }
+    box.addEventListener("click",f1,false);
+    box.addEventListener("click",f2,false);
+</script>

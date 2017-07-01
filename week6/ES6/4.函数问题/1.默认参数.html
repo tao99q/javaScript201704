@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    "use strict";
+    //    function f(x,y) {
+    //
+    //    }
+    //    f(1,2);
+    /*
+    function fn0(x = 1, y = 2) {
+        console.log(x + y)
+    }
+    fn0("1");//"12
+
+    function fn1([x, , , y]) {
+        console.log(arguments.length);
+        console.log(arguments[0].length);
+        console.log(x, y);
+    }
+    fn1([1, 2, 3, 4, 5]);
+    fn1([1, , , 4,]);
+
+    function fn2({x, y} = {x: 1, y: 2}) {
+        // fn2():{x,y}={x:1,y:2}
+        //fn2({}):{x,y}={}
+        //fn2(1):{x,y}=1;
+        console.log(x, y);
+    }
+    fn2();
+    fn2({});
+    fn2(1);
+
+    function fn3({x = 1, y = 2} = {}) {
+        // fn3():{x=1,y=2}={}
+        //fn3({}):{x=1,y=2}={}
+        // fn3({x:"1"}):{x=1,y=2}={x:"1"}
+        console.log(x, y);
+    }
+    fn3();
+    fn3({});
+    fn3({x: "1"});
+
+    function fn4(x = 1, y = 2, z = 3) {
+        console.log(x, y, z);
+    }
+    fn4(10, undefined, 30);//10 2 30
+    fn4(10, null, 30);//10 null 30
+
+
+    function fn5(...others) {
+        console.log(arguments);
+        console.log(others);
+    }
+    fn5(1, 2, 3, 4, 5);
+
+    let x = 1;
+    //参数所在的作用域是私有的作用域(这个小括号形成的),
+    function fn6(x, y = x) {
+        console.log(x, y);
+    }
+    fn6("2");
+
+
+    let a=1;
+    function fn7(n, m = a) {
+        //.log(a);
+        let a = 0;
+        console.log(m);
+    }
+    fn7(1);
+    */
+
+    let [x,y,z,m]=[1,2,3,4];
+    function fn8(x,y,z=x+m) {
+        //x=10,y=20,z=10+4=14
+        console.log(x, y, z, m);
+    }
+    fn8(10,20);
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+<div id="app" class="container text-center">
+    <div class="form-group col-sm-6 col-sm-offset-3" style="margin-top: 50px">
+        <label for="searchInput" class="text-primary" style="font-size: 50px">Baidu</label>
+        <input id="searchInput" type="text" class="form-control" v-model="query" @keyup="search" @keydown.down="down" @keydown.up.prevent="up">
+    </div>
+    <ul class="list-group col-sm-6 col-sm-offset-3" style="padding-left: 15px">
+        <li class="list-group-item" v-for="(item,key) in list" :class="{active:key==index}">{{item}}</li>
+    </ul>
+</div>
+</body>
+</html>
+<script src="js/vue2.0.min.js"></script>
+<script src="js/vue-resource.js"></script>
+<script>
+    var v1=new Vue({
+        el:"#app",
+        data:{
+            index:-1,
+            query:"",
+            inputVal:'',
+            list:[]
+        },
+        methods:{
+            search(e){
+                if(e.keyCode==38||e.keyCode==40)return;
+                this.index=-1;
+                this.$http.jsonp("https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su",{
+                    jsonp:"cb",
+                    params:{
+                        wd:this.query
+                    }
+                }).then((result)=>{
+                    this.list=result.body.s;
+                    this.inputVal=this.query;
+                });
+            },
+            down(){
+                this.index++;
+                if(this.index>=this.list.length){
+                    this.index=-1;
+                    this.query=this.inputVal;
+                    return;
+                }
+                this.query=this.list[this.index];
+            },
+            up(){
+                this.index--;
+                if(this.index<=-1){
+                    if(this.index==-1){
+                        this.query=this.inputVal;
+                        return;
+                    }else {
+                        this.index=this.list.length-1;
+                    }
+                }
+                this.query=this.list[this.index];
+            }
+        }
+    })
+</script>

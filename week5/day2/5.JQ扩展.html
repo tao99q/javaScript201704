@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script>
+   //在JQ原型上扩展  所有的JQ实例公有的
+    jQuery.fn.extend({
+        fn: function () {}
+    });
+    //调用的时候
+    $("#box").fn();
+
+    //在JQ本身上扩展 是JQ私有的
+    jQuery.extend({
+        fn:function(){}
+    });
+    $.extend({});
+    //调用的时候
+    $.fn();
+
+
+
+    var $$=$;
+    var jq=jQuery;
+    $$("#box");
+    jq("#box");
+
+    /*
+    function jQuery(){
+    }
+    jQuery.prototype.a=2; //就相当于在JQ原型上扩展
+    jQuery.a=1;//在JQ本身上扩展 是JQ私有的
+    var f=new Fn();
+    console.log(f.a);
+    */
+</script>
+</body>
+</html>

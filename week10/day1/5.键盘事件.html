@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body id="app">
+两种方式加键值或者键位
+键位:enter,tab,esc,up,down,right,left,delete,space
+<input type="text" @keyup.enter="fn1">
+<input type="text" @keyup.13="fn2">
+</body>
+</html>
+<script src="js/vue1.0.js"></script>
+<script>
+    var v1=new Vue({
+        el:"#app",
+        data:{},
+        methods:{
+            fn1(e){
+                console.log(e);
+            },
+            fn2(e){
+                console.log(e);
+            }
+        }
+    })
+</script>

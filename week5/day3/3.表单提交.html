@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script src="js/jquery-3.2.1.min.js"></script>
+<body>
+<!--
+action="" 就是你提交数据的地址,不写就是默认本地址
+method=""  请求方式 默认是get ,当你点击提交按钮submit的时候
+<input type="submit"/> 是form表单中自带的提交按钮是H5标签有兼容性
+会将表单中的内容以name=value&&name=value的形式添加到URL上,所以以后在真实工作中表单中的那些标签的name值都是后台规定的,让你叫啥你就叫啥,他们需要通过name的来得到想要的参数
+
+有的时候我们不是传给后台而是带参数跳转到其他的页面,在其他的页面中使用当前页面的数据,也就是在打开其他的页面地址的时候在后面拼接上你的参数,你可以用原生方法循环一个一个拼接,在JQ中给你提供了一个方法 serialize(),也会将参数变成name=value&name=value....,
+ 把这个序列化的字符串加在地址后面,但是你得先判断一下地址之前有没?,有的话说明之前有数据了,就在前面拼接个"&",没有的话就在前面拼接个"?"
+-->
+<form action="" method="get">
+    <input type="text" name="user"/>
+    <input type="password" name="passWord"/>
+    <input type="checkbox" name="box"/>
+    <select name="sel" id="">
+        <option value="1">1</option>
+        <option value="2">2</option>
+    </select>
+    <input type="reset"/>
+    <input type="submit"/>
+    <button id="sub">btn</button>
+</form>
+</body>
+</html>
+<script>
+    $("#sub").click(function(){
+        //user=一样一样&passWord=1234567&box=on&sel=2
+        var url=$("form").serialize();
+        window.open("1.html"+"?"+url)
+    });
+</script>

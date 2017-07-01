@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box,.box{
+            width: 100px;
+            height: 200px;
+            background-color: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+<button>按钮</button>
+<div id="box"></div>
+<div class="box">
+    <p>p1</p>
+    <p class="p">p2</p>
+    <p>p3</p>
+</div>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script>
+    $(function(){
+        /*
+        $("#box").click(function(e){
+            //e :是事件对象 原生的对象
+            //this:点击的元素 原生的对象
+        }).mouseover(function(e){
+
+        })
+
+
+        //on绑定事件
+        $("#box").on("click",function(e){
+            //e :是事件对象 原生的对象
+            //this:点击的元素 原生的对象
+        });
+
+        //1.给多个事件行为,绑定同一个函数
+        function fn(e){
+            //e :是事件对象 原生的对象
+            //this:当前触发事件的那个元素 原生的对象
+            //e.type 事件类型 "click" "mouseover"
+            console.log(e.type);
+        };
+        $("#box").on("click mouseover",fn);
+
+        //2.on中有个参数是用来筛选的 (后代筛选)
+        $(".box").on("click","p.p",function(e){
+            //从.box的后代元素找到class名为"p"的p标签,给他绑定事件
+            console.log("事件源:",e.target);
+            console.log("this:",this);
+        });
+
+
+        //3.on中还有个参数是用来给事件对象绑定数据的
+        //objData :事件对象绑定的数据
+        //e.data=objData
+        var objData={name:"a",fn:function(){console.log(this)}};
+        $("#box").on("click",objData,function(e){
+            //e.target  e.type
+            //e.data:事件类型数据
+            console.log(e.data);//objData{}
+            console.log(e.data.name);//objData{}
+            e.data.fn();//this===e.data
+        })
+
+
+        //4.事件命名空间  给事件类型后面加个点和名字:"click.box"
+        //.box就是事件的命名空间
+        $("#box").on("click.box",function(e){
+            console.log(e.type);
+        }).on("click",function(e){
+            console.log("onclick");
+        }).on("mouseover.box",function(e){
+            console.log(e.type);
+        });
+
+        //off移除事件
+        //$("#box").off();//把所有的事件都移除了
+        //$("#box").off("click");//把所有的click事件都移除了
+        //$("#box").off("click.box");//把所有的click.box事件都移除了
+        $("#box").off(".box");//把所有的有.box事件都移除了
+
+
+
+        //on("事件类型type","筛选器",{事件对象绑定的数据data},function(e){},false/true)
+        $(".box").on("click.box","p:eq(2)",{name:"aa"},function(e){
+            //this p:eq(2)
+            //e.data.name="aa"
+        });
+
+        //预留事件 解决未来要添加的元素绑定事件的问题
+
+        //用之前的写法后面如果再给box添加p标签,p标签上不会绑定上事件
+        $(".box p").on("click",function(e){
+            console.log(e.target);
+        });
+        $(".box").append("<p>p4</p>");
+        //用这样的写法后面如果再给box添加p标签,p标签上ye会绑定上事件
+        $(".box").on("click","p",function(e){
+            console.log(e.target);
+        });
+        $(".box").append("<p>p5</p>");
+        */
+
+        //预留事件的另一种方式
+        $(".box").delegate("p","click",function(e){
+            console.log(this);
+        })
+        $(".box").append("<p>p4</p><p>p5</p>");
+
+        // delegate预留事件的移除 undelegate;
+        $(".box").undelegate("click");
+        //移除$(".box")预留的click事件
+        $(".box").undelegate();
+        //移除$(".box")预留的所有事件
+
+        //bind()跟on一样用
+        //bind("type","筛选器",{事件对象数据},function(){});
+        //unbind("type") 跟off一样用
+    });
+    //
+
+
+
+</script>
+</body>
+</html>

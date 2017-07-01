@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        div{
+            width:900px;
+            margin:50px auto;
+            position: relative;
+        }
+        div img{
+            float: left;
+            width: 200px;
+            margin:10px;
+        }
+        #bigger{
+            position: absolute;
+            left:0;
+            top:0;
+            width:600px ;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <img src="img/apple_1.jpg" realImg="img/apple_1_bigger.jpg" alt="">
+    <img src="img/apple_2.jpg" realImg="img/apple_2_bigger.jpg" alt="">
+    <img src="img/apple_3.jpg" realImg="img/apple_3_bigger.jpg" alt="">
+    <img src="img/apple_4.jpg" realImg="img/apple_4_bigger.jpg" alt="">
+    <div class="boxImg">
+        <img src="img/apple_1_bigger.jpg" alt="" id="bigger">
+    </div>
+</div>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script>
+    var $box=$("#box");
+    var $img=$box.children("img");
+    var $big=$("#bigger");
+    $img.mouseover(function (e) {
+        //鼠标放图片上让大图显示,把存在img自定义属性realImg中的图片地址加在大图上
+        $big.show().prop("src",$(this).attr("realImg"));
+        //鼠标动大图跟着动
+        $box.mousemove(function (e) {
+            $big.css({
+                left:e.clientX-$(this).offset().left,
+                top:e.clientY-$(this).offset().top
+            })
+        });
+        $box.mouseout(function (e) {
+            $big.hide();
+        })
+    });
+
+</script>
+</body>
+</html>

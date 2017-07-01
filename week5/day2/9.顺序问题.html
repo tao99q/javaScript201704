@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function on(ele,type,callback){
+        if(ele.addEventListener){
+            ele.addEventListener(type,callback);
+        }else{
+            if(!ele["event"+type]){
+                ele["event"+type];
+            }
+            var events=ele["event"+type];
+            if(events&&events.length){
+                for(var i=0;i<events.length;i++){
+                    if(events[i]==callback){
+                        return;
+                    }
+                }
+            }
+            events.push(callback);
+            //把这个run函数放外面
+            ele.attachEvent("on"+type,function(e){
+                e=e||window.event;
+                run.call(ele,e)
+            })
+        }
+    }
+
+
+    function off(ele,type,callback){
+        if(ele.removeEventListener){
+           ele.removeEventListener(type,callback) ;
+        }else{
+            var events=ele["event"+type];
+            if(events&&events.length){
+                for(var i=0;i<events.length;i++){
+                    if(events[i]==callback){
+                        ele.detachEvent("on"+type,callback);
+                        events.splice(i,1);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    function run(e){
+        //this就是ele
+        //e.type事件类型
+        var events=this["event"+ e.type];
+        if(events&&events.length){
+            for(var i=0;i<events.length;i++){
+                events[i].call(this,e)
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

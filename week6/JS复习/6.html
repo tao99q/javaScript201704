@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    var ary=[1,2,3];
+    ary.__proto__;//Array.prototype
+
+    console.log(Object.prototype.toString.call(ary));
+    ary.__proto__=Object.prototype;
+    console.log(ary.toString());
+
+    function Fn() {
+        this.a=1;
+    }
+    Fn.prototype={
+        constructor:Array,
+        f:1
+    };
+    var f=new Fn;
+    console.log(f.constructor);
+    */
+
+
+    //链式写法
+
+    function FF() {
+        this.x=1;
+        this.y=2;
+        this.getX=function () {
+            console.log(this.x);
+            return this
+        };
+        this.getY=function () {
+            console.log(this.y);
+            return this
+        };
+        //return this
+    }
+    var ff=new FF();
+    //ff.getX();
+    //ff.getY();
+    ff.getX().getY();
+    ff.getY().getX();
+</script>
+</body>
+</html>

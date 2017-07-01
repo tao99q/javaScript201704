@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+单例模式：就是一个对象，主要是解决命名冲突的问题，注意一点，函数之间可以用this相互调用，this就是那个单例模式那个对象
+工厂模式：
+构造函数模式：
+-->
+</body>
+<script TYPE="text/javascript">
+    [].sort(function (a,b) {
+        console.log(this);
+        return a-b
+    })
+    // sort方法中this是谁
+
+
+    function FF() {
+        var n=1;
+        this.n=n;
+        this.m=this.n++;
+        this.f=function () {
+            var n=1;
+            console.log(this.n+n);
+        };
+        return 1;
+    }
+    var xx=FF();//xx=1
+    var x=new FF;//x={n:2,m:2,f:function(){}}
+    console.log(x.n,x.m);
+    x.f();//this=x
+</script>
+</html>

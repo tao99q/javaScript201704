@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box">
+    {{message,msg1}}  ,{{message}} ,{{msg1}} ,{{msg2}}
+    Vue1.0中如果想实现字符串中html的识别,在里面多加一个{}
+    {{{htmlStr}}}
+    在vue2.0中给当前视图加一个指令 v-html
+    <div v-html="htmlStr"></div>
+</div>
+<script type="text/javascript" src="js/vue1.0.js"> </script>
+<script>
+    //1.通过构造函数的方式得到有个vue实例
+    //2.el:规定当前的这个vue实例的管辖范围 el:"#box"
+    //3.data 数据
+    //{{message,msg1}} 展示msg1
+    var v1=new Vue({
+        el:"#box",//'视图'
+        data:{//数据
+            message:"哈哈哈",
+            msg1:"你好",
+            msg2:"你好好",
+            fn:function () {
+                console.log(this);
+            },
+            htmlStr:"<span>1234</span>"
+        }
+    });
+    console.dir(v1);
+    console.log(v1.$el);
+    console.log(v1._data);
+    console.log(v1._data.message);
+    //在vue中对数据data做了处理,直接将data中的数据,赋给了当前实例
+    console.log(v1.message);
+    v1.fn();//当前实例v1
+    v1._data.fn();//this==v1._data
+
+    //    function Vue(obj) {
+//        this.$el=obj.el;
+//    }
+//    var v1=new Vue({el:"#box"})
+
+    v1.msg1="888888";
+</script>
+</body>
+</html>

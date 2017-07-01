@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body,div{
+            margin: 0;
+            padding: 0;
+        }
+        .outer,.center,.inner{
+            border: 20px solid red;
+            margin: 50px;
+        }
+        .outer{
+            width: 500px;
+            height: 500px;
+        }
+        .center{
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-color:yellow ;
+        }
+        .inner{
+            width: 100px;
+            height: 100px;
+            border-color:blue ;
+        }
+    </style>
+</head>
+<body>
+<div class="outer">
+    outer
+    <div class="center">
+        center
+        <div class="inner">inner</div>
+    </div>
+</div>
+<!--
+offsetParent:当前元素的父级参照物,从父级元素开始往上找,找到一个被定位(relative.absolute,fixed)元素,就是当前元素的offsetParent,如果一直找body没有定位元素,那么他的offsetParent就是body
+offsetLeft:当前元素的外边框到offsetParent的内边框(这个距离不包括边框)
+-->
+<script>
+    var outer=document.getElementsByClassName("outer")[0];
+    var center=document.getElementsByClassName("center")[0];
+    var inner=document.getElementsByClassName("inner")[0];
+
+    console.log(outer.offsetParent);
+    console.log(center.offsetParent);
+    console.log(inner.offsetParent);
+    console.log(document.body.offsetParent);
+   //offset(curEle),求curEle到body的上偏移量和左偏移量
+    //当一个函数最终得到多个值那么你就让他返回一个对象就可以了
+    //注意:在IE8中左偏移量和上偏移量包含offsetParent的边框
+    function offset(curEle){
+        //形参curEle:当前的元素
+        var L=curEle.offsetLeft;
+        var T=curEle.offsetTop;
+        var P=curEle.offsetParent;
+        while(P){
+            if(window.navigator.userAgent.indexOf("MSIE 8")==-1){
+                //当前浏览器不是IE8的时候,执行这里面的
+                L+= P.clientLeft;
+                T+= P.clientTop;
+            }
+            L+= P.offsetLeft;
+            T+= P.offsetTop;
+            P= P.offsetParent;
+        }
+        return {
+            left:L,
+            top:T
+        }
+    }
+    console.log(offset(inner).left);
+    console.log(offset(outer).left);
+    console.log(offset(center).left);
+</script>
+</body>
+</html>

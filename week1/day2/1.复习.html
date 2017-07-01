@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script TYPE="text/javascript">
+    //基本数据类型和引用数据类型的区别，引用数据类型的赋值过程
+    //预解释：特殊情况
+    //条件中预解释的情况，预解释的时候，声明变量遇到变量名相同的时候会报错,条件成立第一步给函数赋值，然后再让代码从上到下执行
+    if ("aa" in window) {
+        console.log(aa);
+        aa = 1;
+        function aa() {
+            console.log(aa)
+        }
+    }
+    console.log(aa);
+    //函数执行
+</script>
+</body>
+</html>

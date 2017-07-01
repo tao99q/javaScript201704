@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li>11111</li>
+    <li>22222</li>
+    <li>33333</li>
+    <li>44444</li>
+</ul>
+<script>
+    /*
+     var a=10;
+     if(a){
+     console.log(a);
+     var a=1;
+     console.log(a);
+     }
+     console.log(a);
+     */
+    "use strict";
+    //{}括起来的是私有作用域，块级作用域
+    /*
+     let a=10;
+     if(a){
+     //console.log(a);//报错
+     let a=1;
+     console.log(a);//1
+     }
+     console.log(a);//10
+
+     let a=10;
+     if(true){
+     console.log(a);//10
+     a=1;
+     }
+     console.log(a);
+     */
+    var oLis = document.getElementsByTagName("li");
+
+    for (let i = 0; i < oLis.length; i++) {
+        oLis[i].onclick = function () {
+            console.log(i);
+        }
+    };
+    let a = 0;
+    function fn() {
+        //console.log(a);报错的
+        let a = 9;
+        console.log(a);
+    }
+    console.log(a);
+    fn();
+
+    (function () {
+        let b;
+        console.log(b);
+    })();
+
+    //自执行函数
+    {
+        //let a;
+        let a;
+        console.log(a);
+    }
+</script>
+</body>
+</html>

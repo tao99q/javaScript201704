@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>call</title>
+</head>
+<body>
+<script type="text/javascript">
+    //"use strict";
+    //所有的函数都一个属性length，表示参数的数量
+    var obj={1:1};
+    function fn(n,m) {
+        console.log(n + m);
+        console.log(this);
+    }
+    console.log(fn.length);
+    //fn.__proto__
+    console.dir(Function.prototype);
+    console.log(Function.prototype.call.length);
+    //函数原型上的call方法是一个函数，这个方法至少要穿一个参数，这个参数是用来改变call前面的方法的this的
+    //call两个作用：1.改变this，2，让当前函数执行
+    //实例.call
+    //fn.call//call中的this->fn
+    fn.call(obj);//1.将fn中的this变成obj。2.让fn执行
+    //在非严格模式下，不传参数或者是穿了个null，undefined，默认是window，在严格模式下"use strict"，不传，null。undefined是将this变成了undefined
+    //call方法从第二个参数开始就是给前面的函数传的参数
+
+
+    //当使用函数.call.call()，两个及两个以上的call，你传的参数不是一个函数就会报错，因为只有函数的原型上才会有call这个方法
+    //换句话说，你用两个及两个以上的call方法执行的时候，就相当于把你传进来的那个函数执行
+    fn.call(obj,1,2);
+//    Function.prototype.call=function (obj) {
+//        this//实例
+//        this();
+//    };
+    fn.call();//
+    //fn.call.call(obj);//->obj.call()
+
+
+    function ff() {
+        console.log("哈哈");
+    }
+    [].constructor.call.call(ff);
+    //call  this()
+    //[].__proto__->Array.prototype.constructor->Array
+</script>
+</body>
+</html>

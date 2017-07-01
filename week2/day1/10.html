@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+//    Function.prototype.call=function () {
+//        this()
+//    };
+//    function f() {
+//        console.log(this,"f");
+//    }
+//    function ff() {
+//        console.log(this,"ff")
+//    }
+//    f();
+//    f.call();
+//    f.call.call(ff);//1.改变的是f.call中的this，2.然后f.call()也就是执行this()->ff()
+   // f.call.call.call(ff);//1.改变的是f.call.call中的this，2f.call.call 执行就是this()->ff()
+
+
+
+    //
+//    function f1(n) {
+//        console.log(this,n)
+//    }
+//    function f2(m,w) {
+//        console.log(this,m,w)
+//    }
+//    f1.call();
+//    f1.call.call(f2,1);
+    //参数f2是用来改变f1.call中的this，参数1是给f1.call传参数数的
+    //1.f1.call中的this变成f2
+    //2.f1.call(1) call方法中是让this(),我们现在把this变成f2,也就是让f2(),
+    //3.将f2中的this变成了1，1
+
+   // f1.call.call.call(f2,1,2,3);
+    //f1.call.call(1,2,3)  中this变成f2
+    //f2.call(1,2,3)
+
+    //两个及两个以上的call(fn,obj,n,m,...)
+    //fn:必须是函数
+    //obj是用来改变fn的this
+    //n,m..:给fn 传的参数
+
+
+    function dd(n,m) {
+        console.log(this,n,m)
+    }
+    function bb(x,y) {
+        console.log(this,x,y)
+    }
+    var obj={n:1,m:2};
+    dd.call(null,1,2);
+    dd.call.call(dd,1,1);
+    dd.call.call(bb,obj,1,2,3,4,4,1);
+    dd.call.call.call.call(bb,"1","1","1");
+    bb.call("1","1","1");
+
+    //call:记住三句话：
+    // 1.改变前面方法的this，不管前面有多少东西
+    // 2.让前面方法执行，不管前面有多长
+    // 3.call方法最终执行的一句核心是this()
+    //外加的：两个及两个以上的call。最后一个call的第一个参数是来改变前面call方法中的this，那么this()就变成了第一个参数执行，所以第一个参数必须是函数，否则会报错
+</script>
+</body>
+</html>

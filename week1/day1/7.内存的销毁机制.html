@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<!--
+堆内存：只要这个对堆内存没有被任何变量或者属性占用，浏览器就会主动将他销毁，其他的需要手动销毁，注意以后在做项目的时候遇到一个对象后面不用了，手动清空一下，obj=null;
+栈内存（作用域）：
+全局作用域：关闭浏览器的时候销毁，以后在做项目的时候尽量避免全局变量的使用
+私有作用域：相同的函数每一次执行都会形成一个私有作用域，他们之间没有任何关系
+1.立即销毁 函数没有返回值，或者返回值的内容没有被占用，浏览器就会把他销毁了
+2.暂时不销毁：函数返回了一个函数，这个返回的函数接着执行了，完了之后浏览器会抽时间销毁，（具体什么时候销毁每个浏览器的机制不一样）
+3.不销毁：函数执行返回一个地址，一直被外界变量占用着
+-->
+<div id="box"></div>
+<ul class="oUl">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+</body>
+</html>
+<script type="text/javascript">
+    //
+    function fn1() {
+        var n=1;
+        console.log(n++)
+    }
+    fn1();
+    fn1();
+    fn1();
+    //
+    function fn() {
+        console.log("销毁")
+    }
+    fn();//这个函数执行完后对后面没有什么影响就销毁了
+    //当函数返回一个函数的时候，被外界的变量的接收；
+    function fn2() {
+        var n=0;
+        return function () {
+            console.log(n++)
+        }
+    }
+    var f=fn2();//f=xxxfff000
+    f();
+    //作用域不销毁这个概念主要是用在给元素绑定事件的时候,
+    var box=document.getElementById("box");
+    box.onclick=function (e) {
+        //给元素通过这种方式绑定事件的时候，不要加参数，参数表示的是事件对象
+        var n=0;
+        console.log(e)
+    }
+    var oLis=document.getElementsByClassName("oUl")[0].getElementsByTagName("li");
+    for (var i=0;i<oLis.length;i++){
+        oLis[i].onclick=(function (j) {
+            //作用域中的参数i是私有变量
+            return function () {
+                console.log(j)
+            }
+        })(i);//传进去的i是全局的i
+    }
+    //
+    //i=0 ,先让自执行函数执行，形成一个私有作用域F0，先给参数赋值私有变量j=0,oLis[0].onclick= function () {console.log(j)}
+    //i=1,先让自执行函数执行，形成一个私有作用域F1,先给参数赋值私有变量j=1,oLis[1].onclick= function () {console.log(j)}
+    //i=2,先让自执行函数执行，形成一个私有作用域F2,先给参数赋值私有变量j=2,oLis[2].onclick= function () {console.log(j)}
+
+
+    //比如我去点oLis[1]
+    //把function () {console.log(i)}拿出来执行，
+    //遇到变量i,不是私有的，我往上找，上一级是F1，F1中有私有变量i=1,然后输出i
+
+    function ff(n) {
+        console.log(n)
+    }
+    var a=0;
+    ff(a);
+    (function (n) {
+
+    })(a)
+</script>，

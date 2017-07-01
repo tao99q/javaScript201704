@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<script>
+
+    function fn(a) {
+        console.log("fn执行");
+    }
+
+    Function.prototype.Length = function () {
+        //先让前面的函数执行，
+        //返回前面函数的参数长度
+        //this.apply(this,arguments);
+        var str = "";
+        for (var i = 0; i < arguments.length; i++) {
+            str += arguments[i] + ",";
+        }
+        str=str.substr(0,str.length - 1);//"1,2,3"
+        eval("this(" + str + ")");
+        return arguments.length
+    };
+
+    //String.prototype.unique;
+
+
+    console.log(fn.Length(1, 2, 3));
+
+    Function.prototype.call = function () {
+        //this 前面函数
+        //arguments[0];//改变前面函数this的
+        var str = "";
+        for (var i = 1; i < arguments.length; i++) {
+            str += arguments[i] + ",";
+        }
+        str=str.substr(0,str.length - 1);//"1,2,3"
+        //传进来的是基本数据类型，null,undefined-> window
+        //其他的是所属的类型
+        if (arguments[0] == null || (typeof arguments[0] !== "object" && typeof arguments[0] !== "function")) {
+            if (arguments[0] == null) {
+                arguments[0] = window;
+            } else {
+               arguments[0]= arguments[0].constructor;
+            }
+        }
+        //this()
+        arguments[0].fn=this;
+
+        eval("arguments[0].fn(" + str + ")");
+        delete arguments[0].fn;
+    };
+
+    function ff() {
+        console.log(this);//执行完之后再删掉fn
+    }
+    var obj={};
+    ff.call(obj, 1, 2);
+    console.log(obj);
+
+
+</script>
+</body>
+</html>

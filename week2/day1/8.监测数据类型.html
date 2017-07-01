@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+1.typeof 返回值是一个字符串，如果用两个及两个以上的typeof检测的话返回值＂string＂，但是他有局限性，能详细检测基本数据类型，但是null不行，检测出来是object，对于引用数据类型不能详细检测只有object 和function
+2.instanceof 检测一个实例是否属于某个类，因为每一种数据类型都对应自己所属的类，所以我们可以通过他来检测数据类型，但是也有局限性，对于基本数据类型 用字面量创建方式创建的的变量检测不出来，构造函数创建方式可以，引用数据类型可以详细检测
+3.类原型上的constructor，每个类的原型（prototype）上都有一个constructor属性，他指向类本身，那么一个具体的数据类型的实例.constructor。比如"11".constructor->"11"．__proto__->String.prototype,String原型上有constructor指向String本身，你也可以通过他的name来得到String类名，也就是他的数据类型
+ console.log("11".constructor.name);->"String"
+4.对象Object类的原型上有一个toString，他可以检测数据类型，那么我们就调用Object.prototype.toString()这个方法，用call将里面的this改变成我想检测的那个数据，会得到‘【object 数据类型】’
+-->
+<script type="text/javascript">
+    //toString
+    console.dir(Object.prototype);
+    console.log(({1: 1}).toString());
+    var str="11";
+    var number=1;
+    var ary=[1];
+    var time=new Date();
+    console.log(Object.prototype.toString.call(str));
+    console.log(Object.prototype.toString.call(number));
+    console.log(Object.prototype.toString.call(ary));
+    console.log(Object.prototype.toString.call(time));
+    var s=Object.prototype.toString.call(time);
+    console.log(typeof s);
+    //'[object Date]'
+    //console.log(s.split(" ")[1].replace("]",""));
+    console.log(s.substring(8, s.length - 1),s);
+</script>
+</body>
+</html>

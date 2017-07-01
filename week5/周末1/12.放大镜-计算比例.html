@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        div{
+            width: 420px;
+            height: 420px;
+            margin:10px;
+            box-shadow: 0 0 10px #333;
+            float: left;
+            overflow: hidden;
+            position: relative;
+        }
+        #l{
+            background: url("img/1.jpg") no-repeat center;
+        }
+        #m{
+            background:yellow;
+            opacity: 0.5;
+            filter:alpha(opacity:50);
+            position: absolute;
+            left:0;
+            top:0;
+            display: none;
+        }
+        #r{
+            display: none;
+        }
+        #r img{
+            position: absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+<div id="l">
+    <p id="m"></p>
+</div>
+<div id="r">
+    <img src="img/2.jpg" alt="" >
+</div>
+<script src="js/public.js"></script>
+<script>
+    var L=document.getElementById("l");
+    var M=document.getElementById("m");
+    var R=document.getElementById("r");
+    var RImg=R.getElementsByTagName("img")[0];
+   //获取图片的默认宽高的时候直接用width，height
+    var W=public.css(R,"width")/RImg.width * L.offsetWidth;
+    var H=public.css(R,"height")/RImg.height * L.offsetHeight;
+    //给这遮罩设置大小
+    public.css(M,{width:W,height:H});
+    L.onmouseenter=function () {
+        public.css(M,{display:"block"});
+        public.css(R,{display:"block"});
+        L.onmousemove=function (e) {
+            e=e||window.event;
+            var l=e.clientX-L.offsetLeft-M.offsetWidth/2;
+            var t=e.clientY-L.offsetTop-M.offsetHeight/2;
+            var maxL=L.offsetWidth-M.offsetWidth;
+            var maxT=L.offsetHeight-M.offsetHeight;
+            l=l<0?0:(l>maxL?maxL:l);
+            t=t<0?0:(t>maxT?maxT:t);
+            public.css(M,{left:l,top:t});
+            public.css(RImg,{
+                left:-l*(this.offsetWidth/M.offsetWidth),
+                top:-t*(this.offsetHeight/M.offsetHeight)
+            })
+        };
+        L.onmouseleave=function () {
+            public.css(M,{display:"none"});
+            public.css(R,{display:"none"});
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>get</title>
+    <style>
+       [v-cloak]{
+           display: none;
+       }
+    </style>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="get请求数据" @click="getData">
+    <input type="button" value="post请求数据" @click="postData">
+    <ul>
+        <li v-for="item in msg" v-cloak>
+            <span>{{item.name}}</span>
+            <span>{{item.age}}</span>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+<script src="js/vue2.0.min.js"></script>
+<script src="js/vue-resource.js"></script>
+<script>
+    var v1=new Vue({
+        el:"#app",
+        data:{
+            msg:""
+        },
+        methods:{
+            getData(){
+                //this.$http 中提供了很多请求的方法
+                //then()请求成功了执行的里面的函数
+//                this.$http.get("json/data.json").then(
+//                    function (res) {
+//                        //res 返回的数据
+//                        //res.body中存储的是数据
+//                        //res.bodyText:JSON 字符串数据
+//                        console.log(res.body);
+//                        this.msg=res.body;
+//                    }
+//                )
+                this.$http.get("/getData").then((res)=>{
+                    this.msg= res.body;
+                });
+            },
+            postData(){
+                //post("url请求路径",{参数:向服务器发送的数据})
+                this.$http.post("/postData",{num:2}).then((res)=>{
+                    console.log(res);
+                    this.msg=res.body;
+                })
+            }
+        }
+    })
+</script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!---->
+    <!--<input type="text" v-model="num">*<input type="text" v-model="price">={{product}}-->
+    <input type="text" v-model="product">
+    {{num}}*{{price}}={{product}}
+</div>
+</body>
+</html>
+<script src="js/vue2.0.js"></script>
+<script>
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            num:5,
+            price:100
+        },
+
+        computed:{
+            //计算属性,这里面的属性写在DOM结构中的时候,直接写函数名就可以,不需要执行,编译的时候回自动执行
+//            product:function () {
+//                return this.num*this.price;
+//            }
+            product:{
+                get:function () {
+                    return this.num*this.price;
+                },
+                set:function (product) {
+                   // 形参product就是当前的 product
+                    this.num=product/this.price;
+                }
+            }
+        }
+    })
+</script>

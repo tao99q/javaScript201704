@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body,div,ul,li,input,a{
+            margin: 0;
+            padding: 0;
+            font-family: "microsoft yahei";
+            color: #000;
+        }
+        body{
+            background: lightblue;
+        }
+        ul{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #searchBox{
+            width: 640px;
+            margin: 30px auto;
+        }
+        #searchBox .logo{
+            width: 200px;
+            height: 80px;
+            margin: 0 auto;
+            background: url("img/logo.png") no-repeat;
+            background-size: 100% 100%;
+        }
+        #searchBox .inputBox{
+            width: 640px;
+            height: 40px;
+            position: relative;
+        }
+        #searchBox input{
+            width: 490px;
+            height: 40px;
+            float: left;
+            border: none;
+            padding: 0 40px 0 10px;
+            line-height: 40px;
+            font-size: 14px;
+        }
+        #searchBox .rightBtn{
+            width: 100px;
+            height: 40px;
+            float: right;
+            background: #ccc;
+            line-height: 40px;
+            text-align: center;
+        }
+        #searchBox .camera{
+            display: inline-block;
+            position: absolute;
+            right: 110px;
+            width: 20px;
+            height: 20px;
+            top: 10px;
+            cursor: pointer;
+            background: url("img/camera.png") no-repeat;
+        }
+        #searchBox .camera:hover{
+            background-position: 0 -20px;
+        }
+        #searchBox .searchList{
+            display: none;
+            position: relative;
+            top: -1px;
+            width: 540px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background: #fff;
+        }
+        #searchBox .searchList li{
+            height: 30px;
+            line-height: 30px;
+        }
+        #searchBox .searchList li a{
+            display: block;
+            padding: 0 40px 0 10px;
+        }
+        #searchBox .searchList li a:hover{
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="searchBox">
+        <div class="logo"></div>
+        <div class="inputBox">
+            <input type="text">
+            <span class="camera"></span>
+            <a class="rightBtn" href="javascript: void 0">百度一下</a>
+        </div>
+        <ul class="searchList">
+            <li><a href="javascript:void 0">珠峰</a></li>
+            <li><a href="javascript:void 0">张温</a></li>
+            <li><a href="javascript:void 0">珠峰培训</a></li>
+            <li><a href="javascript:void 0">张温很高</a></li>
+        </ul>
+    </div>
+</body>
+</html>
+<script>
+    var searchBox=document.getElementById("searchBox");
+    var input=searchBox.getElementsByTagName("input")[0];
+    var searchList=searchBox.getElementsByClassName("searchList")[0];
+    var list=searchList.getElementsByTagName("li");
+    var index=0;
+
+    input.onfocus=input.onkeyup=function(e){
+        var reg=/^\s*$/;
+        if(reg.test(this.value)){
+            searchList.style.display="none";
+            return;
+        }
+        searchList.style.display="block";
+        list[0].style.backgroundColor="#bee3e6";
+    };
+
+    window.onkeyup=function(e){
+        e=e||window.event;
+        if(e.keyCode===13){
+            input.value=list[index].innerText;
+            searchList.style.display="none";
+            //选中了之后,在把所有的li变为没有被选中的样式
+            for(var i=0;i<list.length;i++){
+                list[i].style.backgroundColor="#fff";
+            };
+            index=0;
+        }if(e.keyCode===40){
+            index+1==list.length?index=0:index++;
+            for(var i=0;i<list.length;i++){
+                list[i].style.backgroundColor="#fff";
+            }
+            list[index].style.backgroundColor="#bee3e6";
+        }if(e.keyCode===38){
+            index-1==-1?index=list.length-1:index--;
+            for(var i=0;i<list.length;i++){
+                list[i].style.backgroundColor="#fff";
+            }
+            list[index].style.backgroundColor="#bee3e6";
+        }
+    };
+
+    //我们现在不给li绑定点击事件,而是给ul绑定,通过事件源来判断点击的是那个li
+
+    searchList.onclick=function(e){
+        e=e||window.event;
+        e.target= e.target|| e.srcElement;
+        if(e.target.nodeName=="A"|| e.target.nodeName=="LI"){
+            input.value= e.target.innerText;
+            this.style.display="none";
+            for(var i=0;i<list.length;i++){
+                list[i].style.backgroundColor="#fff";
+            };
+        }
+    }
+</script>
+<!--
+给元素的事件行为绑定方法的时候,不是直接给当前元素绑定事件,而是给的他的上级(一般都是父级或者最高级)绑定方法,通过判断事件源是谁来进行不同得到操作;
+这就叫做事件委托(利用的就是事件传播机制,或者说是事件冒泡)
+-->
+
+
