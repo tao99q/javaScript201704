@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <div>{{msg}}</div>
+    <hello></hello>
+    <love></love>
+</div>
+<div id="app1">
+    <hello></hello>
+    <love></love>
+</div>
+
+</body>
+</html>
+<!--
+记住:所有加在VUE上的内容,必须写在实例中有el之前
+组件:自定义标签
+-->
+<script src="js/vue2.0.js"></script>
+<script>
+    //    var vm=new Vue({
+    //        el:"#app"
+    //    });
+
+    //方法一:
+    var tmp = Vue.extend({
+        template: "<h1>HELLO</h1>"
+    });//1.通过VUE的extend这个方法创造一个模板 template:"真实的标签(自定义标签所代表的内容)"
+    Vue.component("hello", tmp);
+    //2.通过VUe中component将这个模板赋给自定义标签
+    //Vue.component("自定义标签",模板);
+
+    //方法二
+    Vue.component("love", {
+        template: "<h2>{{msg}}</h2>",//组件中默认是不可以使用当前VUE实例的数据的,只能用自己组件中提供的数据
+        //可以写当前组件中的数据 data是个函数  return出一个对象对象中就是我们想要的数据
+        data() {
+            return {
+                msg: "I LOVE YOU"
+            }
+        }
+    });
+
+
+    new Vue({
+        data: {
+            msg: "I LOVE YOU"
+        }
+    }).$mount("#app");
+    new Vue({
+        el:"#app1"
+    })
+    //全局组件,在任何VUE实例的视图中都可以使用
+</script>

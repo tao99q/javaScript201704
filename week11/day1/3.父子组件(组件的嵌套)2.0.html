@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <parent></parent>
+    <!--<h1>PARENT</h1><child1></child1>-->
+</div>
+</body>
+</html>
+<script src="js/vue2.0.js"></script>
+<script>
+    var app=new Vue({
+        el:'#app',
+        components:{
+            parent:{
+                template:"<div><h1>PARENT</h1><child1></child1><child2></child2></div>",//在vue2.0中必须包一个根元素,不然就报错 Component template should contain exactly one root element
+                //在2.0中同级是不可以相互使用的
+                //例如:template:"<p>CHILD1</p> <child2></child2>"是错误的
+                data(){
+                   //parent的数据
+                    return{
+                        msg:"我是一个好人"
+                    }
+                },
+                components:{
+                    child1:{
+                        template:"<p>CHILD1:{{msg}}</p>",
+                        //"msg" is not defined
+                        // 子组件不可以使用父组件的数据
+                    },
+                    child2:{
+                        template:"<p>CHILD2</p>"
+                    }
+                }
+            }
+        }
+    })
+
+</script>

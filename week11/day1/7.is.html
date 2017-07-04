@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--这里面出现的数据必须是当前实例的data中的数据-->
+    <button @click="flag='love2'">中文</button>
+    <button @click="flag='love1'">英文</button>
+
+    <component :is="flag"></component>
+    <component :is="'love1'"></component>
+    <!--<love1></love1>-->
+    <component :is="'love2'"></component>
+    <!--<love2></love2>-->
+
+</div>
+<template id="temp1">
+    <h1>I LOVE YOU</h1>
+</template>
+<template id="temp2">
+    <h1>我爱你!</h1>
+</template>
+</body>
+</html>
+<script src="js/vue2.0.js"></script>
+<script>
+    var app=new Vue({
+        el:"#app",
+        data:{
+            flag:"love1"
+        },
+        components:{
+            love1:{
+                template:"#temp1"
+            },
+            love2:{
+                template:"#temp2"
+            }
+        }
+    })
+</script>

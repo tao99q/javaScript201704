@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            font-size: 100px;
+            color: red;
+        }
+        div:nth-child(2){
+            color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <love1></love1>
+    <love2></love2>
+</div>
+<template id="love1">
+    <div>
+        {{msg}}
+        <button @click="goData">走你</button>
+    </div>
+</template>
+<template id="love2">
+    <div>{{msg}}</div>
+</template>
+</body>
+</html>
+<script src="js/vue2.0.js"></script>
+<script>
+    var a=new Vue();
+    //后面的$emit和$on方法是使用实例上的方法,必须保证这个实例是存在的.所有为了安全起见,使用是一个已经创建好的实例 a
+    var app=new Vue({
+        el:"#app",
+        components:{
+            love1:{
+                template:"#love1",
+                data(){
+                    return{
+                        msg:"I LOVE YOU"
+                    }
+                },
+                methods:{
+                    goData(){
+                        a.$emit("m",this.msg);
+                    }
+                }
+            },
+            love2:{
+                template:"#love2",
+                data(){
+                    return{
+                        msg:""
+                    }
+                },
+                mounted:function () {
+                    //console.log(app);undefined
+//                    a.$on("m",function (data) {
+//                        console.log(this);
+//                        //this==a
+//                    })
+                    //使用箭头函数来处理
+                    a.$on("m",(data)=>{
+                        console.log(this);
+                        this.msg=data;
+                    })
+                }
+
+            }
+        }
+    })
+</script>

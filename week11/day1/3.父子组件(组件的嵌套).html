@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <parent></parent>
+    <!--<h1>PARENT</h1><child1></child1>-->
+</div>
+</body>
+</html>
+<script src="js/vue1.0.js"></script>
+<script>
+    var app=new Vue({
+        el:'#app',
+        components:{
+            parent:{
+                template:"<h1>PARENT</h1><div><ul><li><child1></child1></li></ul></div>",//这个结构你是自己随便写的,你写成什么样在页面中parent就呈现出来什么样
+                components:{
+                    child1:{
+                        template:"<p>CHILD1 <kids></kids></p>",
+                        components:{
+                            kids:{
+                                template:"<span></span>"
+                            }
+                        }
+                    },
+                    child2:{
+                        template:"<p>CHILD2</p>"
+                    }
+                }
+            }
+        }
+    })
+    //parent
+    // "<h1>PARENT</h1><div><ul><li><child1></child1></li></ul></div>"
+    //child1:<p>CHILD1 <kids></kids></p>
+    // "<h1>PARENT</h1><div><ul><li><p>CHILD1 <kids></kids></p></li></ul></div>"
+    //kids:<span>kids</span>
+    // "<h1>PARENT</h1><div><ul><li><p>CHILD1 <span>kids</span></p></li></ul></div>"
+</script>

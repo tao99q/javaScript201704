@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app1">
+    <h2>{{msg}} {{wd}}</h2>
+    <hi></hi>
+    <hello></hello>
+    <bay></bay>
+</div>
+<!--<div id="app2">-->
+    <!--<hi></hi>-->
+<!--</div>-->
+</body>
+</html>
+<script src="js/vue2.0.js"></script>
+<script>
+    var app1=new Vue({
+        el:"#app1",
+        data:{
+            msg:"ni",
+            wd:"hao",
+            h:"HI 你好"
+        },
+        //在当前实例中添加组件,只能在当前实例的视图中使用-->局部组件
+        //局部组件也是不可以使用当前实例中的数据,只能使用当前组件中自己的data,也是一个函数,返回一个对象,这个对象中就是想要数据,每一个组件之间不可以相互使用
+        components:{
+            //这里main可以写很多个组件每一个组件都是一个自定义标签名:{}
+            hi:{
+                template:"<h1>{{h}}</h1>",
+                data(){
+                    return{
+                        h:"大家好"
+                    }
+                }
+            },
+            hello:{
+                template:"<h1>{{h}}</h1>",
+                data(){
+                    return{
+                        h:"吃了吗?"
+                    }
+                }
+            },
+            bay:{
+                template:"<h1>bay-bay</h1>"
+            }
+        }
+    });
+//    var app2=new Vue({
+//        el:"#app2"
+//    })
+</script>

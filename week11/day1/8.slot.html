@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <love>我想都对你说:</love>
+</div>
+<div id="app1">
+    <love>
+        <p slot="slot1">亲爱的,你听好了!</p>
+        <p slot="slot2">嫁给我吧!</p>
+    </love>
+</div>
+<template id="temp">
+    <h1>
+        <!--会将自定标签的内容自动加在这里<slot></slot> 这个是个站位的,站的位置在哪里就写在哪里-->
+        <slot></slot>
+        I LOVE YOU
+        <!--<slot></slot>-->
+    </h1>
+</template>
+<template id="temp2">
+    <h1>
+        <slot name="slot1"></slot>
+        I LOVE YOU
+        <slot name="slot2"></slot>
+    </h1>
+</template>
+</body>
+</html>
+<script src="js/vue2.0.js"></script>
+<script>
+    var app=new Vue({
+        el:"#app",
+        components:{
+            love:{
+                template:"#temp"
+            }
+        }
+    });
+    var app1=new Vue({
+        el:"#app1",
+        components:{
+            love:{
+                template:"#temp2"
+            }
+        }
+    })
+</script>

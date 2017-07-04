@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <parent></parent>
+</div>
+<template id="temp1">
+    <div>
+        <h1>{{name}}</h1>
+        <child1 :n.sync="name"></child1>
+        <!--给绑定的数据加一个修饰符sync 当子组件修改n的时候回让父组件的name页修改-->
+        <!--在vue2.0中没有sync这个东西-->
+    </div>
+</template>
+</body>
+</html>
+<script src="js/vue1.0.js"></script>
+<!--<script src="js/vue2.0.js"></script>-->
+
+<script>
+    var app=new Vue({
+        el:"#app",
+        components:{
+            parent:{
+                template:"#temp1",
+                data(){
+                    return{
+                        name:"xiuXiu"
+                    }
+                },
+                components:{
+                    child1:{
+                        template:"<h2 @click='change'>{{n}}</h2>",
+                        props:["n"],
+                        methods:{
+                            change(){
+                                //this当前组件
+                                this.n="秀秀"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    })
+</script>

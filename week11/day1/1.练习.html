@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app1">
+    <like></like>
+</div>
+<div id="app2">
+    <like></like>
+</div>
+</body>
+</html>
+<script src="js/vue2.0.js"></script>
+<script>
+    var v1=new Vue();
+    var v2=new Vue();
+    Vue.component("like",{
+        template:"<ul><li>初见</li><li>相恋</li><li>相守</li></ul>"
+    });
+    v1.$mount("#app1");
+    v2.$mount("#app2");
+</script>

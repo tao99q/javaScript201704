@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p{
+            color: greenyellow;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <parent></parent>
+</div>
+<script src="js/vue2.0.js"></script>
+<!--自定义HTMNL结构模板-->
+<template id="temp1">
+    <!--这里也是一样需要用一个根元素包起来-->
+    <div>
+        <!--这里出现的数据都是parent的数据-->
+        <h1>{{msg}}</h1>
+        <!--<child1 v-bind:mm="msg"></child1>-->
+        <!--{{msg}}-->
+        <child1 :mm="msg" :num="n"></child1>
+        <!--这里就相当于给child1绑定了一个数据mm,值等于parent的msg-->
+    </div>
+</template>
+<script>
+    var app=new Vue({
+        el:"#app",
+        components:{
+            parent:{
+                //template:"<div><h1>{{msg}}</h1> <child1></child1></div>"
+                template:"#temp1",//告诉浏览器parent这个自定义标签代表的内容就是模板#temp1里面的html结构,
+                data(){
+                    return{
+                        msg:"我是老实人",
+                        n:1
+                    }
+                },
+                components:{
+                    child1:{
+                        template:"<p>{{mm}}的第{{num}}孩子 {{ss}}</p>",
+                        //获取绑定的数据,绑定的数全部放在props中
+                        //props:["num","mm"],
+                        //props:["num",{"mm":"String"}]
+                        //如果想规定数据的的类型
+                        props:{mm:String},
+                        data(){
+                            return{
+                                ss:"SS"
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    })
+//    var obj={
+//        name:"aa"
+//    };
+//    obj[name];
+//    obj["name"]
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        h3{
+            color: yellow;
+            border: 2px dashed red;
+            width: 200px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="app1">
+    <parent></parent>
+</div>
+<template id="temp1">
+    <div>
+        <!--父组件默认不可使用子组件的数据-->
+        <h1>儿子你今年{{age}}岁</h1>
+        <!--你在发射数据的时候起的名字就在这里派上用场了 用@a来接收 我们需要把数据取出来  @a=函数get(你自己起的名字)  默认将数据传给函数get-->
+        <child1 @a="get"></child1>
+    </div>
+</template>
+</body>
+</html>
+<script src="js/vue2.0.js"></script>
+<script>
+    var v1=new Vue({
+        el:"#app1",
+        components:{
+            parent:{
+                template:"#temp1",
+                data(){
+                    return{
+                        age:0
+                    }
+                },
+                methods:{
+                   get(res){//res就是发射过来的数据  ==trueAge
+                       //console.log(this);
+                       console.log(res);
+                       this.age=res;
+                   }
+                },
+                components:{
+                    child1:{
+                        template:"<h3 @click='say'>我今年{{trueAge}}岁</h3>",
+                        data(){
+                            return{
+                              trueAge:27
+                            }
+                        },
+                        methods:{
+                            say(){
+                                //console.log(this);
+                                //this就是当前组件child1
+                                //$emit("发射出去数据我们给他起的名字",你想要发射出去的数据)
+                                this.$emit("a",this.trueAge);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    })
+</script>

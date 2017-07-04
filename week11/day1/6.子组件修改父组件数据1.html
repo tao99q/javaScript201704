@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <parent></parent>
+</div>
+<template id="temp1">
+    <div>
+        <h1>{{name}}</h1>
+        <child1 :n="name"></child1>
+    </div>
+</template>
+</body>
+</html>
+<script src="js/vue2.0.js"></script>
+
+<script>
+    var app=new Vue({
+        el:"#app",
+        components:{
+            parent:{
+                template:"#temp1",
+                data(){
+                    return{
+                        name:"xiuXiu"
+                    }
+                },
+                components:{
+                    child1:{
+                        template:"<h2 @click='change'>{{a}}</h2>",
+                        props:["n"],
+                        data(){
+                            return{
+                                a:this.n
+                            }
+                        },
+                        methods:{
+                            change(){
+                                //this当前组件
+                                //this.n="秀秀",
+                                this.a="秀秀"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    })
+</script>
