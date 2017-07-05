@@ -1,0 +1,18 @@
+$route.path
+类型:String   对应当前路由的路径 总是解析为绝对路径 例如:"/user/info"
+
+$route.params
+类型:Object 包含了动态片段和全匹配片段 如果路路由没有参数就是个空对象
+
+$route.query
+类型:Object  查询参数 例如:/user/info?name=aa  {name:"aa"}
+$route.query.name=="aa"
+
+$route.hash
+类型:String 当前路由的哈希值(带着#) 没有就是空字符串
+
+$route.fullPath
+类型:String 完整的url
+
+$route.name
+类型:String  当前路由的名字

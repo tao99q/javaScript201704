@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .router-link-active{
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1>第一次使用路由</h1>
+    <!--使用router-link组件来导航-->
+    <!--原理:页面渲染router-link的时候渲染成a标签-->
+    <!--通过to属性指定链接 好比:href-->
+    <router-link to="/go">Go</router-link>
+    <router-link to="/back">Back</router-link>
+    <!--路由的出口-->
+    <!--路由匹配到的组件将渲染到这里-->
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script src="js/vue2.0.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+    //1.定义(路由)组件
+    const Go = {template: '<h1>GO</h1>'};
+    const Back = {template: '<h1>BACK</h1>'};
+
+    //2.定义路由
+    //每一个路由映射一个组件
+    const routes=[
+        {path:"/go",component:Go},
+        {path:"/back",component:Back}
+    ];
+
+    //3.创建一个路由router的实例,将routes传给他
+    const router=new VueRouter({
+        //routes:routes
+//        routes:[
+//            {path:"/go",component:Go},
+//            {path:"/back",component:Back}
+//        ]
+          routes
+//         这个是routes:routes的简写
+
+    });
+
+    //4.将router配置到实例中
+    const app = new Vue({
+        router,
+        el: "#app"
+    });
+    //let {a,b}={a:1,b:2};
+    //a=1,b=2
+</script>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/animate.css">
+    <style>
+        .h,.list{
+            float: left;
+        }
+        .list{
+            padding: 20px;
+        }
+        .list div{
+            line-height: 30px;
+            font-size: 20px;
+            color: #d521c7;
+        }
+        .router-link-active{
+            color: #c9302c;
+        }
+        a{
+            color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1>名单</h1>
+    <div class="h">
+        <h2>
+            <router-link to="/group1">第一组</router-link>
+        </h2>
+        <h2>
+            <router-link to="/group2">第二组</router-link>
+        </h2>
+    </div>
+    <div class="list">
+        <transition enter-active-class="animated fadeInLeft" leave-active-class="animated fadeOutRight">
+            <router-view name="b"></router-view>
+        </transition>
+        <transition enter-active-class="animated tada" leave-active-class="animated tada">
+        <router-view name="a"></router-view>
+        </transition>
+        <transition enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
+        <router-view></router-view>
+        </transition>
+    </div>
+</div>
+</body>
+</html>
+<script src="js/vue2.0.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+    const person1={template:"<div>段斌</div>"};
+    const person2={template:"<div>刘美亚</div>"};
+    const person3={template:"<div>朱广寒</div>"};
+    const person4={template:"<div>康丽丽</div>"};
+    const person5={template:"<div>宁会远</div>"};
+    const person6={template:"<div>程书丽</div>"};
+    const router=new VueRouter({
+        routes:[
+            {path:"/group1",components:{
+                default:person1,
+                a:person2,
+                b:person3
+            }},
+            {path:'/group2',components:{
+                default:person4,
+                a:person5,
+                b:person6
+            }}
+            ]
+    });
+
+    new Vue({router}).$mount("#app")
+</script>

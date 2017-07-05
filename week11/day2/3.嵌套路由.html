@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/animate.css">
+    <style>
+        a{
+            display: inline-block;
+            font-size: 40px;
+            padding: 10px 20px;
+
+        }
+        .router-link-active{
+            color: #ff55db;
+        }
+        .user{
+            width: 500px;
+            height: 300px;
+        }
+        .user h2{
+          font-size: 50px;
+            text-align: center;
+            color: #c9302c;
+        }
+        .user h3{
+            font-size: 40px;
+            text-align: center;
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <p>
+        <router-link to="/user/JS4/index">首页</router-link>
+        <router-link to="/user/JS4/XX">班长:XX</router-link>
+        <router-link to="/user/JS4/YY">捣蛋鬼:YY</router-link>
+    </p>
+    <transition enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown"><router-view></router-view></transition>
+</div>
+</body>
+</html>
+<script src="js/vue2.0.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+    const User={
+        template:`<div class="user">
+            <h2>班级{{$route.params.class}}</h2>
+            <transition enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown"><router-view></router-view></transition>
+        </div>`
+    };
+    const userIndex={template:`<h3>孟老师真好!</h3>`};
+    const userXX={template:`<h3>班长秀秀真美!</h3>`};
+    const userYY={template:`<h3>捣蛋鬼勇勇真讨厌!</h3>`};
+
+    var router=new VueRouter({
+        routes:[{
+            //:class就会将/user/JS4 中的JS4 赋给class
+            path:"/user/:class",component:User,
+            children:[
+                {path:"index",component:userIndex},
+                //当/user/:class/XX 匹配成功 将userXX渲染到User的router-view中
+                {path:"XX",component:userXX},
+                {path:"YY",component:userYY}
+            ]
+        }]
+    });
+
+    const app=new Vue({
+        router
+    }).$mount("#app");
+</script>

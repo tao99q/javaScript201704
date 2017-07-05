@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <router-link to="/user/1?n=1#v=v">用户一</router-link>
+    <router-link to="/user/2">用户二</router-link>
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script src="js/vue2.0.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+    const User={
+        template:"<h2>用户{{$route.params.id}}</h2>",
+        //使用watch方法来监听$route对象的变化
+        //提醒一下,当路由参数从/user/1到/User/2,原来的组件实例会被复用 ,因为这两个路由渲染同一个组件,这样比销毁在创建更加高效,不过,这样也意味着组件的生命周期的钩子函数不会再被调用
+        watch:{
+            $route (to,from){
+                console.log(to,from)
+            }
+        }
+    };
+    const router=new VueRouter({
+        routes:[
+            {name:"r1",path:"/user/:id",component:User}
+        ]
+    });
+    const app=new Vue({
+        router,
+        el:"#app"
+    });
+
+
+</script>

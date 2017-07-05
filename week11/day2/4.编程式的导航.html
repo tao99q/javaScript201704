@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+除了使用router-link创建a标签来定义导航链接,还可以借助router实例中提供的方法,通过编程式来实现导航链接
+router.push(location)
+实质上  当你点击router-link时候,to后面填的地址,就相当于调用router.push(to后面填的地址)
+想要导航到不用的URl,则需要使用router.push方法  history栈添加一个新的记录 当用户点击浏览器的的返回按钮的时候,可以返回到上一个记录(就相当于原生中window.history.pushState)
+-->
+<div id="app">
+    <button @click="getIndex">首页</button>
+    <button @click="getInfo">详情页</button>
+    <button @click="go">前进</button>
+    <!--<router-link to="/index">首页</router-link>-->
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script src="js/vue2.0.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+    const index={template:"<h1>首页信息{{$route.params.id}}</h1>"};
+    const info={template:"<h1>详情页信息{{$route.query.h}} {{$route.query.w}}</h1>"};
+    const router=new VueRouter({
+        routes:[
+            {name:"index",path:"/index/:id",component:index},
+            {name:"info",path:"/info",component:info}
+        ]
+    });
+    // 这样写不用任何点击操作就可以显示对应的组件
+    //1.router.push("/index");
+    //2.router.push({path:"/index"});
+    //3.命名的路由  router.push({name:"index",params:{id:123}});
+    //4.带查询参数
+    //router.push({path:"/index",query:{h:"hello"}})
+    new Vue({
+        router,
+        methods:{
+            getIndex(){
+                //router.push("/index");
+                router.push({name:"index",params:{id:123}});
+                //router.replace 跟router.push一样,只有一个不同就是不会向history栈中添加记录而是直接替换掉之前的记录,所以不会在浏览器中返回,(跟原生中window.history.replaceState一样)
+                //router.replace({name:"index",params:{id:123}});
+            },
+            getInfo(){
+                //router.push("/info");
+                router.push({path:"/info",query:{h:"hello",w:"word"}})
+                //router.replace({path:"/info",query:{h:"hello",w:"word"}})
+            },
+            go(){
+                router.go(1);
+            }
+        }
+    }).$mount("#app")
+</script>
+<script>
+    //对应window.history.go()方法
+    //router.go(参数) 参数是个整数 意思是前进或者后退多少history条记录
+    //例子:
+    //1.router.go(-1) 后退一步 等价于 history.back()
+    //2.router.go(1) 前进一步 等价于 history.forward()
+    //3.router.go(3) 前进3步
+
+</script>
