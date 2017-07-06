@@ -1,0 +1,16 @@
+--save-dev开发的时候依赖的模块(工具) :webpack gulp less less-loader
+-save 上线发布后依然需要的:vue react JQ BootStrap....
+
+创建配置文件  npm init -y   "package.json"
+##webpack
+npm install webpack webpack-dev-server --save-dev
+
+##vue
+npm install vue-loader vue-template-compiler --save-dev
+npm install vue vue-router --save
+
+##babel
+npm install babel-core babel-loader babel-preset-es2015 style-loader css-loader --save-dev
+
+解析html的
+npm install html-webpack-plugin --save-dev
