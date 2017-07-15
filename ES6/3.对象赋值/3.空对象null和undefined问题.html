@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    "use strict";
+    //let obj={};
+    //let a=obj.a;//undefined
+    /*
+    let {a,b}={};
+    console.log(a, b);
+    //let {n,m}=null;//报错了
+    //let {n,m}=undefined;//报错了
+    let {x,y,z}={x:"1",undefined,z:1};
+    console.log(x, y, z);
+    */
+    //赋的值是其他的数据类型，会转成一个对象(所属的类)
+    //let {x,y,z}=1;
+    //let {x,y,z}="123";
+    //let {x,y,length}=[1,2,3];
+    //console.log(x, y, length);
+    //var ary=[1,2,3];
+//    console.dir(String);
+//    var str=new String("123");
+//    console.dir(str);
+//    console.dir("123");
+//    let {x,__proto__,length}=str;
+//    console.log(__proto__,length);
+    //let n=1;
+//    let n=new Number(1);
+//    console.dir(n);
+//    let {__proto__:pro}=n;
+//    console.log(pro);
+    function fn(a,b) {};
+    fn(1,2);
+    console.dir(fn);
+    let {name,length,prototype:{constructor:C}}=fn;
+    console.log(name);//"fn"
+    console.log(length);//2
+    console.log(C);
+</script>
+</body>
+</html>

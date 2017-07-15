@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zhufengpeixun</title>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>
+<script>
+    'use strict';
+    //Array.from()
+    // 将一个数组和类数组转化为数组
+    // 返回值是一个新数组
+    // 原来数组不变
+    let oldArr=[1,2,3,"a","b"];
+    //之前学过克隆一个新的数组 例如 slice()/slice(0)
+    //let newArr=oldArr.slice();
+    let newArr=Array.from(oldArr);
+    newArr.push("c");
+    //新数组指向的是另外一个地址,新数组改变,原来数组不变
+    console.log(oldArr, newArr);
+    //类数组:元素集合 参数集合
+    let divs=document.getElementsByTagName("div");
+    let oDivAry=Array.from(divs);
+    console.log(oDivAry);
+    //注意dom映射问题
+    document.body.appendChild(document.createElement('div'));
+    console.log(divs,oDivAry);
+    oDivAry[1].style.height='100px';
+    oDivAry[1].style.backgroundColor='red';
+    //第二个参数可以传一个函数
+    let ary=[1,2,3,4,5];
+    let arr=Array.from(ary,function (item,index) {
+        //console.log(arguments);
+        return ++item;
+    });
+    //返回值组成一个新数组,原数组不变
+    console.log(ary,arr);
+</script>

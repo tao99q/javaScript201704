@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zhufengpeixun</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    'use strict';
+    let ary=['a','b','c','d'];
+    for (let i=0;i<ary.length;i++){
+        ary[i]=ary[i].toUpperCase();
+    }
+    console.log(ary);
+
+    //forEach
+    ary.forEach(function (item,index,arr) {
+        //这里的index是数字
+        if(index===2){
+            return;
+        }
+        console.log(item)
+    });
+    //for in
+    for(let i in ary){
+        //这里的i是索引,是字符串
+        if(i==2){
+            break
+        }
+        console.log(ary[i])
+    }
+
+    //for of遍历数组,类数组
+    for(let item of ary){
+        //这里的item是当前项
+        if(item=='b'){
+            break;
+        }
+        console.log(item);
+    }
+    //迭代器
+
+    let ary2=ary.entries();
+    console.log(ary);
+    console.log(ary2);
+    //Array Iterator返回一个数组迭代器  ，这个迭代器的原型上有next方法
+    console.log(ary2.next());
+    //Object {value: Array[2], done: false}  value:Array[2] ----[0:0,1:1];
+    console.log(ary2.next());
+    //Object {value: Array[2], done: false}  value:Array[2] ----[0:1,1:2];
+    //可以看出每次执行这个next().都会返回一个该数组的索引和值组成的新的数组，被包在一个对象的value属性里
+    //所以可以通过ary2.next().value获取当前的值和索引
+</script>

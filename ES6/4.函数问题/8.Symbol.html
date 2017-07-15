@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box">1111</div>
+<script>
+    "use strict";
+    let box=document.getElementById("box");
+//    box.index=0;
+//    let obj={
+//        a:"a",
+//        b:"b"
+//    };
+//    obj.a;
+//    obj["a"];
+//    box["index"]=1;
+
+//    let str1="index";
+//    let str2="index";
+//    console.log(str1 == str2);
+//    box[str1]=0;
+//    box[str2]=1;
+
+    let str1=Symbol("index");
+    let str2=Symbol("index");
+    console.log(str1);
+    console.log(str2);
+    console.log(typeof str1);
+    console.log(typeof str2);
+
+    console.log(str1.toString());
+    console.log(str2.toString());
+
+    console.log(str1 == str2);
+    console.log(str1 == "Symbol(index)");
+
+
+
+    let s1="index";
+    let s2="index";
+    box[s1]=1;
+    box[s2]=2;
+    console.dir(box);
+    box[str1]=10;
+    box[str2]=20;
+
+    console.log(box["index"]);
+    console.log(box[str1]);
+    console.log(box[str2]);
+
+</script>
+</body>
+</html>

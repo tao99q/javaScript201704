@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Promise</title>
+    <style>
+        .__time {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            margin-top: 60px;
+            text-align: center;
+        }
+    </style>
+    <script src="lib/jquery-2.1.4.js"></script>
+</head>
+<body>
+    <h1 class="__time">0ms</h1>
+</body>
+<script>
+    {
+        // 在script标签中用箭头函数编辑器会报语法错误,太讨厌了:(
+        let timeEle = document.querySelector('.__time');
+
+        let startTime = new Date().getTime();
+        let intervalTimer = setInterval(function () {
+            let timeDuration = new Date().getTime() - startTime;
+            timeEle.innerHTML = timeDuration + 'ms';
+            if (timeDuration > 10000) {
+                // 防止讲课的时候浏览器自己玩
+                window.clearInterval(intervalTimer);
+            }
+        }, 100);
+
+        window.clearTime = function () {
+            window.clearInterval(intervalTimer);
+            startTime = new Date().getTime() - parseInt(timeEle.innerHTML);
+            intervalTimer = setInterval(function () {
+                let timeDuration = new Date().getTime() - startTime;
+                timeEle.innerHTML = timeDuration + 'ms';
+                if (timeDuration > 10000) {
+                    // 防止讲课的时候浏览器自己玩
+                    window.clearInterval(intervalTimer);
+                }
+            }, 0);
+        }
+    }
+</script>
+<!--<script src=1.Promise的基本范例.js></script>-->
+<!--<script src="2.then与catch的使用.js"></script>-->
+<!--<script src="3.Promise.all.js"></script>-->
+<!--<script src="4.Promise.race.js"></script>-->
+<!--<script src="5.Promise.resolve.js"></script>-->
+<!--<script src="6.Promise.reject.js"></script>-->
+<!--<script src="7.Promise.then的执行时机.js"></script>-->
+<!--<script src="8.Promise链式调用chain.js"></script>-->
+<!--<script src=0.有了Promise会怎样.js></script>-->
+<!--<script src="x.js"></script>-->
+<script src="xx.js"></script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    "use strict";
+    //箭头函数其实就是匿名函数的一种简写方式
+    let a=8;
+//    let fn=function (a) {
+//        return a
+//    }
+    //let 变量=(参数)=>return 出的内容
+    let fn=a=>a;
+    console.log(fn(a));
+
+    //多个参数
+    let fn0=(a,b)=>a+b;
+    console.log(fn0(1,2));
+
+    //函数中有其他代码,用大括号包起来
+    let fn1=(a,b,c)=>{
+        let s=a+b+c;
+        return s;
+    };
+    console.log(fn1(5));//NaN;
+
+//    let f=x=>console.log(x)+1;
+//    let res=f(1);//1
+//    console.log(res);//NaN
+
+    let f=function (x) {
+        return console.log(x)+1;//undefined+1=NaN
+    };
+    let res=f(1);//1
+    console.log(res);//NaN
+    console.log(console.log(1));
+
+    //a=(1,2)+3;//5
+    //console.log(a = 1);
+
+    console.log(...[1, 2, 3]);//1,2,3
+
+</script>
+</body>
+</html>

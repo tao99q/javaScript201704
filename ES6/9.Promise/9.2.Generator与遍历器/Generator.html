@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Generator</title>
+    <style>
+        .__time {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            margin-top: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="__time">0ms</h1>
+</body>
+<script>
+    {
+        // 在script标签中用箭头函数编辑器会报语法错误,太讨厌了:(
+        let timeEle = document.querySelector('.__time');
+
+        let startTime = new Date().getTime();
+        let intervalTimer = setInterval(function () {
+            let timeDuration = new Date().getTime() - startTime;
+            timeEle.innerHTML = timeDuration + 'ms';
+            if (timeDuration > 10000) {
+                // 防止讲课的时候浏览器自己玩
+                window.clearInterval(intervalTimer);
+            }
+        }, 100);
+
+        window.clearTime = function () {
+            window.clearInterval(intervalTimer);
+            startTime = new Date().getTime() - parseInt(timeEle.innerHTML);
+            intervalTimer = setInterval(function () {
+                let timeDuration = new Date().getTime() - startTime;
+                timeEle.innerHTML = timeDuration + 'ms';
+                if (timeDuration > 10000) {
+                    // 防止讲课的时候浏览器自己玩
+                    window.clearInterval(intervalTimer);
+                }
+            }, 0);
+        }
+    }
+</script>
+<!--<script src=5.连续运行的Generator.js></script>-->
+<!--<script src="libs/polyfill.js"></script>-->
+<!--<script src="./dist/bundle.js"></script>-->
+<!--<script src="http://localhost:9090/dev_static/bundle.js"></script>-->
+<!--<script src="1.基础使用.js"></script>-->
+<script src="4.实现迭代器协议-也许是全网唯一完美版.js"></script>
+</html>

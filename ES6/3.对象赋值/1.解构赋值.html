@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    "use strict";
+    let obj = {
+        n1: "p1",
+        n2: "p2"
+    };
+    //let n1=obj["n1"];
+    //let n2=obj["n2"];
+    //这个变量名必须跟属性名一样
+    let {n1, n2} = obj;
+    console.log(n1, n2);
+
+    //如果不想变量名跟属性名一样
+    let {n1: x1, n2: x2} = obj;
+    console.log(x1, x2);
+
+    let {n,m:m1}={n:"1",m:"11"};
+
+    console.log(n, m1);//"1" "11"
+</script>
+</body>
+</html>

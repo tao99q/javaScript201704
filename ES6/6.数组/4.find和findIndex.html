@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zhufengpeixun</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    'use strict';
+    let arr=[1,2,3,3,4,5];
+    //返回值是找到的那一项,没有就是undefined
+    let find=arr.find((item,index,arr)=>{
+        //item当前项,index:索引,arr:元素组
+        return item==0;
+    });
+    //返回值是找到的那一项的索引,没有就是-1
+    let findIndex=arr.findIndex((item,index,arr)=>{
+        return item==0;
+    });
+    console.log(find, findIndex);
+</script>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zhufengpeixun</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    'use strict';
+    //new Set(数组),会去除重复项,得到是个类数组
+    let set1=new Set([{},{},'a',"a",NaN,NaN,null,null,undefined,undefined,0,-0,+0,]);
+    console.log(set1);
+    console.log(set1.size);
+    console.log(set1.length);//没有length
+
+    //基本操作,Set原型上的共有方法
+    //add 添加  返回值:增加后的set
+    //delete 删除  返回值:是否删除成功
+    //has 查找 返回值:是否存在当前项
+    //clear 清空 无返回值
+
+    /*
+    console.log(set1.add("A"));
+    console.log(set1);
+    console.log(set1.delete('a'));
+    console.log(set1);
+    console.log(set1.has(0));
+    set1.clear();
+    console.log(set1);
+    */
+    //遍历操作
+    //keys
+    //values
+    //entries
+    //forEach
+
+//    console.log(set1.keys());
+//    console.log(set1.values());
+//    console.log(set1.entries());
+    for(let item of set1.keys()){
+        console.log(item);
+    }
+    for(let item of set1.values()){
+        console.log(item);
+    }
+    for(let item of set1.entries()){
+        console.log(item);
+    }
+    for(let item of set1){
+        console.log(item);
+    }
+
+    //拓展运算符 ... 是使用了for of遍历的方式
+    let s=new Set([1,2,3,4]);
+    let arr=[...s];
+    console.log(s, arr);
+
+    //set 实现JS中的集合运算:并集,交集,差集
+    let s1=new Set([1,2,3,5,7]);
+    let s2=new Set([1,2,4,6,8]);
+
+    //1.并集
+
+    let bingJi1=new Set([...s1,...s2]);//Set类数组
+    let bingJi2=[...s1,...s2];//数组
+    console.log(bingJi1,bingJi2);
+
+    //1.交集
+
+    let jiaoJi1=new Set([...s1].filter(value=>s2.has(value)));//Set类数组
+    let jiaoJi2=[...s1].filter(value=>s2.has(value));//数组
+    console.log(jiaoJi1,jiaoJi2);
+
+    //1.差集
+
+    let chaJi1=new Set([...s1].filter(value=>!s2.has(value)));//Set类数组
+    let chaJi2=[...s1].filter(value=>!s2.has(value));//数组
+    console.log(chaJi1,chaJi2);
+</script>

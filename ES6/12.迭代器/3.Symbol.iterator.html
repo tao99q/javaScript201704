@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    'use strict';
+    let obj = {
+        0: 'a',
+        9: 'b',
+        2: 'c',
+//        length: 3,
+    };
+
+    window.a = 1;
+//    obj[Symbol.iterator] = Array.prototype[Symbol.iterator];
+    obj[Symbol.iterator] = function () {
+        let myObj = this;
+        return {
+            next: function () {
+//                debugger;
+                let done = false;
+                if (a > 10) {
+                    done = true;
+                }
+//                debugger;
+                console.log(a);
+                return {
+                    value: myObj[a++],
+                    done: done
+                };
+            }
+        }
+    };
+
+    for (let item of obj) {
+        console.log(item);
+    }
+//    [...obj]
+
+    debugger;
+
+//    console.log(Symbol.iterator === Symbol.iterator);
+//    console.log(Symbol.iterator === Array.prototype[Symbol.iterator]);
+//    console.log(Set.prototype[Symbol.iterator] === Map.prototype[Symbol.iterator]);
+
+    let arr = [1, 2, 3, 4 ,5];
+    let arrIter = arr[Symbol.iterator]();
+
+//    for (let item of arrIter) {
+//        console.log(arrIter);
+//    }
+//    debugger;
+
+//    for (let item of arr) {
+//        console.log(item);
+//    }
+
+</script>
+</html>

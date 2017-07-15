@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box">111111111111</div>
+<!--
+在再箭头函数中的this默认就是window，
+特殊情况：当箭头函数作为参数的时候，并且是在一个对象的某个属性值中，this就是这个对象
+-->
+<script>
+    "use strict";
+    /*
+     {
+     console.log(this);
+     }
+     function fn() {
+     console.log(this);
+     }
+     fn();//在严格模式下，函数执行的时候前面没有点 this就是undefined
+     window.fn();
+
+     //    window.setTimeout(function () {
+     //        console.log(this);
+     //    },1000)
+     window.setTimeout(()=>{console.log(this)},1000)
+
+     //let a=1;
+     window.a = 1;
+     let obj = {
+     a: 'a',
+     fn1: () => {
+     let a = "aa";
+     console.log(this.a);//this==window
+     return a
+     },
+     fn2: function () {
+     window.setTimeout(() => {
+     console.log(this.a)//this==obj
+     }, 1000)
+     },
+     fn3: {
+     a: "a3",
+     fn: () => this.a//this Windows
+     }
+     };
+     let fn1 = obj.fn1;
+     //obj.fn1();
+     //console.log(fn1());
+     obj.fn2();
+     console.log(obj.fn3.fn());
+     ;
+
+
+     let f = () => {
+     console.log(this);
+     };
+     f();
+     let obj1 = {
+     f: function () {
+     //        window.setTimeout(()=>{
+     //            console.log(this);
+     //        },1000)
+     [1, 2].sort((a, b) => {
+     console.log(this);
+     })
+     }
+     };
+     obj1.f();
+     //    [1, 2].sort((a, b) => {
+     //        console.log(this);
+     //    })
+
+     */
+    let box=document.getElementById("box");
+    box.fn=()=>{
+        console.log(this);
+    };
+//    box.onclick=function () {
+//        //console.log(this);
+//        //this.fn.call(this);
+//    }
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zhufengpeixun</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    'use strict';
+    //includes 代替indexOf,返回值是true和false
+    //之前的indexOf存在一些问题
+    //Infinity 属性用于存放表示正无穷大的数值。
+    //[补充说明]
+    //无法使用 for/in 循环来枚举 Infinity 属性，也不能用 delete 运算符来删除它。
+    //Infinity 不是常量，可以把它设置为其他值。
+    let arr=[NaN,Infinity,'a',0];
+    //在indexOf 中使用的是===绝对相等
+    console.log(arr.indexOf(NaN));//-1 认为NaN跟任何值都不相等
+    // 但是实际上是存在的
+    console.log(arr.includes(NaN));
+
+    //跟indexOf一样第二个参数可选,includes(value,formIndex)
+    // formIndex:表示开始查找的索引。
+    //1.如果为负值，则按升序从 ary.length + fromIndex 的索引开始搜索。默认为 0。
+    //2.如果fromIndex 大于等于数组长度 ，则返回 false 。该数组不会被搜索。
+    //3.如果 fromIndex 为负值，计算出的索引将作为开始搜索的位置。如果计算出的索引小于 0，则整个数组都会被搜索。
+</script>

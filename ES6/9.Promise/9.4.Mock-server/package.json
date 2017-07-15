@@ -1,0 +1,17 @@
+{
+  "name": "es6mock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "node koa-mock.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^1.2.1",
+    "koa-body-parser": "^1.1.2",
+    "koa-cors": "0.0.16",
+    "koa-router": "^5.4.0"
+  }
+}

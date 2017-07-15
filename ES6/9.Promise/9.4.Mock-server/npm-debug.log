@@ -1,0 +1,48 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/Weil/.nvm/versions/node/v4.2.2/bin/node',
+1 verbose cli   '/Users/Weil/.nvm/versions/node/v4.2.2/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'server' ]
+2 info using npm@3.10.2
+3 info using node@v4.2.2
+4 verbose run-script [ 'preserver', 'server', 'postserver' ]
+5 info lifecycle es6mock@1.0.0~preserver: es6mock@1.0.0
+6 silly lifecycle es6mock@1.0.0~preserver: no script for preserver, continuing
+7 info lifecycle es6mock@1.0.0~server: es6mock@1.0.0
+8 verbose lifecycle es6mock@1.0.0~server: unsafe-perm in lifecycle true
+9 verbose lifecycle es6mock@1.0.0~server: PATH: /Users/Weil/.nvm/versions/node/v4.2.2/lib/node_modules/npm/bin/node-gyp-bin:/Users/Weil/projects/zf-es6/9.4.Mock-server/node_modules/.bin:/Users/Weil/.nvm/versions/node/v4.2.2/bin:/Users/Weil/.nvm/versions/node/v4.2.2/bin:/usr/local/apache-maven/apache-maven-3.3.3/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/aria2/bin:/usr/local/git/bin:/Users/Weil/.rvm/bin:/usr/local/mongodb/bin:/Users/Weil/Library/Android/sdk/tools:/Users/Weil/Library/Android/sdk/platform-tools
+10 verbose lifecycle es6mock@1.0.0~server: CWD: /Users/Weil/projects/zf-es6/9.4.Mock-server
+11 silly lifecycle es6mock@1.0.0~server: Args: [ '-c', 'node koa-mock.js' ]
+12 silly lifecycle es6mock@1.0.0~server: Returned: code: 1  signal: null
+13 info lifecycle es6mock@1.0.0~server: Failed to exec server script
+14 verbose stack Error: es6mock@1.0.0 server: `node koa-mock.js`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (/Users/Weil/.nvm/versions/node/v4.2.2/lib/node_modules/npm/lib/utils/lifecycle.js:242:16)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at EventEmitter.emit (events.js:172:7)
+14 verbose stack     at ChildProcess.<anonymous> (/Users/Weil/.nvm/versions/node/v4.2.2/lib/node_modules/npm/lib/utils/spawn.js:40:14)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at ChildProcess.emit (events.js:172:7)
+14 verbose stack     at maybeClose (internal/child_process.js:818:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+15 verbose pkgid es6mock@1.0.0
+16 verbose cwd /Users/Weil/projects/zf-es6/9.4.Mock-server
+17 error Darwin 15.6.0
+18 error argv "/Users/Weil/.nvm/versions/node/v4.2.2/bin/node" "/Users/Weil/.nvm/versions/node/v4.2.2/bin/npm" "run" "server"
+19 error node v4.2.2
+20 error npm  v3.10.2
+21 error code ELIFECYCLE
+22 error es6mock@1.0.0 server: `node koa-mock.js`
+22 error Exit status 1
+23 error Failed at the es6mock@1.0.0 server script 'node koa-mock.js'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the es6mock package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     node koa-mock.js
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs es6mock
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls es6mock
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]

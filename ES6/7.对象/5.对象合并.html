@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zhufengpeixun</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    'use strict';
+    let obj1={x:"XX"};
+    let obj2={y:"YY"};
+    let obj3={x:'我是谁'};
+    let obj4={y:'你好'};
+
+    //合并对象:Object.assign(obj1,obj2.....)
+    //将obj2...合并到obj1上,将obj1返回
+    //注意obj2...可以不是一个对象,属性名依次为"0","1"....
+    let obj=Object.assign(obj1,obj2);
+    console.log(obj,obj1,obj2);
+    console.log(obj == obj1);//true
+
+    function FF() {
+        this.f="ff";
+    };
+    Object.assign(FF.prototype,{
+        getTime(){
+            console.log(new Date());
+            console.log(this);
+        }
+    });
+    let ff=new FF();
+    ff.getTime();
+
+    //克隆对象 写一个clone的方法来实现对象的克隆
+    function clone(obj) {
+        //这两者的去别
+        //return Object.assign({},obj);
+        return Object.assign(obj);
+    }
+    let objOld={a:"a",b:"b"};
+    let objNew=clone(objOld);
+    console.log(objNew);
+
+</script>

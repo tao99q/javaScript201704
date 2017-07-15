@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zhufengpeixun</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    'use strict';
+    //类似Set,不重复值得集合
+    let obj1={a:"a"};
+    let obj2={b:"b"};
+    let weak=new WeakSet([obj1,obj2]);
+    console.log(weak);
+    obj1={a:'A'};
+    obj2.b="A";
+    console.log(weak);
+
+    //为了防止内存泄漏 size和forEach等遍历的方法都没有
+    //可以在控制台输出看一下
+    //只有一下三种方法
+    //add
+    //delete
+    //has
+</script>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zhufengpeixun</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    'use strict';
+    let obj={};
+    let a="AAA";
+    obj[a]="aaa";
+    let obj1={
+        [a]:'a',
+        [a+'fn'](){
+            console.log(a + 'fn');
+        },
+        a
+    };
+    console.log(obj1);
+    //{AAA:"a",AAAfn:ƒ (),a:"AAA"}
+</script>

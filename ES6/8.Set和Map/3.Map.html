@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zhufengpeixun</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    'use strict';
+    //之前学的对象,存在一些缺陷
+    //例如
+    let ary=[1,2];
+    let o={a:"a"};
+    let obj={};
+    obj[ary]="哈哈";
+    obj[o]="嘿嘿";
+    console.log(obj);
+    //我们说了对象的属性名必须是字符串,所以会默认讲其转为字符串,当做键值
+    //为了解决这个问题，ES6 提供了 Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。
+    //Map属于类数组
+
+    //1.第一种方式
+    let map = new Map();
+    map.set(ary, "哈哈");
+    map.set(o, "嘿嘿");
+    console.log(map);
+
+
+    //2.第二种方式
+    let map1 = new Map([[ary, "哈哈"], [o, "嘿嘿"]]);
+    console.log(map1);
+
+    //3.get方式获取
+    console.log(map.get(o));
+    console.log(map1.get(ary));
+
+    //4.Map 转数组
+    let arr=[...map];
+    let arr1=[...map1];
+    console.log(arr, arr1);
+
+    //5. 数组转为Map
+    let ary1=["a","b","c"];
+    let mapVal=ary1.map((item,index,arr)=>[index,item]);
+    let arrToMap=new Map(mapVal);
+    console.log(arrToMap);
+
+    //6.属性和方法
+    // size:返回 Map 结构的成员总数
+    // set(key, value):设置键名key对应的键值为value，然后返回整个 Map 结构(因此可以采用链式写法)。如果key已经有值，则键值会被更新，否则就新生成该键。
+    // get(key):读取key对应的键值，如果找不到key，返回undefined
+    // has:返回一个布尔值，表示某个键是否在当前 Map 对象之中。
+    // delete:删除某个键，返回true。如果删除失败，返回false。
+    // clear:清除所有成员，没有返回值。
+
+
+    //7.遍历
+    // keys()：返回键名的遍历器。
+    // values()：返回键值的遍历器。
+    // entries()：返回所有成员的遍历器。
+    // forEach()：遍历 Map 的所有成员
+
+    const m = new Map([
+        ['no', 'false'],
+        ['yes', 'true'],
+    ]);
+
+    for (let key of m.keys()) {
+        console.log(key);
+    }
+
+    for (let value of m.values()) {
+        console.log(value);
+    }
+    for (let item of m.entries()) {
+        console.log(item[0], item[1]);
+    }
+
+    // 或者
+    for (let [key, value] of m.entries()) {
+        console.log(key, value);
+    }
+
+    // 等同于使用m.entries()
+    for (let [key, value] of m) {
+        console.log(key, value);
+    }
+
+    //此外，Map 还有一个forEach方法，与数组的forEach方法类似，也可以实现遍历。
+
+    m.forEach(function(value, key, map) {
+        console.log("Key: %s, Value: %s", key, value);
+    });
+    //forEach方法还可以接受第二个参数，用来绑定this。
+
+    const reporter = {
+        report: function(key, value) {
+            console.log("Key: %s, Value: %s", key, value);
+        }
+    };
+
+    m.forEach(function(value, key, map) {
+        this.report(key, value);
+    }, reporter);
+    //上面代码中，forEach方法的回调函数的this，就指向reporter。
+</script>
