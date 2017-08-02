@@ -1,0 +1,99 @@
+<!DOCTYPE html><html><head><title>第四期移动端补课</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style>.note-content  {font-family: 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, Song, sans-serif;}
+
+
+</style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+<h3 id="第四期移动端补课">第四期移动端补课</h3>
+
+<p><a href="http://www.css88.com/book/css/values/image/gradient.htm" target="_blank">http://www.css88.com/book/css/values/image/gradient.htm</a>  css3速查表 <br>
+<strong>【Flex版本演变】</strong></p>
+
+<p>flex布局分为旧版本display: box;，过渡版本display: flexbox;，以及现在的标准版本display: flex;所以如果你只是写新版本的语法形式，是肯定存在兼容性问题的</p>
+
+<ul><li>2009 version - display:box;  属性box-，例如box-pack;</li>
+<li>2011 version - display:flexbox;</li>
+<li>2012 version - display:flex/inline-flex; 属性flex-;</li>
+<li>2014 version 新增了对flex项z-index的规定;</li>
+</ul>
+
+<p><strong>【浏览器对最新flexbox规范的支持情况】</strong>  </p>
+
+<ul><li>Chrome 29+</li>
+<li>Firefox 28+</li>
+<li>Internet Explorer 11+</li>
+<li>Opera 17+</li>
+<li>Safari 6.1+ (prefixed with -webkit-)</li>
+<li>Android 4.4+</li>
+<li>iOS 7.1+ (prefixed with -webkit-)</li>
+</ul>
+
+<p><strong>【Flex兼容写法】</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs scss"><span class="hljs-attribute">display</span>:box; <span class="hljs-comment">/* 老版本语法：Android  4.4- */</span><br><span class="hljs-attribute">display</span>: -webkit-box;  <span class="hljs-comment">/* 老版本语法: Chrome 21+ */</span><br><span class="hljs-attribute">display</span>: -moz-box;  <span class="hljs-comment">/* 老版本语法: Firefox  19-(buggy) */</span><br><span class="hljs-attribute">display</span>: -ms-flexbox; <span class="hljs-comment">/* 混合版本语法: IE 10 */</span><br><span class="hljs-attribute">display</span>: -webkit-flex;  <span class="hljs-comment">/* 新版本语法: Chrome 21+ */</span><br><span class="hljs-attribute">display</span>: flex;   <span class="hljs-comment">/* 新版本语法: Opera 12.1, Firefox 20+ */</span><br></code></pre>
+
+<p><strong>【子元素-平均分栏】</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs scss">-webkit-box-<span class="hljs-attribute">flex</span>: <span class="hljs-number">1</span>; <span class="hljs-comment">/* 老版本语法：iOS 6-, Safari 3.1-6 */</span><br>-moz-box-<span class="hljs-attribute">flex</span>: <span class="hljs-number">1</span>; <span class="hljs-comment">/* 老版本语法：Firefox 19- */</span><br>-webkit-<span class="hljs-attribute">flex</span>: <span class="hljs-number">1</span>; <span class="hljs-comment">/* Chrome */</span><br>-ms-<span class="hljs-attribute">flex</span>: <span class="hljs-number">1</span>; <span class="hljs-comment">/* IE 10 */</span><br><span class="hljs-attribute">flex</span>: <span class="hljs-number">1</span>; <span class="hljs-comment">/* 新版本语法： Opera 12.1, Firefox 20+ */</span><br></code></pre>
+
+<p><strong>[各大公司flex兼容写法]</strong></p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs mipsasm">淘宝:<br><span class="hljs-keyword">display: </span>-webkit-<span class="hljs-keyword">box;<br></span><span class="hljs-keyword">display: </span>-moz-<span class="hljs-keyword">box;<br></span><span class="hljs-keyword">display: </span>-ms-flexbox<span class="hljs-comment">;</span><br><span class="hljs-keyword">display: </span>-webkit-flex<span class="hljs-comment">;</span><br><span class="hljs-keyword">display: </span>flex<span class="hljs-comment">;</span><br><br>-webkit-<span class="hljs-keyword">box-flex: </span><span class="hljs-number">1</span><span class="hljs-comment">;</span><br>-moz-<span class="hljs-keyword">box-flex: </span><span class="hljs-number">1</span><span class="hljs-comment">;</span><br>-webkit-flex: <span class="hljs-number">1</span><span class="hljs-comment">;</span><br>-ms-flex: <span class="hljs-number">1</span><span class="hljs-comment">;</span><br><span class="hljs-symbol">flex:</span> <span class="hljs-number">1</span><span class="hljs-comment">;</span><br><br>垂直方向(vertical)<br>-webkit-<span class="hljs-keyword">box-orient: </span>vertical<span class="hljs-comment">;</span><br>-webkit-<span class="hljs-keyword">box-direction: </span><span class="hljs-keyword">normal;<br></span>-moz-<span class="hljs-keyword">box-orient: </span>vertical<span class="hljs-comment">;</span><br>-moz-<span class="hljs-keyword">box-direction: </span><span class="hljs-keyword">normal;<br></span>-webkit-flex-<span class="hljs-keyword">direction: </span>column<span class="hljs-comment">;</span><br>-ms-flex-<span class="hljs-keyword">direction: </span>column<span class="hljs-comment">;</span><br>flex-<span class="hljs-keyword">direction: </span>column<span class="hljs-comment">;</span><br><br>水平方向(horizontal)<br>-webkit-<span class="hljs-keyword">box-orient: </span>horizontal<span class="hljs-comment">;</span><br>-webkit-<span class="hljs-keyword">box-direction: </span><span class="hljs-keyword">normal;<br></span>-moz-<span class="hljs-keyword">box-orient: </span>horizontal<span class="hljs-comment">;</span><br>-moz-<span class="hljs-keyword">box-direction: </span><span class="hljs-keyword">normal;<br></span>-webkit-flex-<span class="hljs-keyword">direction: </span>row<span class="hljs-comment">;</span><br>-ms-flex-<span class="hljs-keyword">direction: </span>row<span class="hljs-comment">;</span><br>flex-<span class="hljs-keyword">direction: </span>row<br><br>两端对齐:<br>-webkit-<span class="hljs-keyword">box-pack: </span><span class="hljs-keyword">justify; </span><br><span class="hljs-keyword">box-pack: </span><span class="hljs-keyword">justify;<br></span>-webkit-<span class="hljs-keyword">justify-content: </span>space-<span class="hljs-keyword">between;<br></span><span class="hljs-keyword">justify-content: </span>space-<span class="hljs-keyword">between;</span><br></code></pre>
+
+<p>【ios和android 浏览器适配问题总结】 <br>
+<a href="http://www.jianshu.com/p/31e53df2ecce" target="_blank">http://www.jianshu.com/p/31e53df2ecce</a>  技术文章 <br>
+1.防止手机中网页放大和缩小</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs applescript">&lt;meta <span class="hljs-built_in">name</span>=<span class="hljs-string">"viewport"</span> content=<span class="hljs-string">"width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"</span> /&gt;<br></code></pre>
+
+<p>2.安卓浏览器看背景图片，有些设备会模糊 ?</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs scss">用同等比例的图片在PC机上很清楚，但是手机上很模糊，原因是什么呢？ 经过研究，是devicePixelRatio作怪，因为手机分辨率太小，如果按照分辨率来显示网页，这样字会非常小，所以苹果当初就把iPhone 4的960*640分辨率，在网页里只显示了480*320，这样devicePixelRatio＝2。现在android比较乱，有1<span class="hljs-selector-class">.5</span>的，有2的也有3的。 想让图片在手机里显示更为清晰，必须使用2x的背景图来代替<span class="hljs-selector-tag">img</span>标签（一般情况都是用2倍）。<br>例如一个<span class="hljs-selector-tag">div</span>的宽高是100*100，背景图必须得200*200，然后<span class="hljs-attribute">background-size</span>:contain;这样显示出来的图片就比较清晰了。<br><br><span class="hljs-attribute">background</span>:url(../images/icon/all.png) no-repeat center center;<br>-webkit-<span class="hljs-attribute">background-size</span>:<span class="hljs-number">50px</span> <span class="hljs-number">50px</span>; <br><span class="hljs-attribute">background-size</span>: <span class="hljs-number">50px</span> <span class="hljs-number">50px</span>; <br><span class="hljs-attribute">display</span>:inline-block; <br><span class="hljs-attribute">width</span>:<span class="hljs-number">100%</span>;<br><span class="hljs-attribute">height</span>:<span class="hljs-number">50px</span>;<br></code></pre>
+
+<p>3.一些情况下对非可点击元素如(label,span)监听click事件，ios下不会触发;</p>
+
+<blockquote>
+  <p>解决方案：css增加cursor:pointer;</p>
+</blockquote>
+
+<p>4.在ios和andriod中,audio元素和video元素无法自动播放</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript">这个不是 BUG，由于自动播放网页中的音频或视频，会给用户带来一些困扰或者不必要的流量消耗，所以苹果系统和安卓系统通常都会禁止自动播放和使用 JS 的触发播放，必须由用户来触发才可以播放。 <br>解决方法思路：先通过用户 touchstart 触碰，触发播放并暂停（音频开始加载，后面用 JS 再操作就没问题了）。<br> <span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">'touchstart'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{         <br>      <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">'audio'</span>)[<span class="hljs-number">0</span>].play(); <br>      <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">'audio'</span>)[<span class="hljs-number">0</span>].pause(); <br>});<br></code></pre>
+
+<p>5.fixed定位缺陷</p>
+
+<blockquote>
+  <p>ios下fixed元素容易定位出错，软键盘弹出时，影响fixed元素定位, android下fixed表现要比iOS更好，软键盘弹出时，不会影响fixed元素定位 , ios4下不支持position:fixed; <br>
+  解决方案： 可用iScroll插件解决这个问题</p>
+</blockquote>
+
+<p>6.Input 的placeholder会出现文本位置偏上的情况</p>
+
+<blockquote>
+  <p>input 的placeholder会出现文本位置偏上的情况： <br>
+  PC端设置line-height等于height能够对齐，而移动端仍然是偏上，解决是设置line-height：normal;</p>
+</blockquote>
+
+<p>7.圆角bug</p>
+
+<blockquote>
+  <p>某些Android手机圆角失效 <br>
+  解决方案：background-clip: padding-box;</p>
+</blockquote>
+
+<p>8.IOS中input键盘事件keyup、keydown、keypress支持不是很好</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs xml">问题是这样的，用input search做模糊搜索的时候，在键盘里面输入关键词，会通过ajax后台查询，然后返回数据，然后再对返回的数据进行关键词标红。用input监听键盘keyup事件，在安卓手机浏览器中是可以的，但是在ios手机浏览器中变红很慢，用输入法输入之后，并未立刻相应keyup事件，只有在通过删除之后才能相应！ <br>解决办法:可以用html5的oninput事件去代替keyup <br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span><span class="hljs-attr">id</span>=<span class="hljs-string">"testInput"</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span>&gt;</span><span class="javascript"><br><span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'testInput'</span>).addEventListener(<span class="hljs-string">'input'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>)</span>{<br>varvalue = e.target.value;<br>});<br></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> 然后就达到类似keyup的效果！<br></code></pre>
+
+<p>9.部分机型存在type为search的input，自带close按钮样式修改方法;</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs stata">有些机型的搜索<span class="hljs-keyword">input</span>控件会自带<span class="hljs-keyword">close</span>按钮（一个伪元素），而通常为了兼容所有浏览器，我们会自己实现一个，此时去掉原生<span class="hljs-keyword">close</span>按钮的方法为: <br>#<span class="hljs-keyword">Search</span>::-webkit-<span class="hljs-keyword">search</span>-cancel-button{ <br>    <span class="hljs-keyword">display</span>:none; <br>} <br>如果想使用原生<span class="hljs-keyword">close</span>按钮，又想使其符合设计风格，可以对这个伪元素的样式进行修改。<br></code></pre></div></body></html>
