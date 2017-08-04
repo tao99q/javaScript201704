@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <!--循环谁给谁加一个指令v-for-->
+        <!--如果有重复的项,就会报错,解决方法: track-by="$index"-->
+        <li v-for="(index,val) in list" track-by="$index">
+            {{val}}:当前这一项
+            {{$index}}:索引
+            {{index}}:索引
+        </li>
+    </ul>
+    <span v-for="(key,val) in listObj">
+        {{key}}:属性名,
+        {{val}}:属性值;
+    </span>
+</div>
+</body>
+</html>
+<script src="js/vue1.0.js"></script>
+<script>
+    var v1=new Vue({
+        el:"#app",
+        data:{
+            list:["a","b","c","d","a"],
+            listObj:{
+                name:"AA",
+                age:12,
+                n:1
+            }
+        }
+    })
+</script>

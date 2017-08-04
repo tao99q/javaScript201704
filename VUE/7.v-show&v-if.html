@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--v-show="false" 隐藏display="none"引起重绘 -->
+<!--v-if="false"  移除标签  会引起回流-->
+<div id="app">
+    <div v-show="isShow">1234567890</div>
+    <div v-if="flag">000000000</div>
+</div>
+</body>
+</html>
+<script src="js/vue2.0.min.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            isShow:[],
+            flag:false
+        }
+    })
+</script>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            margin: 10px auto;
+        }
+        .box1{
+            height: 50px;
+            background: #28a4c9;
+        }
+        .box2{
+            height: 20px;
+            border:2px dashed deeppink;
+        }
+    </style>
+</head>
+<body>
+<!--v-bind:class 简写成 :class
+这种方式是可以跟原生的class="a" 混用的
+比如:class="a" :class="class2"  class="a box2"
+-->
+<div id="app">
+    <div class="{{class1}}">{{class1}}</div>
+    <div v-bind:class="class1"></div>
+    <div class="a" :class="class2"></div>
+    <div :class="{box1:flag2}"></div>
+    <div :class="{box1:flag1,box2:!flag2}"></div>
+    <div :class="[class1,class2]"></div>
+    <div :class="[class1,{box2:flag2}]"></div>
+    <div :class="[flag1?class1:class2]"></div>
+</div>
+
+</body>
+</html>
+<script src="js/vue1.0.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            class1:"box1",
+            class2:"box2",
+            flag1:true,
+            flag2:false
+        }
+    })
+</script>

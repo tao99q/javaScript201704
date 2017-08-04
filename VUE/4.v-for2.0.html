@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <!--$index is not defined-->
+        <!--在vue2.0中未定义的变量不可用-->
+        <li v-for="(item,index) in list" track-by="$index">
+            {{item}}:当前这一项
+            <!--{{$index}}:索引-->
+            {{index}}:索引
+        </li>
+    </ul>
+    <!--<span v-for="(val,key) in listObj">-->
+        <!--{{key}}:属性名,-->
+        <!--{{val}}:属性值;-->
+    <!--</span>-->
+    <span v-for="val in listObj">
+        {{val}}:属性值;
+    </span>
+</div>
+</body>
+</html>
+<script src="js/vue2.0.min.js"></script>
+<script>
+    var v1=new Vue({
+        el:"#app",
+        data:{
+            list:["a","b","c","d","a"],
+            listObj:{
+                name:"AA",
+                age:12,
+                n:1
+            }
+        }
+    })
+</script>

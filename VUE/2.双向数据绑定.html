@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box">
+    给input输入框加一个指令:v-model=""
+    <input type="text" v-model="msg">
+    <p>{{msg}}</p>
+    在vue1.0中使用*的方式
+    <!--{{*只让数据绑定一次,以后不再随之数据的改变而改变}}-->
+    <!--<p>{{*msg}}</p>-->
+    在2.0中加一个指令v-once
+    <p v-once>{{msg}}</p>
+</div>
+<script src="js/vue2.0.min.js"></script>
+<script>
+    var v1=new Vue({
+        el:"#box",
+        data:{
+            msg:"hello word"
+        }
+    });
+    /*
+    var inp=document.getElementsByTagName("input")[0];
+    var p=document.getElementsByTagName("p")[0];
+    inp.oninput=function () {
+        p.innerHTML=this.value;
+    }
+    */
+
+</script>
+</body>
+</html>
