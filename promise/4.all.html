@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+    'use strict';
+    let p=Promise.all([1,2,3,4,0]);
+    console.log(p);
+    p.then((res)=>{
+        res.forEach((item)=>{
+            if(!item){
+                throw Error(item+"错了")
+            }
+        })
+    }).catch((e)=>{
+        console.log(e);
+    });
+    //console.log(self===window.top);
+    if(self.fetch) {
+        // 使用 fetch 框架处理
+        console.dir(self.fetch);
+        fetch("data.json").then((res)=>{
+            console.log(res.json);
+        });
+    } else {
+        // 使用 XMLHttpRequest 或者其他封装框架处理
+    }
+
+</script>

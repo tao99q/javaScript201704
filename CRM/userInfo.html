@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        .box{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <form id="#f">
+        <label for="id">编号</label>
+        <input type="text" id="id" name="id" disabled>
+        <br>
+        <label for="name">姓名</label>
+        <input type="text" id="name" name="name">
+        <br>
+        <label for="sex">性别</label>
+        <input type="text" id="sex" name="sex">
+        <br>
+        <label for="score">分数</label>
+        <input type="text" id="score" name="score">
+        <br>
+        <input type="button" value="修改用户" id="submit">
+    </form>
+</div>
+</body>
+</html>
+<script src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript">
+    var id=window.location.href.split("?")[1];
+    $.ajax({
+        url:'/userInfo?'+id,
+        type:"get",
+        data:null,
+        dataType:"json",
+        success:function (res) {
+            //console.log(res.data);
+            for (var key in res.data){
+                $("#"+key).val(res.data[key]);
+                if(key=="sex"){
+                    $("#"+key).val( res.data[key]==0?"男":"女")
+                }
+            }
+        },
+        error:function () {
+            
+        }
+    });
+
+    $("#submit").on("click",function () {
+        var dd= eval("({"+decodeURIComponent($(this.parentNode).serialize()).replace(/=/g,":'").replace(/&/g,"',")+"'})");
+        dd.id=id.split("=")[1];
+        if(dd.sex=="女"){
+            dd.sex=1
+        }else{
+            dd.sex==0
+        }
+        $.ajax({
+            url:'/changeUserInfo',
+            type:"post",
+            //name=陶雷峰&sex=1&score=96
+            data:dd,
+            dataType:"json",
+            success:function (res) {
+                alert(res.msg+"修改成功");
+                window.open('userList.html')
+            },
+            error:function () {
+
+            }
+        })
+    })
+</script>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<img src="" alt="" class="img1">
+<img src="" alt="" class="img2">
+<button id="play"> 播放</button>
+
+</body>
+</html>
+<script type="text/javascript">
+    'use strict';
+    var myImage1 = document.querySelector('.img1');
+    var myImage2 = document.querySelector('.img2');
+
+    fetch('a.jpg').then(function(response) {
+        response.blob().then(function(myBlob) {
+            var objectURL = URL.createObjectURL(myBlob);
+            myImage1.src = objectURL;
+        });
+    });
+    fetch('a.jpg').then(function(response) {
+        return response.blob();
+    }).then(function(myBlob) {
+        var objectURL = URL.createObjectURL(myBlob);
+        myImage2.src = objectURL;
+    });
+    console.log(window);
+
+    fetch("data.json",{type:"GET"}).then((response)=>{
+        response.json().then((data)=>{
+            console.log(data);
+        })
+    });
+
+    var audioCtx = new AudioContext();
+    var source = audioCtx.createBufferSource();
+    function getData() {
+        var myRequest = new Request('music.mp3');
+        fetch(myRequest).then((response) =>{
+            response.arrayBuffer().then(function(buffer) {
+                audioCtx.decodeAudioData(buffer, (decodedData) =>{
+                    source.buffer = decodedData;
+                    source.connect(audioCtx.destination);
+                });
+            });
+        })
+    };
+
+    // wire up buttons to stop and play audio
+
+    var play=document.getElementById("play");
+    play.onclick = function() {
+        getData();
+        source.start(0);
+        this.setAttribute('disabled', 'disabled');
+    }
+</script>

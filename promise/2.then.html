@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+    'use strict';
+    let pro=new Promise((resolve,reject)=>{
+        resolve();
+        reject(new Error("sorry"));
+    });
+
+//    pro.then(() => {
+//        console.log("OK1")
+//    }, (res) => {
+//        throw Error(res)
+//    }).then(()=>{
+//        console.log("OK2")
+//    },()=>{
+//        console.log("sorry2")
+//    })
+//    pro.then(() => {
+//        console.log("OK1")
+//    }, (res) => {
+//        throw Error(res)
+//    }).catch(()=>{
+//        console.log("sorry2")
+//    })
+    pro.then(() => {
+        console.log("OK1");
+    }, (res) => {
+        throw Error(res);
+    }).catch(()=>{
+        console.log("sorry2");
+    }).then(()=>{
+        console.log("OK2");
+    })
+</script>

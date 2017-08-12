@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<img id="photo1" src="" photo="a.jpg" alt="">
+</body>
+</html>
+<script type="text/javascript">
+    'use strict';
+//    let pro=new Promise(function (resolve,reject) {
+//        setTimeout(resolve,1000,'成功!');
+//        //reject();
+//    });
+//
+//    pro.then((res)=>{
+//        console.log("resolve",res);
+//    },(res)=>{
+//        console.log("reject",res)
+//    });
+    let photo1=document.getElementById("photo1");
+    function loadSync(url) {
+        return new Promise((resolve,reject)=>{
+            let img=new Image();
+            img.src=url;
+            img.onload=function () {
+                resolve(img)
+            };
+            img.onerror=function () {
+                reject(new Error("not found this path"))
+            }
+        })
+    }
+
+    setTimeout(function () {
+        loadSync(photo1.getAttribute("photo")).then((img)=>{
+            photo1.src=img.src;
+        },(res)=>{
+            console.log(res);
+        })
+    },1000);
+
+
+</script>

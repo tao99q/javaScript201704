@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+    //'use strict';
+    let getJson = function (url) {
+        var promise = new Promise((resolve, reject) => {
+            var xhr = new XMLHttpRequest();
+            xhr.open("get", url);
+            xhr.onreadystatechange = function () {
+                if (this.readyState !== 4) {
+                    return;
+                }
+                ;
+                if (this.status == 200) {
+                    resolve(this.response)
+                } else {
+                    reject(new Error(this.statusText))
+                }
+            };
+            xhr.responseType = "json";
+            xhr.setRequestHeader("Accept", 'application/json');
+            xhr.send();
+        });
+        return promise;
+    };
+    //    getJson("data1.json").then((data)=>{
+    //        console.log("OK",data);
+    //    },(res)=>{
+    //        console.log(res);
+    //    })
+    //    getJson("data1.json").then((data)=>{
+    //        console.log(data);
+    //    }).then((data)=>{
+    //        console.log("OK");
+    //    },()=>{
+    //        console.log("sorry");
+    //    })
+    //    getJson("data.json").then((data)=>{
+    //        console.log(data);
+    //    }).catch(()=>{
+    //        console.log("sorry");
+    //    })
+    let pro1=new Promise((resolve,reject)=>{
+        //resolve();
+        throw Error("老婆我错了!")
+    });
+    pro1.then(()=>{
+        console.log("第一次没有发现!")
+    }).then(()=>{
+        console.log("第二次没有发现!")
+    }).catch(()=>{
+        console.log("发现了1!");
+    });
+
+    let pro2=new Promise((resolve,reject)=>{
+        resolve(x+1);
+    });
+    pro2.then(()=>{
+       console.log("我不需要参数");
+    }).catch((e)=>{
+        console.log("我试试",e);
+        a+1;
+    }).then(()=>{
+        console.log("then");
+    }).catch((e)=>{
+        console.log(e);
+    });
+</script>
